@@ -5,7 +5,7 @@ import { questions } from "../data/questions";
 import { useScreen } from "../App";
 import { getRandomIntInclusive } from "../utils/fetchQuestion";
 
-import { updateUser } from "../data/user";
+import { updateUser, user } from "../data/user";
 
 const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
   const [hover, setHover] = useState(false);
@@ -29,24 +29,14 @@ const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
   );
 };
 
-const Result = ({ question, selectedAnswer, setStatChanges }) => {
-  const calculateBranchingStats = (answer) => {
-    setStatChanges(answer);
-    updateUser({
-      points: answer.points,
-      money: answer.money,
-      fans: answer.fans,
-      vibes: answer.vibes,
-    });
-  };
-
+const Result = ({ question, selectedAnswer, calculateStats }) => {
   const answer = question.answers.filter(
     (answer) => answer.id === selectedAnswer
   )[0];
 
   if (answer.isBranching === true) {
     const index = getRandomIntInclusive(0, answer.result.length - 1);
-    calculateBranchingStats(answer.result[index]);
+    calculateStats(answer.result[index]);
     return (
       <div className="w-[400px] h-[200px] mt-4 flex justify-center items-center">
         <p className="text-white font-press-start text-center text-sm">
@@ -72,11 +62,7 @@ export const Question = () => {
   const [isResultVisible, setIsResultVisible] = useState(false);
   const [statChanges, setStatChanges] = useState();
 
-  const calculateStats = (selectedAnswer, question) => {
-    const answer = question.answers.filter(
-      (answer) => answer.id === selectedAnswer
-    )[0];
-
+  const calculateStats = (answer) => {
     setStatChanges(answer);
 
     updateUser({
@@ -157,14 +143,29 @@ export const Question = () => {
         <div className="flex flex-row items-center justify-center gap-x-10 mt-10 w-[800px] flex-wrap gap-y-10">
           {question &&
             question.answers.map((answer) => {
-              return (
-                <Answer
-                  setSelectedAnswer={setSelectedAnswer}
-                  answer={answer}
-                  selectedAnswer={selectedAnswer}
-                  key={answer.id}
-                />
-              );
+              if (answer?.inventoryCondition) {
+                if (user.inventory.includes(answer.inventoryCondition)) {
+                  return (
+                    <Answer
+                      setSelectedAnswer={setSelectedAnswer}
+                      answer={answer}
+                      selectedAnswer={selectedAnswer}
+                      key={answer.id}
+                    />
+                  );
+                } else {
+                  return;
+                }
+              } else {
+                return (
+                  <Answer
+                    setSelectedAnswer={setSelectedAnswer}
+                    answer={answer}
+                    selectedAnswer={selectedAnswer}
+                    key={answer.id}
+                  />
+                );
+              }
             })}
         </div>
       )}
@@ -174,7 +175,10 @@ export const Question = () => {
           if (isResultVisible) {
             submit();
           } else {
-            calculateStats(selectedAnswer, question);
+            const answer = question.answers.filter(
+              (answer) => answer.id === selectedAnswer
+            )[0];
+            calculateStats(answer);
             setIsResultVisible(true);
           }
         }}
@@ -189,6 +193,7 @@ export const Question = () => {
             question={question}
             selectedAnswer={selectedAnswer}
             setStatChanges={setStatChanges}
+            calculateStats={calculateStats}
           />
         </div>
       )}
