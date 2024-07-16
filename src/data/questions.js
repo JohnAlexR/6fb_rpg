@@ -1,11 +1,60 @@
 export const questions = [
   {
     id: "1",
-    question: "You have an off day, what to do?",
+    question: "Time to hit the road! Who should drive?",
     isSecondary: false,
     answers: [
       {
         id: "1a",
+        text: "Elliott",
+        points: 5,
+        fans: 0,
+        vibes: 30,
+        money: 0,
+        isBranching: false,
+        result:
+          "You have some great conversations, but you're holding on for dear life",
+      },
+      {
+        id: "1b",
+        text: "Brian",
+        points: 50,
+        fans: 0,
+        vibes: 20,
+        money: 0,
+        isBranching: false,
+        result:
+          "Vibes are chill, you stop by the world's largest ball of yarn, and you're an hour late",
+      },
+      {
+        id: "1c",
+        text: "Zach",
+        points: 50,
+        fans: 0,
+        vibes: 20,
+        money: 0,
+        isBranching: false,
+        result: "you reach mach-10, and arrive at the venue an hour early",
+      },
+      {
+        id: "1d",
+        text: "Julia",
+        points: 50,
+        fans: 0,
+        vibes: 20,
+        money: 0,
+        isBranching: false,
+        result: "you're hopelessly lost and enjoying every minute of it",
+      },
+    ],
+  },
+  {
+    id: "5",
+    question: "You have an off day, what to do?",
+    isSecondary: false,
+    answers: [
+      {
+        id: "5a",
         text: "rest",
         points: 5,
         fans: 0,
@@ -15,7 +64,7 @@ export const questions = [
         result: "you feel rested",
       },
       {
-        id: "1b",
+        id: "5b",
         text: "go busking",
         points: 10,
         fans: 20,
@@ -26,7 +75,7 @@ export const questions = [
           "you spend the day in the sun, you wear yourself out but make some new fans!",
       },
       {
-        id: "1c",
+        id: "5c",
         text: "write a new song",
         points: 20,
         fans: 0,
@@ -36,7 +85,7 @@ export const questions = [
         result: "it's a good song, and you feel inspired and energized",
       },
       {
-        id: "1d",
+        id: "5d",
         text: "put up flyers for next show",
         points: 20,
         fans: 50,

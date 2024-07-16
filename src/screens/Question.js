@@ -4,10 +4,8 @@ import { fetchQuestion } from "../utils/fetchQuestion";
 import { questions } from "../data/questions";
 import { useScreen } from "../App";
 import { getRandomIntInclusive } from "../utils/fetchQuestion";
-import {
-  calculateBranchingStats,
-  calculateStats,
-} from "../utils/calculateStats";
+
+import { updateUser } from "../data/user";
 
 const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
   const [hover, setHover] = useState(false);
@@ -31,7 +29,17 @@ const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
   );
 };
 
-const Result = ({ question, selectedAnswer }) => {
+const Result = ({ question, selectedAnswer, setStatChanges }) => {
+  const calculateBranchingStats = (answer) => {
+    setStatChanges(answer);
+    updateUser({
+      points: answer.points,
+      money: answer.money,
+      fans: answer.fans,
+      vibes: answer.vibes,
+    });
+  };
+
   const answer = question.answers.filter(
     (answer) => answer.id === selectedAnswer
   )[0];
@@ -60,9 +68,24 @@ const Result = ({ question, selectedAnswer }) => {
 export const Question = () => {
   const { screenIndex, setScreenIndex } = useScreen();
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [hover, setHover] = useState(0);
   const [question, setQuestion] = useState(questions[0]);
   const [isResultVisible, setIsResultVisible] = useState(false);
+  const [statChanges, setStatChanges] = useState();
+
+  const calculateStats = (selectedAnswer, question) => {
+    const answer = question.answers.filter(
+      (answer) => answer.id === selectedAnswer
+    )[0];
+
+    setStatChanges(answer);
+
+    updateUser({
+      points: answer.points,
+      money: answer.money,
+      fans: answer.fans,
+      vibes: answer.vibes,
+    });
+  };
 
   const startEndGame = () => {
     setScreenIndex(5);
@@ -87,13 +110,43 @@ export const Question = () => {
       }
     }
     setIsResultVisible(false);
+    setStatChanges(null);
     setSelectedAnswer("");
   };
 
   return (
     <div className="relative h-full">
-      <div className="flex flex-row">
-        <Stats />
+      <div className="flex flex-row relative">
+        <div className="relative">
+          <Stats />
+          {isResultVisible && (
+            <div className="flex flex-col absolute right-0 top-7">
+              <p
+                className={`font-press-start ${
+                  statChanges.points >= 0 ? "text-green-400" : "text-red-500"
+                }`}
+              >{`${statChanges.points >= 0 ? "+" : ""}${
+                statChanges.points
+              }`}</p>
+              <p
+                className={`font-press-start ${
+                  statChanges.fans >= 0 ? "text-green-400" : "text-red-500"
+                }`}
+              >{`${statChanges.fans >= 0 ? "+" : ""}${statChanges.fans}`}</p>
+              <p
+                className={`font-press-start ${
+                  statChanges.vibes >= 0 ? "text-green-400" : "text-red-500"
+                }`}
+              >{`${statChanges.vibes >= 0 ? "+" : ""}${statChanges.vibes}`}</p>
+              <p
+                className={`font-press-start ${
+                  statChanges.money >= 0 ? "text-green-400" : "text-red-500"
+                }`}
+              >{`${statChanges.money >= 0 ? "+" : ""}${statChanges.money}`}</p>
+            </div>
+          )}
+        </div>
+
         <div className="flex items-center text-center justify-center w-[500px]">
           <p className="font-press-start text-white text-center">
             {question.question}
@@ -132,7 +185,11 @@ export const Question = () => {
       </button>
       {isResultVisible && (
         <div className="flex justify-center items-center">
-          <Result question={question} selectedAnswer={selectedAnswer} />
+          <Result
+            question={question}
+            selectedAnswer={selectedAnswer}
+            setStatChanges={setStatChanges}
+          />
         </div>
       )}
     </div>
