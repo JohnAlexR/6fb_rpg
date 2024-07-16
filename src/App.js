@@ -1,23 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState, useContext } from "react";
+import "./App.css";
+import GameBorder from "./components/GameBorder";
+import { screens } from "./data/screens";
+import { updateUser } from "./data/user";
+import { clearAnswers, clearQuestionsAsked } from "./data/user";
+
+const ScreenContext = createContext();
+
+// Create a provider component
+export const ScreenProvider = ({ children }) => {
+  const [screenIndex, setScreenIndex] = useState(0);
+  return (
+    <ScreenContext.Provider value={{ screenIndex, setScreenIndex }}>
+      {children}
+    </ScreenContext.Provider>
+  );
+};
+
+// Custom hook for accessing the screen context
+export const useScreen = () => {
+  return useContext(ScreenContext);
+};
 
 function App() {
   return (
+    <ScreenProvider>
+      <MainApp />
+    </ScreenProvider>
+  );
+}
+
+function MainApp() {
+  const { screenIndex, setScreenIndex } = useScreen();
+  return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GameBorder>{screens[screenIndex].component}</GameBorder>
+      <button
+        onClick={() => {
+          setScreenIndex(0);
+          clearAnswers();
+          clearQuestionsAsked();
+          updateUser({
+            name: "",
+            points: "0",
+            money: "1000",
+            fans: "100",
+            vibes: "100",
+            inventory: [],
+          });
+        }}
+      >
+        <p>reset</p>
+      </button>
     </div>
   );
 }
