@@ -4,7 +4,10 @@ import { fetchQuestion } from "../utils/fetchQuestion";
 import { questions } from "../data/questions";
 import { useScreen } from "../App";
 import { getRandomIntInclusive } from "../utils/fetchQuestion";
-import { calculateStats } from "../utils/calculateStats";
+import {
+  calculateBranchingStats,
+  calculateStats,
+} from "../utils/calculateStats";
 
 const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
   const [hover, setHover] = useState(false);
@@ -35,6 +38,7 @@ const Result = ({ question, selectedAnswer }) => {
 
   if (answer.isBranching === true) {
     const index = getRandomIntInclusive(0, answer.result.length - 1);
+    calculateBranchingStats(answer.result[index]);
     return (
       <div className="w-[400px] h-[200px] mt-4 flex justify-center items-center">
         <p className="text-white font-press-start text-center text-sm">
@@ -117,7 +121,7 @@ export const Question = () => {
           if (isResultVisible) {
             submit();
           } else {
-            calculateStats(selectedAnswer, question)
+            calculateStats(selectedAnswer, question);
             setIsResultVisible(true);
           }
         }}

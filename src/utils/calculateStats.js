@@ -13,3 +13,12 @@ export const calculateStats = (selectedAnswer, question) => {
     vibes: answer.vibes,
   });
 };
+
+export const calculateBranchingStats = (answer) => {
+  updateUser({
+    points: answer.points,
+    money: answer.money,
+    fans: answer.fans,
+    vibes: answer.vibes,
+  });
+};
