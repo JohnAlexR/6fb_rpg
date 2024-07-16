@@ -151,7 +151,7 @@ export const questions = [
           {
             inventoryReq: "dog treats",
             prob: 0.5,
-            text: "a mysterious wild animal approaches your merch box. Luckily, you still have your dog treats, you throw the dog treats to the animal. They happily eat the treats instead of your merch",
+            result: "a mysterious wild animal approaches your merch box. Luckily, you still have your dog treats, you throw the dog treats to the animal. They happily eat the treats instead of your merch",
             points: 150,
             fans: 0,
             vibes: 0,
@@ -160,7 +160,7 @@ export const questions = [
           {
             inventoryReq: "",
             prob: 0.5,
-            text: "a mysterious wild animal approaches your merch box. It tears a hole in your merch box and eats some.",
+            result: "a mysterious wild animal approaches your merch box. It tears a hole in your merch box and eats some.",
             points: 0,
             fans: 0,
             vibes: -20,
@@ -175,7 +175,7 @@ export const questions = [
         result: [
           {
             prob: 0.8,
-            text: "you get pulled over...oof",
+            result: "you get pulled over...oof",
             points: 0,
             fans: 0,
             vibes: 0,
@@ -183,7 +183,7 @@ export const questions = [
           },
           {
             prob: 0.2,
-            text: "somehow you don't get pulled over, but you feel bad about about your reckless driving. Vibes decrease",
+            result: "somehow you don't get pulled over, but you feel bad about about your reckless driving. Vibes decrease",
             points: 100,
             fans: 0,
             vibes: -10,
@@ -275,7 +275,7 @@ export const questions = [
         result: [
           {
             characterCondition: ["john"],
-            text: "john's alter stage-ego 'sean' shines through, the crowd goes wild!",
+            result: "john's alter stage-ego 'sean' shines through, the crowd goes wild!",
             points: 300,
             fans: 100,
             vibes: 50,
@@ -283,7 +283,7 @@ export const questions = [
           },
           {
             characterCondition: ["elliott", "zach", "julia", "dom", "brian"],
-            text: "it's kind of hard to see with the sunglasses on",
+            result: "it's kind of hard to see with the sunglasses on",
             points: -50,
             fans: -10,
             vibes: -20,
@@ -308,7 +308,7 @@ export const questions = [
         result: [
           {
             characterCondition: ["zach"],
-            text: "you look absolutely legendary, everyone loves your outfit",
+            result: "you look absolutely legendary, everyone loves your outfit",
             points: 300,
             fans: 100,
             vibes: 50,
@@ -316,7 +316,7 @@ export const questions = [
           },
           {
             characterCondition: ["elliott", "john", "julia", "dom", "brian"],
-            text: "you and zach are matching, cute",
+            result: "you and zach are matching, cute",
             points: 50,
             fans: 10,
             vibes: 20,

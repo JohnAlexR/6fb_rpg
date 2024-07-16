@@ -29,38 +29,32 @@ const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
   );
 };
 
-const Result = ({ question, selectedAnswer, calculateStats }) => {
-  const answer = question.answers.filter(
-    (answer) => answer.id === selectedAnswer
-  )[0];
-
-  if (answer.isBranching === true) {
-    const index = getRandomIntInclusive(0, answer.result.length - 1);
-    calculateStats(answer.result[index]);
-    return (
-      <div className="w-[400px] h-[200px] mt-4 flex justify-center items-center">
-        <p className="text-white font-press-start text-center text-sm">
-          {answer.result[index].text}
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="w-[400px] h-[200px] mt-4 flex justify-center items-center">
-      <p className="text-white font-press-start text-center text-sm">
-        {answer.result}
-      </p>
-    </div>
-  );
-};
-
 export const Question = () => {
   const { screenIndex, setScreenIndex } = useScreen();
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [question, setQuestion] = useState(questions[0]);
   const [isResultVisible, setIsResultVisible] = useState(false);
   const [statChanges, setStatChanges] = useState();
+  const [answer, setAnswer] = useState();
+
+  const calculateAnswer = () => {
+    const answer = question.answers.filter(
+      (answer) => answer.id === selectedAnswer
+    )[0];
+
+    if (answer.isBranching && answer.result[0].characterCondition) {
+      if (answer.result[0].characterCondition.includes(user.character)) {
+        return answer.result[0];
+      } else if (answer.result[1].characterCondition.includes(user.character)) {
+        return answer.result[1];
+      }
+    } else if (answer.isBranching === true) {
+      const index = getRandomIntInclusive(0, answer.result.length - 1);
+      return answer.result[index];
+    } else {
+      return answer;
+    }
+  };
 
   const calculateStats = (answer) => {
     setStatChanges(answer);
@@ -105,7 +99,7 @@ export const Question = () => {
       <div className="flex flex-row relative">
         <div className="relative">
           <Stats />
-          {isResultVisible && (
+          {isResultVisible && statChanges && (
             <div className="flex flex-col absolute right-0 top-7">
               <p
                 className={`font-press-start ${
@@ -175,11 +169,10 @@ export const Question = () => {
           if (isResultVisible) {
             submit();
           } else {
-            const answer = question.answers.filter(
-              (answer) => answer.id === selectedAnswer
-            )[0];
-            calculateStats(answer);
             setIsResultVisible(true);
+            const statAnswer = calculateAnswer();
+            setAnswer(statAnswer);
+            calculateStats(statAnswer);
           }
         }}
       >
@@ -189,12 +182,11 @@ export const Question = () => {
       </button>
       {isResultVisible && (
         <div className="flex justify-center items-center">
-          <Result
-            question={question}
-            selectedAnswer={selectedAnswer}
-            setStatChanges={setStatChanges}
-            calculateStats={calculateStats}
-          />
+          <div className="w-[400px] h-[200px] mt-4 flex justify-center items-center">
+            <p className="text-white font-press-start text-center text-sm">
+              {answer.result}
+            </p>
+          </div>
         </div>
       )}
     </div>
