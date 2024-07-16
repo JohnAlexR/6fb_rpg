@@ -150,6 +150,7 @@ export const questions = [
         vibes: 0,
         money: 0,
         isBranching: false,
+        result: "you feel a bit more energized",
       },
     ],
   },

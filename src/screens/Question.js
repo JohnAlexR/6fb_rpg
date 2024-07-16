@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Stats } from "../components/Stats";
 import { fetchQuestion } from "../utils/fetchQuestion";
 import { questions } from "../data/questions";
-import { answers } from "../data/user";
 import { useScreen } from "../App";
+import { getRandomIntInclusive } from "../utils/fetchQuestion";
 
 const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
   const [hover, setHover] = useState(false);
@@ -30,12 +30,23 @@ const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
 const Result = ({ question, selectedAnswer }) => {
   const answer = question.answers.filter(
     (answer) => answer.id === selectedAnswer
-  );
+  )[0];
+
+  if (answer.isBranching === true) {
+    const index = getRandomIntInclusive(0, answer.result.length - 1);
+    return (
+      <div className="w-[400px] h-[200px] mt-4 flex justify-center items-center">
+        <p className="text-white font-press-start text-center text-sm">
+          {answer.result[index].text}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-[400px] h-[200px] mt-4 flex justify-center items-center">
       <p className="text-white font-press-start text-center text-sm">
-        {answer[0].result}
+        {answer.result}
       </p>
     </div>
   );
@@ -53,11 +64,23 @@ export const Question = () => {
   };
 
   const submit = () => {
-    const newQuestion = fetchQuestion();
-    if (newQuestion === "end") {
-      startEndGame();
+    const answer = question.answers.filter(
+      (answer) => answer.id === selectedAnswer
+    )[0];
+
+    if (answer.nextQuestion) {
+      const nextQuestion = questions.filter(
+        (question) => question.id === answer.nextQuestion
+      )[0];
+      setQuestion(nextQuestion);
+    } else {
+      const newQuestion = fetchQuestion();
+      if (newQuestion === "end") {
+        startEndGame();
+      } else {
+        setQuestion(newQuestion);
+      }
     }
-    setQuestion(newQuestion);
     setIsResultVisible(false);
     setSelectedAnswer("");
   };
