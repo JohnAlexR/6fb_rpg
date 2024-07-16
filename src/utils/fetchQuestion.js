@@ -14,12 +14,15 @@ export const fetchQuestion = () => {
   const newQuestions = questions.filter(
     (question) => !questionsAsked.includes(question.id) && !question.isSecondary
   );
-  if(newQuestions.length === 0) {
-    return 'end'
+  if (newQuestions.length === 0) {
+    return "end";
   }
   const length = newQuestions.length;
-  const index = getRandomIntInclusive(0, length);
-
-  updateQuestions(newQuestions[index].id);
+  const index = getRandomIntInclusive(0, length - 1);
+  console.log("index", index);
+  console.log("newQ", newQuestions);
+  const questionID = newQuestions[index].id;
+  console.log("updateQ", questionID);
+  updateQuestions(questionID);
   return newQuestions[index];
 };

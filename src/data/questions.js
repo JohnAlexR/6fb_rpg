@@ -61,7 +61,7 @@ export const questions = [
         vibes: 0,
         money: 0,
         isBranching: false,
-        result: "",
+        result: "the shower is too gross to use, your next drive is stinky",
       },
       {
         id: "2b",
@@ -71,7 +71,8 @@ export const questions = [
         vibes: 0,
         money: 0,
         isBranching: false,
-        result: "",
+        result:
+          "you sleep great and have an awesome continental breakfast! Time to go crush",
       },
       {
         id: "2c",
