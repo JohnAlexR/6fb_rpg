@@ -4,6 +4,7 @@ import { fetchQuestion } from "../utils/fetchQuestion";
 import { questions } from "../data/questions";
 import { useScreen } from "../App";
 import { getRandomIntInclusive } from "../utils/fetchQuestion";
+import { calculateStats } from "../utils/calculateStats";
 
 const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
   const [hover, setHover] = useState(false);
@@ -116,6 +117,7 @@ export const Question = () => {
           if (isResultVisible) {
             submit();
           } else {
+            calculateStats(selectedAnswer, question)
             setIsResultVisible(true);
           }
         }}

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useScreen } from "../App";
+import { updateUser } from "../data/user";
 
 export const Name = () => {
   const { screenIndex, setScreenIndex } = useScreen();
   const [name, setName] = useState("");
+  console.log(name);
 
   return (
     <div className="flex justify-center items-center flex-col">
@@ -12,7 +14,7 @@ export const Name = () => {
         <input
           className="font-press-start text-white bg-black text-3xl text-center border-0"
           maxLength={3}
-          onChange={(text) => setName(text)}
+          onChange={(e) => setName(e.target.value)}
           autoFocus={true}
         />
       </div>
@@ -23,7 +25,12 @@ export const Name = () => {
       </div>
       <div className="text-center mt-10">
         {name && (
-          <button onClick={() => setScreenIndex(2)}>
+          <button
+            onClick={() => {
+              updateUser({ name: name });
+              setScreenIndex(2);
+            }}
+          >
             <p className="text-white font-press-start">continue</p>
           </button>
         )}

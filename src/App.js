@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext } from "react";
 import "./App.css";
 import GameBorder from "./components/GameBorder";
 import { screens } from "./data/screens";
-import { updateUser } from "./data/user";
+import { resetUser } from "./data/user";
 import { clearAnswers, clearQuestionsAsked } from "./data/user";
 
 const ScreenContext = createContext();
@@ -40,14 +40,7 @@ function MainApp() {
           setScreenIndex(0);
           clearAnswers();
           clearQuestionsAsked();
-          updateUser({
-            name: "",
-            points: "0",
-            money: "1000",
-            fans: "100",
-            vibes: "100",
-            inventory: [],
-          });
+          resetUser()
         }}
       >
         <p>reset</p>

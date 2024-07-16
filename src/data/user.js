@@ -1,33 +1,49 @@
 export const user = {
   name: "",
-  points: "0",
-  money: "1000",
-  fans: "100",
-  vibes: "100",
+  points: 0,
+  money: 1000,
+  fans: 100,
+  vibes: 100,
   inventory: [],
+  character: "",
 };
 
 export let answers = [];
 export let questionsAsked = ["1"];
 
-export const updateUser = ({ name, points, money, fans, vibes, inventory }) => {
+export const updateUser = ({
+  name,
+  points,
+  money,
+  fans,
+  vibes,
+  inventory,
+  character,
+}) => {
   if (name) {
     user.name = name;
   }
   if (points) {
-    user.points = points;
+    const newPoints = user.points + points;
+    user.points = newPoints;
   }
   if (money) {
-    user.money = money;
+    const newMoney = user.money + money;
+    user.money = newMoney;
   }
   if (fans) {
-    user.fans = fans;
+    const newFans = user.fans + fans;
+    user.fans = newFans;
   }
   if (vibes) {
-    user.vibes = vibes;
+    const newVibes = user.vibes + vibes;
+    user.vibes = newVibes;
   }
   if (inventory) {
     user.inventory = inventory;
+  }
+  if (character) {
+    user.character = character;
   }
 };
 
@@ -45,4 +61,13 @@ export const updateQuestions = (id) => {
 
 export const clearQuestionsAsked = () => {
   questionsAsked = ["1"];
+};
+
+export const resetUser = () => {
+  user.name = "";
+  user.money = 1000;
+  user.fans = 100;
+  user.vibes = 100;
+  user.inventory = [];
+  user.character = "";
 };

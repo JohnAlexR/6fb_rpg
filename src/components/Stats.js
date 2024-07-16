@@ -5,7 +5,7 @@ export const Stats = () => {
   const [helpText, setHelpText] = useState(0);
   return (
     <div className="border-white border-2 w-[300px] h-[150px] px-2 relative">
-      <p className="text-white font-press-start text-center">John Alex</p>
+      <p className="text-white font-press-start text-center">{`${user.name}: ${user.character}`}</p>
       <div className="border-white border-2" />
       <div className="flex flex-col">
         <p

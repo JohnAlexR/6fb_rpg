@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useScreen } from "../App";
 import { Logo } from "../assets/Logo";
+import { updateUser } from "../data/user";
 
 const CharacterSelection = () => {
   const { screenIndex, setScreenIndex } = useScreen();
@@ -123,7 +124,12 @@ const CharacterSelection = () => {
       </div>
       <div className="text-center">
         {selectedCharacter && (
-          <button onClick={() => setScreenIndex(3)}>
+          <button
+            onClick={() => {
+              updateUser({ character: selectedCharacter });
+              setScreenIndex(3);
+            }}
+          >
             <p className="text-white font-press-start">continue</p>
           </button>
         )}
