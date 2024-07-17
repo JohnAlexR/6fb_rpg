@@ -18,6 +18,7 @@ export const LoseScreen = () => {
           clearQuestionsAsked();
           resetUser();
         }}
+        className="mt-5 border-white border-2 px-2 py-1"
       >
         <p className="text-white font-press-start">reset</p>
       </button>

@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import { useScreen } from "../App";
 import { Logo } from "../assets/Logo";
 import { updateUser } from "../data/user";
+import {
+  Julia,
+  Zach,
+  Brian,
+  JohnAlex,
+  Elliott,
+  Dom,
+} from "../assets/characters";
 
 const CharacterSelection = () => {
   const { screenIndex, setScreenIndex } = useScreen();
-  const [characterDisplay, setCharacterDisplay] = useState(null);
+  const [characterDisplay, setCharacterDisplay] = useState("john");
   const [selectedCharacter, setSelectedCharacter] = useState();
 
   return (
@@ -20,7 +28,13 @@ const CharacterSelection = () => {
             onClick={() => setSelectedCharacter("john")}
             onMouseLeave={() => setCharacterDisplay("")}
           >
-            <p className="text-2xl font-press-start">John Alex</p>
+            <p
+              className={`text-2xl font-press-start ${
+                characterDisplay === "john" && "text-black"
+              } ${selectedCharacter === "john" && "text-black"}`}
+            >
+              John Alex
+            </p>
           </button>
           <button
             className={`text-white border-slate-300 border-2 px-3 py-3 ${
@@ -30,7 +44,13 @@ const CharacterSelection = () => {
             onClick={() => setSelectedCharacter("brian")}
             onMouseLeave={() => setCharacterDisplay("")}
           >
-            <p className="text-2xl font-press-start">Brian</p>
+            <p
+              className={`text-2xl font-press-start ${
+                characterDisplay === "brian" && "text-black"
+              } ${selectedCharacter === "brian" && "text-black"}`}
+            >
+              Brian
+            </p>
           </button>
           <button
             className={`text-white border-slate-300 border-2 px-3 py-3 ${
@@ -40,7 +60,13 @@ const CharacterSelection = () => {
             onClick={() => setSelectedCharacter("julia")}
             onMouseLeave={() => setCharacterDisplay("")}
           >
-            <p className="text-2xl font-press-start">Julia</p>
+            <p
+              className={`text-2xl font-press-start ${
+                characterDisplay === "julia" && "text-black"
+              } ${selectedCharacter === "julia" && "text-black"}`}
+            >
+              Julia
+            </p>
           </button>
           <button
             className={`text-white border-slate-300 border-2 px-3 py-3 ${
@@ -50,7 +76,13 @@ const CharacterSelection = () => {
             onClick={() => setSelectedCharacter("dom")}
             onMouseLeave={() => setCharacterDisplay("")}
           >
-            <p className="text-2xl font-press-start">Dom</p>
+            <p
+              className={`text-2xl font-press-start ${
+                characterDisplay === "dom" && "text-black"
+              } ${selectedCharacter === "dom" && "text-black"}`}
+            >
+              Dom
+            </p>
           </button>
           <button
             className={`text-white border-slate-300 border-2 px-3 py-3 ${
@@ -60,7 +92,13 @@ const CharacterSelection = () => {
             onClick={() => setSelectedCharacter("elliott")}
             onMouseLeave={() => setCharacterDisplay("")}
           >
-            <p className="text-2xl font-press-start">Elliott</p>
+            <p
+              className={`text-2xl font-press-start ${
+                characterDisplay === "elliott" && "text-black"
+              } ${selectedCharacter === "elliott" && "text-black"}`}
+            >
+              Elliott
+            </p>
           </button>
           <button
             className={`text-white border-slate-300 border-2 px-3 py-3 ${
@@ -70,12 +108,32 @@ const CharacterSelection = () => {
             onClick={() => setSelectedCharacter("zach")}
             onMouseLeave={() => setCharacterDisplay("")}
           >
-            <p className="text-2xl font-press-start">Zach</p>
+            <p
+              className={`text-2xl font-press-start ${
+                characterDisplay === "zach" && "text-black"
+              } ${selectedCharacter === "zach" && "text-black"}`}
+            >
+              Zach
+            </p>
           </button>
         </div>
         <div className="flex flex-row items-center">
           <div className="bounce">
-            <Logo />
+            {!selectedCharacter && characterDisplay === "zach" && <Zach />}
+            {!selectedCharacter && characterDisplay === "john" && <JohnAlex />}
+            {!selectedCharacter && characterDisplay === "elliott" && (
+              <Elliott />
+            )}
+            {!selectedCharacter && characterDisplay === "dom" && <Dom />}
+            {!selectedCharacter && characterDisplay === "brian" && <Brian />}
+            {!selectedCharacter && characterDisplay === "julia" && <Julia />}
+            {selectedCharacter === "julia" && <Julia />}
+            {selectedCharacter === "john" && <JohnAlex />}
+            {selectedCharacter === "brian" && <Brian />}
+            {selectedCharacter === "elliott" && <Elliott />}
+            {selectedCharacter === "zach" && <Zach />}
+            {selectedCharacter === "dom" && <Dom />}
+            {!selectedCharacter && !characterDisplay && <Logo />}
           </div>
           <div className="flex flex-col text-center">
             <p className="text-white font-press-start text-center mb-3">

@@ -22,7 +22,13 @@ export const Inventory = () => {
             onMouseLeave={() => setHover(0)}
             onClick={() => setAnswer(1)}
           >
-            <p className="text-2xl font-press-start">your lucky shoes</p>
+            <p
+              className={`text-2xl font-press-start ${
+                (hover === 1 || answer === 1) && "text-black "
+              }`}
+            >
+              your lucky shoes
+            </p>
           </button>
           <button
             className={`text-white border-slate-300 border-2 px-3 py-3 ${
@@ -32,7 +38,13 @@ export const Inventory = () => {
             onMouseLeave={() => setHover(0)}
             onClick={() => setAnswer(2)}
           >
-            <p className="text-2xl font-press-start">snacks</p>
+            <p
+              className={`text-2xl font-press-start ${
+                (hover === 2 || answer === 2) && "text-black "
+              }`}
+            >
+              snacks
+            </p>
           </button>
         </div>
         <div className="flex flex-row justify-center gap-x-10 mt-10">
@@ -44,17 +56,29 @@ export const Inventory = () => {
             onMouseLeave={() => setHover(0)}
             onClick={() => setAnswer(3)}
           >
-            <p className="text-2xl font-press-start">dog treats?</p>
+            <p
+              className={`text-2xl font-press-start ${
+                (hover === 3 || answer === 3) && "text-black "
+              }`}
+            >
+              dog treats?
+            </p>
           </button>
           <button
-            className={`text-white border-slate-300 border-2 px-3 py-3 ${
-              hover === 4 && "bg-white text-black"
-            } ${answer === 4 && "text-black bg-yellow-300"}`}
+            className={`border-slate-300 border-2 px-3 py-3 text-white ${
+              hover === 4 && "bg-white "
+            } ${answer === 4 && "bg-yellow-300"}`}
             onMouseEnter={() => setHover(4)}
             onMouseLeave={() => setHover(0)}
             onClick={() => setAnswer(4)}
           >
-            <p className="text-2xl font-press-start">sunglasses</p>
+            <p
+              className={`text-2xl font-press-start ${
+                (hover === 4 || answer === 4) && "text-black "
+              }`}
+            >
+              sunglasses
+            </p>
           </button>
         </div>
       </div>
