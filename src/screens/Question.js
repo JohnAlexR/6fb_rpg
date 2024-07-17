@@ -149,7 +149,7 @@ export const Question = () => {
         </div>
       </div>
       {!isResultVisible && (
-        <div className="flex flex-row items-center justify-center gap-x-10 mt-10 w-[800px] flex-wrap gap-y-10">
+        <div className="flex flex-row items-center justify-center gap-x-5 mt-10 w-[800px] flex-wrap gap-y-3">
           {question &&
             question.answers.map((answer) => {
               if (answer?.inventoryCondition) {
@@ -179,7 +179,7 @@ export const Question = () => {
         </div>
       )}
       <button
-        className="p-6 mb-10 absolute bottom-[-20px] right-0 left-0"
+        className="p-6 mb-7 absolute bottom-[-20px] right-0 left-0"
         onClick={() => {
           if (isResultVisible) {
             submit();

@@ -86,7 +86,7 @@ export const questions = [
       },
       {
         id: "5d",
-        text: "put up flyers for next show",
+        text: "put up flyers for next show (-$20)",
         points: 20,
         fans: 50,
         vibes: -30,
@@ -104,7 +104,7 @@ export const questions = [
     answers: [
       {
         id: "2a",
-        text: "Bad Motel",
+        text: "Bad Motel (-$100)",
         points: 10,
         fans: 0,
         vibes: -30,
@@ -114,7 +114,7 @@ export const questions = [
       },
       {
         id: "2b",
-        text: "Nice Motel",
+        text: "Nice Motel (-$400)",
         points: 40,
         fans: 0,
         vibes: 30,
@@ -151,7 +151,8 @@ export const questions = [
           {
             inventoryReq: "dog treats",
             prob: 0.5,
-            result: "a mysterious wild animal approaches your merch box. Luckily, you still have your dog treats, you throw the dog treats to the animal. They happily eat the treats instead of your merch",
+            result:
+              "a mysterious wild animal approaches your merch box. Luckily, you still have your dog treats, you throw the dog treats to the animal. They happily eat the treats instead of your merch",
             points: 150,
             fans: 0,
             vibes: 0,
@@ -160,7 +161,8 @@ export const questions = [
           {
             inventoryReq: "",
             prob: 0.5,
-            result: "a mysterious wild animal approaches your merch box. It tears a hole in your merch box and eats some.",
+            result:
+              "a mysterious wild animal approaches your merch box. It tears a hole in your merch box and eats some.",
             points: 0,
             fans: 0,
             vibes: -20,
@@ -183,7 +185,8 @@ export const questions = [
           },
           {
             prob: 0.2,
-            result: "somehow you don't get pulled over, but you feel bad about about your reckless driving. Vibes decrease",
+            result:
+              "somehow you don't get pulled over, but you feel bad about about your reckless driving. Vibes decrease",
             points: 100,
             fans: 0,
             vibes: -10,
@@ -193,7 +196,7 @@ export const questions = [
       },
       {
         id: "3c",
-        text: "stop for coffee",
+        text: "stop for coffee (-$30)",
         points: 0,
         fans: 0,
         vibes: 10,
@@ -210,11 +213,11 @@ export const questions = [
     answers: [
       {
         id: "4a",
-        text: "ice cream... of course",
+        text: "ice cream... of course (-$50)",
         points: 100,
         fans: 10,
-        vibes: 30,
-        money: -100,
+        vibes: 50,
+        money: -50,
         isBranching: false,
         result:
           "ice cream was a great call, vibes are immaculate and you met some new fans",
@@ -242,7 +245,7 @@ export const questions = [
       },
       {
         id: "4d",
-        text: "coffee",
+        text: "coffee (-$20)",
         points: 20,
         fans: 0,
         vibes: 30,
@@ -275,7 +278,8 @@ export const questions = [
         result: [
           {
             characterCondition: ["john"],
-            result: "john's alter stage-ego 'sean' shines through, the crowd goes wild!",
+            result:
+              "john's alter stage-ego 'sean' shines through, the crowd goes wild!",
             points: 300,
             fans: 100,
             vibes: 50,
@@ -293,7 +297,7 @@ export const questions = [
       },
       {
         id: "6c",
-        text: "go buy something new!",
+        text: "go buy something new! (-$100)",
         points: 100,
         fans: 20,
         vibes: 20,
@@ -323,6 +327,203 @@ export const questions = [
             money: 0,
           },
         ],
+      },
+    ],
+  },
+  {
+    id: "7",
+    question:
+      "Your upcoming show isn't selling a lot of tickets, what do you do?",
+    isSecondary: false,
+    answers: [
+      {
+        id: "7a",
+        text: "Create some silly ads for instagram (-$200)",
+        points: 10,
+        fans: 50,
+        vibes: -10,
+        money: -200,
+        isBranching: false,
+        result: "a lot of work, but the internet is loving it!",
+      },
+      {
+        id: "7b",
+        text: "Put flyers around town! (-$50)",
+        points: 10,
+        fans: 20,
+        vibes: -20,
+        money: -50,
+        isBranching: false,
+        result: "you're in the heat all day, but make a few new fans",
+      },
+      {
+        id: "7c",
+        text: "take a nap",
+        points: 10,
+        fans: 0,
+        vibes: 30,
+        money: 0,
+        isBranching: false,
+        result: "you dream of massive crowds cheering you on",
+      },
+      {
+        id: "7d",
+        text: "text all your friends to come",
+        points: 10,
+        fans: 1,
+        vibes: -5,
+        money: 0,
+        isBranching: false,
+        result: "your second cousin might come!",
+      },
+    ],
+  },
+  {
+    id: "8",
+    question: "Crowd is cheering for an encore! What do you do?",
+    isSecondary: false,
+    answers: [
+      {
+        id: "8a",
+        text: "Play a rocking cover",
+        points: 50,
+        fans: 20,
+        vibes: 10,
+        money: 0,
+        isBranching: false,
+        result: "Nice, the crowd has fun!",
+      },
+      {
+        id: "8b",
+        text: "Play your new original",
+        points: 100,
+        fans: 5,
+        vibes: 20,
+        money: 0,
+        isBranching: false,
+        result: "You have a lot of fun with your new song!",
+      },
+      {
+        id: "8c",
+        text: "Don't go back on stage, you need your rest",
+        points: 50,
+        fans: -10,
+        vibes: 30,
+        money: 0,
+        isBranching: false,
+        result: "you reach mach-10, and arrive at the venue an hour early",
+      },
+      {
+        id: "8d",
+        text: "Go to the mic and do an impression",
+        isBranching: false,
+        points: 0,
+        fans: 0,
+        vibes: 0,
+        money: 0,
+        nextQuestion: "9",
+      },
+    ],
+  },
+  {
+    id: "9",
+    question: "uhhh...are you sure?",
+    isSecondary: true,
+    answers: [
+      {
+        id: "9a",
+        text: "Yes",
+        points: 0,
+        fans: 0,
+        vibes: 0,
+        money: 0,
+        isBranching: false,
+        nextQuestion: "10",
+      },
+      {
+        id: "9b",
+        text: "No",
+        points: 0,
+        fans: 0,
+        vibes: 0,
+        money: 0,
+        isBranching: false,
+        result: "thank you",
+      },
+    ],
+  },
+  {
+    id: "10",
+    question:
+      "very very low chance this goes over well. You sure you want to do this?",
+    isSecondary: true,
+    answers: [
+      {
+        id: "10a",
+        text: "Yes",
+        points: 0,
+        fans: 0,
+        vibes: 0,
+        money: 0,
+        isBranching: false,
+        nextQuestion: "11",
+      },
+      {
+        id: "10b",
+        text: "No",
+        points: 0,
+        fans: 0,
+        vibes: 0,
+        money: 0,
+        isBranching: false,
+        result: "thank you",
+      },
+    ],
+  },
+  {
+    id: "11",
+    question:
+      "ok, I'll be honest. There's a .01% chance that this works. Are you absolutely sure?",
+    isSecondary: true,
+    answers: [
+      {
+        id: "11a",
+        text: "Yes",
+        points: 0,
+        fans: 0,
+        vibes: 0,
+        money: 0,
+        isBranching: true,
+        result: [
+          {
+            prob: 0.1,
+            result:
+              "the crowd erupts in hearty laughter, you go down in history as an absolute legend",
+            points: 550,
+            fans: 100,
+            vibes: 100,
+            money: 0,
+          },
+          {
+            prob: 0.9,
+            result:
+              "you're booed by your family and friends in the audience. Don't say I didn't warn you",
+            points: -500,
+            fans: -500,
+            vibes: -500,
+            money: -500,
+          },
+        ],
+      },
+      {
+        id: "11b",
+        text: "No",
+        points: 0,
+        fans: 0,
+        vibes: 0,
+        money: 0,
+        isBranching: false,
+        result: "thank you",
       },
     ],
   },
