@@ -305,7 +305,7 @@ export const questions = [
       },
       {
         id: "6d",
-        text: "black shirt and jeas",
+        text: "black shirt and jeans",
         isBranching: true,
         result: [
           {
