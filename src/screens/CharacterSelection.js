@@ -7,8 +7,8 @@ import {
   Zach,
   Brian,
   JohnAlex,
-  Elliott,
   Dom,
+  Elliott,
 } from "../assets/characters";
 
 const CharacterSelection = () => {
@@ -126,7 +126,7 @@ const CharacterSelection = () => {
               <JohnAlex size={400} />
             )}
             {!selectedCharacter && characterDisplay === "elliott" && (
-              <Elliott />
+              <Elliott size={400} />
             )}
             {!selectedCharacter && characterDisplay === "dom" && (
               <Dom size={400} />
@@ -140,10 +140,10 @@ const CharacterSelection = () => {
             {selectedCharacter === "julia" && <Julia size={400} />}
             {selectedCharacter === "john" && <JohnAlex size={400} />}
             {selectedCharacter === "brian" && <Brian size={400} />}
-            {selectedCharacter === "elliott" && <Elliott size={400} />}
             {selectedCharacter === "zach" && <Zach size={400} />}
             {selectedCharacter === "dom" && <Dom size={400} />}
             {!selectedCharacter && !characterDisplay && <Logo />}
+            {selectedCharacter === "elliott" && <Elliott size={400} />}
           </div>
           <div className="flex flex-col text-center">
             <p className="text-white font-press-start text-center mb-3">
@@ -151,7 +151,9 @@ const CharacterSelection = () => {
             </p>
             <div className="flex flex-col">
               {!selectedCharacter && characterDisplay === "zach" && (
-                <p className="text-white font-press-start">+10% Money</p>
+                <p className="text-white font-press-start">
+                  Spend 20% Less Money
+                </p>
               )}
               {!selectedCharacter && characterDisplay === "john" && (
                 <p className="text-white font-press-start">+10% Points</p>

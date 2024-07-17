@@ -36,7 +36,7 @@ export const Endgame = () => {
       </div>
       <div>
         <p className="text-white font-press-start">{`Your Score: ${
-          user.points + user.fans + user.money + user.vibes
+          user.points + user.fans + user.vibes
         }`}</p>
       </div>
       <p className="text-white font-press-start text-center bottom-2 border-b-2">

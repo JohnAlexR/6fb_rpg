@@ -63,7 +63,8 @@ export const Question = () => {
 
   const determineRandomEncounter = () => {
     let tireProbability = 0.01;
-    let dogProbability = 0.1;
+    let dogProbability = 0.05;
+    let earplugProbability = 0.07;
 
     if (questionsAsked.includes("12")) {
       tireProbability = 0;
@@ -73,11 +74,17 @@ export const Question = () => {
       dogProbability = 0;
     }
 
+    if (questionsAsked.includes("19") || questionsAsked.length < 5) {
+      earplugProbability = 0;
+    }
+
     const randomNumber = Math.random();
     if (randomNumber < tireProbability) {
       return "tire";
     } else if (randomNumber < dogProbability) {
       return "dog";
+    } else if (randomNumber < earplugProbability) {
+      return "earplug";
     } else {
       return null;
     }
@@ -97,7 +104,7 @@ export const Question = () => {
     } else if (answer.isBranching === true) {
       if (answer.result[0].inventoryCondition) {
         if (user.inventory === answer.result[0].inventoryCondition) {
-          user.inventory = "";
+          user.inventory = "empty";
           return answer.result[0];
         } else {
           return answer.result[1];
@@ -196,12 +203,18 @@ export const Question = () => {
           )[0];
           setQuestion(dogQuestion);
           updateQuestions("13");
-        } else {
+        } else if (randomEncounter === "tire") {
           const tireQuestion = questions.filter(
             (question) => question.id === "12"
           )[0];
           setQuestion(tireQuestion);
           updateQuestions("12");
+        } else if (randomEncounter === "earplug") {
+          const earplugQuestion = questions.filter(
+            (question) => question.id === "19"
+          )[0];
+          setQuestion(earplugQuestion);
+          updateQuestions("19");
         }
       } else {
         const newQuestion = fetchQuestion();
