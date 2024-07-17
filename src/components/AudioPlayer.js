@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { MutedAudio, PlayingAudio } from "../assets/audio";
 
 const AudioPlayer = () => {
   const audioRef = useRef(null);
@@ -14,10 +15,10 @@ const AudioPlayer = () => {
   };
 
   return (
-    <div>
+    <div className="absolute bottom-0 right-2">
       <audio ref={audioRef} src="/naptown.mp3" />
       <button onClick={handlePlayPause} className="text-black text-xl">
-        {isPlaying ? "Pause" : "Play"}
+        {isPlaying ? <PlayingAudio /> : <MutedAudio />}
       </button>
     </div>
   );

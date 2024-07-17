@@ -3,7 +3,6 @@ import "./App.css";
 import GameBorder from "./components/GameBorder";
 import { screens } from "./data/screens";
 import { clearAnswers, clearQuestionsAsked, resetUser } from "./data/user";
-import AudioPlayer from "./components/AudioPlayer";
 
 const ScreenContext = createContext();
 
@@ -45,9 +44,6 @@ function MainApp() {
       >
         <p>reset</p>
       </button>
-      <div className="border-purple-400">
-        <AudioPlayer />
-      </div>
     </div>
   );
 }
