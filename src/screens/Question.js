@@ -5,6 +5,8 @@ import { questions } from "../data/questions";
 import { useScreen } from "../App";
 import { getRandomIntInclusive } from "../utils/fetchQuestion";
 import { updateQuestions } from "../data/user";
+import db from "../firebase";
+import { collection, addDoc } from "firebase/firestore/lite";
 import {
   Julia,
   JohnAlex,
@@ -141,7 +143,19 @@ export const Question = () => {
     });
   };
 
-  const startEndGame = () => {
+  const startEndGame = async () => {
+    var ref = collection(db, "scores");
+
+    const score = user.points + user.money + user.fans + user.vibes;
+
+    await addDoc(ref, { name: user.name, score: score })
+      .then(() => {
+        console.log("data added successfully");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+
     setScreenIndex(5);
   };
 
