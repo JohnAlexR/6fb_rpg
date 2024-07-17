@@ -176,7 +176,7 @@ export const Question = () => {
   };
 
   const triggerLoseCondition = () => {
-    setScreenIndex(6);
+    setScreenIndex(7);
   };
 
   const submit = () => {

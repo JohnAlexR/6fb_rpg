@@ -30,23 +30,16 @@ export const Endgame = () => {
 
   return (
     <div className="h-full w-full flex flex-grow items-center justify-center flex-col">
-      <p className="text-white font-press-start mb-6">Game Over</p>
-      <div className="bounce mb-10">
-        <Stats />
-      </div>
-      <div>
-        <p className="text-white font-press-start">{`Your Score: ${
-          user.points + user.fans + user.vibes
-        }`}</p>
-      </div>
-      <p className="text-white font-press-start text-center bottom-2 border-b-2">
+      <p className="text-white font-press-start text-center bottom-2 border-b-2 mb-5">
         high scores
       </p>
       <div>
         {items.map((score) => (
           <p
             key={`${score.score}${score.name}`}
-            className="font-press-start text-white text-xs"
+            className={`font-press-start text-white text-center ${
+              score.name === user.name && "text-yellow-300 text-lg"
+            }`}
           >{`${score.name}: ${score.score}`}</p>
         ))}
       </div>
