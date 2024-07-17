@@ -525,4 +525,96 @@ export const questions = [
       },
     ],
   },
+  {
+    id: "12",
+    question:
+      "during your drive a tire falls from the sky (this actually happened)...",
+    isSecondary: true,
+    answers: [
+      {
+        id: "12a",
+        text: "uh-oh...",
+        points: 0,
+        fans: 0,
+        vibes: 0,
+        money: 0,
+        isBranching: true,
+        result: [
+          {
+            inventoryCondition: "lucky shoes",
+            result:
+              "it's your lucky day, you swerve in the nick of time and avoid the tire! Nice :)",
+            points: 500,
+            fans: 0,
+            vibes: 50,
+            money: 0,
+          },
+          {
+            inventoryCondition: "",
+            result:
+              " the tire smashes into the side of your car! Luckily no one was hurt, but you're going to need a new car...",
+            points: 0,
+            fans: 0,
+            vibes: -20,
+            money: -500,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "13",
+    question: "you encounter a dog! Hecks ya. Pet the dog?",
+    isSecondary: true,
+    answers: [
+      {
+        id: "13a",
+        text: "yes",
+        points: 100,
+        fans: 1,
+        vibes: 10,
+        money: 0,
+        isBranching: false,
+        result: "it's a good boy, tail is wagging furiously",
+      },
+      {
+        id: "13b",
+        text: "no",
+        points: -1000000,
+        fans: -2,
+        vibes: -50,
+        money: 0,
+        isBranching: false,
+        result: "...why?",
+      },
+    ],
+  },
+  {
+    id: "14",
+    question: "give the dog a treat?",
+    isSecondary: true,
+    answers: [
+      {
+        id: "14a",
+        text: "yes",
+        points: 100,
+        fans: 2,
+        vibes: 30,
+        money: 0,
+        isBranching: false,
+        result:
+          "the owner is impressed that you had dog treats. They want to come to your show! ",
+      },
+      {
+        id: "14b",
+        text: "no",
+        points: 0,
+        fans: 0,
+        vibes: 0,
+        money: 0,
+        isBranching: false,
+        result: "what are you saving them for?",
+      },
+    ],
+  },
 ];

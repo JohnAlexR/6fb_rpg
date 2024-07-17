@@ -4,8 +4,9 @@ import { fetchQuestion } from "../utils/fetchQuestion";
 import { questions } from "../data/questions";
 import { useScreen } from "../App";
 import { getRandomIntInclusive } from "../utils/fetchQuestion";
+import { updateQuestions } from "../data/user";
 
-import { updateUser, user } from "../data/user";
+import { updateUser, user, questionsAsked } from "../data/user";
 
 const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
   const [hover, setHover] = useState(false);
@@ -36,6 +37,29 @@ export const Question = () => {
   const [isResultVisible, setIsResultVisible] = useState(false);
   const [statChanges, setStatChanges] = useState();
   const [answer, setAnswer] = useState();
+
+  const determineRandomEncounter = () => {
+    console.log("firedDetermineRandom");
+    let tireProbability = 0.05;
+    let dogProbability = 0.1;
+
+    if (questionsAsked.includes("12")) {
+      tireProbability = 0;
+    }
+
+    if (questionsAsked.includes("13")) {
+      dogProbability = 0;
+    }
+
+    const randomNumber = Math.random();
+    if (randomNumber < tireProbability) {
+      return "tire";
+    } else if (randomNumber < dogProbability) {
+      return "dog";
+    } else {
+      return null;
+    }
+  };
 
   const calculateAnswer = () => {
     const answer = question.answers.filter(
@@ -108,18 +132,39 @@ export const Question = () => {
     const answer = question.answers.filter(
       (answer) => answer.id === selectedAnswer
     )[0];
-
-    if (answer.nextQuestion) {
+    if (question.id === "13" && user.inventory === "dog treats") {
+      const treatQuestion = questions.filter(
+        (question) => question.id === "14"
+      )[0];
+      setQuestion(treatQuestion);
+    } else if (answer.nextQuestion) {
       const nextQuestion = questions.filter(
         (question) => question.id === answer.nextQuestion
       )[0];
       setQuestion(nextQuestion);
     } else {
-      const newQuestion = fetchQuestion();
-      if (newQuestion === "end") {
-        startEndGame();
+      const randomEncounter = determineRandomEncounter();
+      if (randomEncounter) {
+        if (randomEncounter === "dog") {
+          const dogQuestion = questions.filter(
+            (question) => question.id === "13"
+          )[0];
+          setQuestion(dogQuestion);
+          updateQuestions("13");
+        } else {
+          const tireQuestion = questions.filter(
+            (question) => question.id === "12"
+          )[0];
+          setQuestion(tireQuestion);
+          updateQuestions("12");
+        }
       } else {
-        setQuestion(newQuestion);
+        const newQuestion = fetchQuestion();
+        if (newQuestion === "end") {
+          startEndGame();
+        } else {
+          setQuestion(newQuestion);
+        }
       }
     }
     setIsResultVisible(false);

@@ -4,7 +4,7 @@ export const user = {
   money: 500,
   fans: 100,
   vibes: 100,
-  inventory: [],
+  inventory: "",
   character: "",
 };
 
@@ -68,7 +68,7 @@ export const resetUser = () => {
   user.money = 500;
   user.fans = 100;
   user.vibes = 100;
-  user.inventory = [];
+  user.inventory = "";
   user.character = "";
   user.points = 0;
 };

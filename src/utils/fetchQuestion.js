@@ -19,10 +19,7 @@ export const fetchQuestion = () => {
   }
   const length = newQuestions.length;
   const index = getRandomIntInclusive(0, length - 1);
-  console.log("index", index);
-  console.log("newQ", newQuestions);
   const questionID = newQuestions[index].id;
-  console.log("updateQ", questionID);
   updateQuestions(questionID);
   return newQuestions[index];
 };
