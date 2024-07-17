@@ -149,8 +149,7 @@ export const questions = [
         isBranching: true,
         result: [
           {
-            inventoryReq: "dog treats",
-            prob: 0.5,
+            inventoryCondition: "dog treats",
             result:
               "a mysterious wild animal approaches your merch box. Luckily, you still have your dog treats, you throw the dog treats to the animal. They happily eat the treats instead of your merch",
             points: 150,
@@ -159,8 +158,7 @@ export const questions = [
             money: 0,
           },
           {
-            inventoryReq: "",
-            prob: 0.5,
+            inventoryCondition: "",
             result:
               "a mysterious wild animal approaches your merch box. It tears a hole in your merch box and eats some.",
             points: 0,
@@ -483,7 +481,7 @@ export const questions = [
   {
     id: "11",
     question:
-      "ok, I'll be honest. There's a .01% chance that this works. Are you absolutely sure?",
+      "ok, I'll be honest. There's a 1% chance that this works. Are you absolutely sure?",
     isSecondary: true,
     answers: [
       {
@@ -496,7 +494,7 @@ export const questions = [
         isBranching: true,
         result: [
           {
-            prob: 0.1,
+            prob: 0.01,
             result:
               "the crowd erupts in hearty laughter, you go down in history as an absolute legend",
             points: 550,
@@ -505,7 +503,7 @@ export const questions = [
             money: 0,
           },
           {
-            prob: 0.9,
+            prob: 0.99,
             result:
               "you're booed by your family and friends in the audience. Don't say I didn't warn you",
             points: -500,

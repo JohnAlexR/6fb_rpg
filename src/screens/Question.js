@@ -49,8 +49,22 @@ export const Question = () => {
         return answer.result[1];
       }
     } else if (answer.isBranching === true) {
-      const index = getRandomIntInclusive(0, answer.result.length - 1);
-      return answer.result[index];
+      if (answer.result[0].inventoryCondition) {
+        if (user.inventory === answer.result[0].inventoryCondition) {
+          return answer.result[0];
+        } else {
+          return answer.result[1];
+        }
+      } else {
+        if (answer.result[0].prob) {
+          const randomNumber = Math.random();
+          const index = randomNumber < answer.result[0].prob ? 0 : 1;
+          return answer.result[index];
+        } else {
+          const index = getRandomIntInclusive(0, answer.result.length - 1);
+          return answer.result[index];
+        }
+      }
     } else {
       return answer;
     }
