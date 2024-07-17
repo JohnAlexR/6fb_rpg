@@ -52,23 +52,29 @@ export const Stats = () => {
         </p>
       </div>
       {helpText === 1 && (
-        <div className="bg-white h-10 w-[200px] absolute bottom-[-55px] text-center">
-          <p className="font-press-start text-sm">Try for the high score</p>
+        <div className="bg-white h-10 w-[200px] absolute bottom-[-55px] text-center flex justify-center items-center">
+          <p className="font-press-start text-xs">Try for the high score</p>
         </div>
       )}
       {helpText === 2 && (
-        <div className="bg-white h-10 w-[200px] absolute bottom-[-55px] text-center">
-          <p className="font-press-start text-sm">You lose if 0</p>
+        <div className="bg-white h-14 w-[200px] absolute bottom-[-55px] text-center flex justify-center items-center">
+          <p className="font-press-start text-xs">
+            You lose if 0. Adds to final score
+          </p>
         </div>
       )}
       {helpText === 3 && (
-        <div className="bg-white h-10 w-[200px] absolute bottom-[-55px] text-center">
-          <p className="font-press-start text-sm">Energy/Morale, lose if 0</p>
+        <div className="bg-white h-14 w-[200px] absolute bottom-[-55px] text-center flex justify-center items-center">
+          <p className="font-press-start text-xs">
+            Energy/Morale, lose if 0. Adds to final score
+          </p>
         </div>
       )}
       {helpText === 4 && (
-        <div className="bg-white h-10 w-[200px] absolute bottom-[-55px] text-center">
-          <p className="font-press-start text-sm">for buying, lose if 0</p>
+        <div className="bg-white h-16 w-[200px] absolute bottom-[-55px] text-center flex justify-center items-center">
+          <p className="font-press-start text-xs">
+            Lose if 0. Does not count towards score
+          </p>
         </div>
       )}
     </div>

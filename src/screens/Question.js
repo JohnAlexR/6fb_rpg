@@ -32,7 +32,7 @@ const DomLostModal = ({ onClose }) => {
           } else if (lossCondition === "fans") {
             updateUser({ fans: 100 });
           } else {
-            updateUser({ vibes: 100 });
+            updateUser({ vibes: 50 });
           }
           onClose();
         }}
@@ -283,6 +283,7 @@ export const Question = () => {
         const newQuestion = fetchQuestion();
         if (newQuestion === "end") {
           startEndGame();
+          return;
         } else {
           setQuestion(newQuestion);
         }
