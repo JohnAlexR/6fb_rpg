@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useScreen } from "../App";
 import { Logo } from "../assets/Logo";
-import { updateUser } from "../data/user";
+import { updateUser, user } from "../data/user";
 import {
   Julia,
   Zach,
@@ -13,11 +13,26 @@ import {
 
 const CharacterSelection = () => {
   const { screenIndex, setScreenIndex } = useScreen();
-  const [characterDisplay, setCharacterDisplay] = useState("john");
+  const [characterDisplay, setCharacterDisplay] = useState();
   const [selectedCharacter, setSelectedCharacter] = useState();
+  const sillyNames = [
+    "ass",
+    "tit",
+    "fuk",
+    "poo",
+    "pee",
+    "dck",
+    "cum",
+    "fck",
+    "sht",
+  ];
+  const isNameBad = sillyNames.includes(user.name.toLowerCase()) ? true : false;
 
   return (
     <div className="flex h-full w-full flex-col">
+      {isNameBad && (
+        <p className="text-white font-press-start text-center">{`Since you are named ${user.name}, you must play as Zach`}</p>
+      )}
       <div className="flex flex-row">
         <div className="flex flex-col">
           <button
@@ -27,6 +42,7 @@ const CharacterSelection = () => {
             onMouseEnter={() => setCharacterDisplay("john")}
             onClick={() => setSelectedCharacter("john")}
             onMouseLeave={() => setCharacterDisplay("")}
+            disabled={isNameBad}
           >
             <p
               className={`text-2xl font-press-start ${
@@ -43,6 +59,7 @@ const CharacterSelection = () => {
             onMouseEnter={() => setCharacterDisplay("brian")}
             onClick={() => setSelectedCharacter("brian")}
             onMouseLeave={() => setCharacterDisplay("")}
+            disabled={isNameBad}
           >
             <p
               className={`text-2xl font-press-start ${
@@ -59,6 +76,7 @@ const CharacterSelection = () => {
             onMouseEnter={() => setCharacterDisplay("julia")}
             onClick={() => setSelectedCharacter("julia")}
             onMouseLeave={() => setCharacterDisplay("")}
+            disabled={isNameBad}
           >
             <p
               className={`text-2xl font-press-start ${
@@ -75,6 +93,7 @@ const CharacterSelection = () => {
             onMouseEnter={() => setCharacterDisplay("dom")}
             onClick={() => setSelectedCharacter("dom")}
             onMouseLeave={() => setCharacterDisplay("")}
+            disabled={isNameBad}
           >
             <p
               className={`text-2xl font-press-start ${
@@ -91,6 +110,7 @@ const CharacterSelection = () => {
             onMouseEnter={() => setCharacterDisplay("elliott")}
             onClick={() => setSelectedCharacter("elliott")}
             onMouseLeave={() => setCharacterDisplay("")}
+            disabled={isNameBad}
           >
             <p
               className={`text-2xl font-press-start ${
