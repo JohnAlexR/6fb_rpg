@@ -5,8 +5,29 @@ import { questions } from "../data/questions";
 import { useScreen } from "../App";
 import { getRandomIntInclusive } from "../utils/fetchQuestion";
 import { updateQuestions } from "../data/user";
+import {
+  Julia,
+  JohnAlex,
+  Zach,
+  Dom,
+  Elliott,
+  Brian,
+} from "../assets/characters";
 
 import { updateUser, user, questionsAsked } from "../data/user";
+
+const CharacterIcon = () => {
+  return (
+    <div className="flex absolute justify-center items-center bottom-0 right-0">
+      {user.character === "julia" && <Julia size={"150"} />}
+      {user.character === "john" && <JohnAlex size={"150"} />}
+      {user.character === "elliott" && <Elliott size={"150"} />}
+      {user.character === "zach" && <Zach size={"150"} />}
+      {user.character === "dom" && <Dom size={"150"} />}
+      {user.character === "brian" && <Brian size={"150"} />}
+    </div>
+  );
+};
 
 const Answer = ({ setSelectedAnswer, answer, selectedAnswer }) => {
   const [hover, setHover] = useState(false);
@@ -39,8 +60,7 @@ export const Question = () => {
   const [answer, setAnswer] = useState();
 
   const determineRandomEncounter = () => {
-    console.log("firedDetermineRandom");
-    let tireProbability = 0.05;
+    let tireProbability = 0.01;
     let dogProbability = 0.1;
 
     if (questionsAsked.includes("12")) {
@@ -75,6 +95,7 @@ export const Question = () => {
     } else if (answer.isBranching === true) {
       if (answer.result[0].inventoryCondition) {
         if (user.inventory === answer.result[0].inventoryCondition) {
+          user.inventory = "";
           return answer.result[0];
         } else {
           return answer.result[1];
@@ -208,14 +229,14 @@ export const Question = () => {
           )}
         </div>
 
-        <div className="flex items-center text-center justify-center w-[500px]">
-          <p className="font-press-start text-white text-center">
+        <div className="flex items-center text-center justify-center w-[500px] px-5">
+          <p className="font-press-start text-white text-center ">
             {question.question}
           </p>
         </div>
       </div>
       {!isResultVisible && (
-        <div className="flex flex-row items-center justify-center gap-x-5 mt-10 w-[800px] flex-wrap gap-y-3">
+        <div className="flex flex-row items-center justify-center gap-x-5 mt-10 w-[800px] flex-wrap gap-y-3 px-4">
           {question &&
             question.answers.map((answer) => {
               if (answer?.inventoryCondition) {
@@ -270,6 +291,7 @@ export const Question = () => {
           </div>
         </div>
       )}
+      <CharacterIcon />
     </div>
   );
 };

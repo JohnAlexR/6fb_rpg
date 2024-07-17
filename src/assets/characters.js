@@ -1,12 +1,12 @@
 import React from "react";
 
-export const Julia = () => (
+export const Julia = ({ size }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="svg"
     version="1.1"
-    width="400"
-    height="400"
+    width={size}
+    height={size}
     viewBox="0, 0, 400,400"
   >
     <g id="svgg">
@@ -70,13 +70,13 @@ export const Julia = () => (
   </svg>
 );
 
-export const JohnAlex = () => (
+export const JohnAlex = ({ size }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="svg"
     version="1.1"
-    width="400"
-    height="400"
+    width={size}
+    height={size}
     viewBox="0, 0, 400,400"
   >
     <g id="svgg">
@@ -140,13 +140,13 @@ export const JohnAlex = () => (
   </svg>
 );
 
-export const Brian = () => (
+export const Brian = ({ size }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="svg"
     version="1.1"
-    width="400"
-    height="400"
+    width={size}
+    height={size}
     viewBox="0, 0, 400,400"
   >
     <g id="svgg">
@@ -210,13 +210,13 @@ export const Brian = () => (
   </svg>
 );
 
-export const Zach = () => (
+export const Zach = ({ size }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="svg"
     version="1.1"
-    width="400"
-    height="400"
+    width={size}
+    height={size}
     viewBox="0, 0, 400,400"
   >
     <g id="svgg">
@@ -280,13 +280,13 @@ export const Zach = () => (
   </svg>
 );
 
-export const Elliott = () => (
+export const Elliott = ({ size }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="svg"
     version="1.1"
-    width="400"
-    height="400"
+    width={size}
+    height={size}
     viewBox="0, 0, 400,400"
   >
     <g id="svgg">
@@ -336,13 +336,13 @@ export const Elliott = () => (
   </svg>
 );
 
-export const Dom = () => (
+export const Dom = ({ size }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="svg"
     version="1.1"
-    width="400"
-    height="400"
+    width={size}
+    height={size}
     viewBox="0, 0, 400,400"
   >
     <g id="svgg">

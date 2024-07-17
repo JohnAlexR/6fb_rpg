@@ -119,20 +119,30 @@ const CharacterSelection = () => {
         </div>
         <div className="flex flex-row items-center">
           <div className="bounce">
-            {!selectedCharacter && characterDisplay === "zach" && <Zach />}
-            {!selectedCharacter && characterDisplay === "john" && <JohnAlex />}
+            {!selectedCharacter && characterDisplay === "zach" && (
+              <Zach size={400} />
+            )}
+            {!selectedCharacter && characterDisplay === "john" && (
+              <JohnAlex size={400} />
+            )}
             {!selectedCharacter && characterDisplay === "elliott" && (
               <Elliott />
             )}
-            {!selectedCharacter && characterDisplay === "dom" && <Dom />}
-            {!selectedCharacter && characterDisplay === "brian" && <Brian />}
-            {!selectedCharacter && characterDisplay === "julia" && <Julia />}
-            {selectedCharacter === "julia" && <Julia />}
-            {selectedCharacter === "john" && <JohnAlex />}
-            {selectedCharacter === "brian" && <Brian />}
-            {selectedCharacter === "elliott" && <Elliott />}
-            {selectedCharacter === "zach" && <Zach />}
-            {selectedCharacter === "dom" && <Dom />}
+            {!selectedCharacter && characterDisplay === "dom" && (
+              <Dom size={400} />
+            )}
+            {!selectedCharacter && characterDisplay === "brian" && (
+              <Brian size={400} />
+            )}
+            {!selectedCharacter && characterDisplay === "julia" && (
+              <Julia size={400} />
+            )}
+            {selectedCharacter === "julia" && <Julia size={400} />}
+            {selectedCharacter === "john" && <JohnAlex size={400} />}
+            {selectedCharacter === "brian" && <Brian size={400} />}
+            {selectedCharacter === "elliott" && <Elliott size={400} />}
+            {selectedCharacter === "zach" && <Zach size={400} />}
+            {selectedCharacter === "dom" && <Dom size={400} />}
             {!selectedCharacter && !characterDisplay && <Logo />}
           </div>
           <div className="flex flex-col text-center">
