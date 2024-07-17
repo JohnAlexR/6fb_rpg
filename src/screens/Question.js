@@ -59,11 +59,26 @@ export const Question = () => {
   const calculateStats = (answer) => {
     setStatChanges(answer);
 
+    const values = answer;
+    if (user.character === "john" && values.fans > 0) {
+      values.points *= 1.1;
+      values.points = Math.round(values.points);
+    } else if (user.character === "zach") {
+      values.money *= 0.8;
+      values.money = Math.round(values.money);
+    } else if (user.character === "julia" && values.fans > 0) {
+      values.fans *= 1.1;
+      values.fans = Math.round(values.fans);
+    } else if (user.character === "brian") {
+      values.vibes *= 1.1;
+      values.vibes = Math.round(values.vibes);
+    }
+
     updateUser({
-      points: answer.points,
-      money: answer.money,
-      fans: answer.fans,
-      vibes: answer.vibes,
+      points: values.points,
+      money: values.money,
+      fans: values.fans,
+      vibes: values.vibes,
     });
   };
 

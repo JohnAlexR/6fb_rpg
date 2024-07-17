@@ -101,7 +101,9 @@ const CharacterSelection = () => {
                 <p className="text-white font-press-start">second life</p>
               )}
               {selectedCharacter === "zach" && (
-                <p className="text-white font-press-start">+10% Money</p>
+                <p className="text-white font-press-start">
+                  Spend 20% less money
+                </p>
               )}
               {selectedCharacter === "john" && (
                 <p className="text-white font-press-start">+10% Points</p>

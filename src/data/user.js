@@ -65,7 +65,7 @@ export const clearQuestionsAsked = () => {
 
 export const resetUser = () => {
   user.name = "";
-  user.money = 1000;
+  user.money = 500;
   user.fans = 100;
   user.vibes = 100;
   user.inventory = [];
