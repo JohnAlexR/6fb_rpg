@@ -98,7 +98,7 @@ export const Question = () => {
     let tireProbability = 0.01;
     let dogProbability = 0.05;
     let earplugProbability = 0.07;
-    let recordProbability = 0.1;
+    let recordProbability = 0.15;
 
     if (!answers.includes("5c") || questionsAsked.includes("21")) {
       recordProbability = 0;
@@ -112,7 +112,7 @@ export const Question = () => {
       dogProbability = 0;
     }
 
-    if (questionsAsked.includes("19") || questionsAsked.length < 5) {
+    if (questionsAsked.includes("18") || questionsAsked.length > 5) {
       earplugProbability = 0;
     }
 
