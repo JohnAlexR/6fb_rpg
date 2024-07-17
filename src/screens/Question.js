@@ -18,6 +18,37 @@ import {
 
 import { updateUser, user, questionsAsked } from "../data/user";
 
+const DomLostModal = ({ onClose }) => {
+  const lossCondition =
+    user.money <= 0 ? "money" : user.fans <= 0 ? "fans" : "vibes";
+  return (
+    <div className="border-white border-2 h-full w-full absolute top-0 bg-black flex-col justify-center items-center px-10 text-center">
+      <p className="text-white font-press-start mt-20">{`You ran out of ${lossCondition}! But Dom doesn't give up easily`}</p>
+      <button
+        className="p-2 mt-20 border-white border-2"
+        onClick={() => {
+          if (lossCondition === "money") {
+            updateUser({ money: 500 });
+          } else if (lossCondition === "fans") {
+            updateUser({ fans: 100 });
+          } else {
+            updateUser({ vibes: 100 });
+          }
+          onClose();
+        }}
+      >
+        <p className="text-white font-press-start">{`keep going ${
+          lossCondition === "money"
+            ? "(+$500)"
+            : lossCondition === "fans"
+            ? "(+100 fans)"
+            : "(+100 vibes)"
+        }`}</p>
+      </button>
+    </div>
+  );
+};
+
 const CharacterIcon = () => {
   return (
     <div className="flex absolute justify-center items-center bottom-0 right-0">
@@ -60,11 +91,18 @@ export const Question = () => {
   const [isResultVisible, setIsResultVisible] = useState(false);
   const [statChanges, setStatChanges] = useState();
   const [answer, setAnswer] = useState();
+  const [domLostModalIsVibile, setDomLostModalIsVisible] = useState(false);
+  const [hasDomLost, setHasDomLost] = useState(false);
 
   const determineRandomEncounter = () => {
     let tireProbability = 0.01;
     let dogProbability = 0.05;
     let earplugProbability = 0.07;
+    let recordProbability = 0.1;
+
+    if (!answers.includes("5c") || questionsAsked.includes("21")) {
+      recordProbability = 0;
+    }
 
     if (questionsAsked.includes("12")) {
       tireProbability = 0;
@@ -85,6 +123,8 @@ export const Question = () => {
       return "dog";
     } else if (randomNumber < earplugProbability) {
       return "earplug";
+    } else if (randomNumber < recordProbability) {
+      return "record";
     } else {
       return null;
     }
@@ -128,6 +168,14 @@ export const Question = () => {
     setStatChanges(answer);
 
     const values = answer;
+
+    if (answers.includes("20a")) {
+      values.money += 50;
+    } else if (answers.includes("20b")) {
+      values.money += 100;
+    } else if (answers.includes("20d")) {
+      values.fans += 20;
+    }
     if (user.character === "john" && values.fans > 0) {
       values.points *= 1.1;
       values.points = Math.round(values.points);
@@ -141,6 +189,7 @@ export const Question = () => {
       values.vibes *= 1.1;
       values.vibes = Math.round(values.vibes);
     }
+
     if (typeof values.inventory === "string") {
       updateUser({
         points: values.points,
@@ -215,6 +264,12 @@ export const Question = () => {
           )[0];
           setQuestion(earplugQuestion);
           updateQuestions("19");
+        } else if (randomEncounter === "record") {
+          const recordQuestion = questions.filter(
+            (question) => question.id === "21"
+          )[0];
+          setQuestion(recordQuestion);
+          updateQuestions("21");
         }
       } else {
         const newQuestion = fetchQuestion();
@@ -229,7 +284,12 @@ export const Question = () => {
     setStatChanges(null);
     setSelectedAnswer("");
     if (user.money <= 0 || user.fans <= 0 || user.vibes <= 0) {
-      triggerLoseCondition();
+      if (user.character === "dom" && !hasDomLost) {
+        setDomLostModalIsVisible(true);
+        setHasDomLost(true);
+      } else {
+        triggerLoseCondition();
+      }
     }
   };
 
@@ -328,6 +388,9 @@ export const Question = () => {
             </p>
           </div>
         </div>
+      )}
+      {domLostModalIsVibile && (
+        <DomLostModal onClose={() => setDomLostModalIsVisible(false)} />
       )}
       <CharacterIcon />
     </div>

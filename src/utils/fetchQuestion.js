@@ -2,7 +2,6 @@ import React from "react";
 import { questions } from "../data/questions";
 import { updateQuestions, user } from "../data/user";
 import { questionsAsked } from "../data/user";
-import { triggerEndGame } from "./triggerEndgame";
 
 export const getRandomIntInclusive = (min, max) => {
   const minCeiled = Math.ceil(min);
