@@ -100,6 +100,10 @@ export const Question = () => {
     setScreenIndex(5);
   };
 
+  const triggerLoseCondition = () => {
+    setScreenIndex(6);
+  };
+
   const submit = () => {
     const answer = question.answers.filter(
       (answer) => answer.id === selectedAnswer
@@ -121,6 +125,9 @@ export const Question = () => {
     setIsResultVisible(false);
     setStatChanges(null);
     setSelectedAnswer("");
+    if (user.money <= 0 || user.fans <= 0 || user.vibes <= 0) {
+      triggerLoseCondition();
+    }
   };
 
   return (

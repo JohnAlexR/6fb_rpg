@@ -4,6 +4,7 @@ import { Inventory } from "../screens/Inventory";
 import { Question } from "../screens/Question";
 import { Name } from "../screens/Name";
 import Endgame from "../screens/Endgame";
+import LoseScreen from "../screens/LoseScreen";
 
 export const screens = [
   {
@@ -15,4 +16,5 @@ export const screens = [
   { name: "inventory", component: <Inventory /> },
   { name: "question", component: <Question /> },
   { name: "endGame", component: <Endgame /> },
+  { name: "LoseScreen", component: <LoseScreen /> },
 ];

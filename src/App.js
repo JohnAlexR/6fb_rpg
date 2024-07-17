@@ -2,8 +2,7 @@ import React, { createContext, useState, useContext } from "react";
 import "./App.css";
 import GameBorder from "./components/GameBorder";
 import { screens } from "./data/screens";
-import { resetUser } from "./data/user";
-import { clearAnswers, clearQuestionsAsked } from "./data/user";
+import { clearAnswers, clearQuestionsAsked, resetUser } from "./data/user";
 
 const ScreenContext = createContext();
 
