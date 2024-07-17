@@ -114,7 +114,7 @@ export const questions = [
       },
       {
         id: "2b",
-        text: "Nice Motel (-$400)",
+        text: "Nice Hotel (-$400)",
         points: 40,
         fans: 0,
         vibes: 30,
@@ -337,8 +337,8 @@ export const questions = [
       {
         id: "7a",
         text: "Create some silly ads for instagram (-$200)",
-        points: 10,
-        fans: 50,
+        points: 100,
+        fans: 100,
         vibes: -10,
         money: -200,
         isBranching: false,
@@ -556,7 +556,7 @@ export const questions = [
             points: 0,
             fans: 0,
             vibes: -20,
-            money: -500,
+            money: -450,
           },
         ],
       },
