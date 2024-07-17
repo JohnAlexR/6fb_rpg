@@ -135,6 +135,14 @@ export const Question = () => {
       (answer) => answer.id === selectedAnswer
     )[0];
 
+    if (
+      answer.isBranching &&
+      answer.result[0].inventoryCondition === "lucky shoes" &&
+      user.character === "elliott"
+    ) {
+      return answer.result[0];
+    }
+
     if (answer.isBranching && answer.result[0].characterCondition) {
       if (answer.result[0].characterCondition.includes(user.character)) {
         return answer.result[0];
@@ -333,7 +341,7 @@ export const Question = () => {
         </div>
       </div>
       {!isResultVisible && (
-        <div className="flex flex-row items-center justify-center gap-x-5 mt-10 w-[800px] flex-wrap gap-y-3 px-4">
+        <div className="flex flex-row items-center justify-center gap-x-5 mt-5 w-[800px] flex-wrap gap-y-3 px-4">
           {question &&
             question.answers.map((answer) => {
               if (answer?.inventoryCondition) {

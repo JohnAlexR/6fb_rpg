@@ -10,7 +10,7 @@ export const LoseScreen = () => {
       <div className="bounce mb-10">
         <Stats />
       </div>
-      <p className="font-press-start text-white">You lose...</p>
+      <p className="font-press-start text-red-500">You lose...</p>
       <button
         onClick={() => {
           setScreenIndex(0);

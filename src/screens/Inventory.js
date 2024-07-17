@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useScreen } from "../App";
 import { updateUser } from "../data/user";
+import { user } from "../data/user";
 
 export const Inventory = () => {
   const [answer, setAnswer] = useState(0);
@@ -14,22 +15,24 @@ export const Inventory = () => {
       </p>
       <div className="flex flex-col mt-10">
         <div className="flex flex-row justify-center gap-x-10">
-          <button
-            className={`text-white border-slate-300 border-2 px-3 py-3 ${
-              hover === 1 && "bg-white text-black"
-            } ${answer === 1 && "text-black bg-yellow-300"}`}
-            onMouseEnter={() => setHover(1)}
-            onMouseLeave={() => setHover(0)}
-            onClick={() => setAnswer(1)}
-          >
-            <p
-              className={`text-2xl font-press-start ${
-                (hover === 1 || answer === 1) && "text-black "
-              }`}
+          {user.character !== "elliott" && (
+            <button
+              className={`text-white border-slate-300 border-2 px-3 py-3 ${
+                hover === 1 && "bg-white text-black"
+              } ${answer === 1 && "text-black bg-yellow-300"}`}
+              onMouseEnter={() => setHover(1)}
+              onMouseLeave={() => setHover(0)}
+              onClick={() => setAnswer(1)}
             >
-              your lucky shoes
-            </p>
-          </button>
+              <p
+                className={`text-2xl font-press-start ${
+                  (hover === 1 || answer === 1) && "text-black "
+                }`}
+              >
+                your lucky shoes
+              </p>
+            </button>
+          )}
           <button
             className={`text-white border-slate-300 border-2 px-3 py-3 ${
               hover === 2 && "bg-white text-black"

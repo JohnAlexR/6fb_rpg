@@ -4,7 +4,7 @@ import { user } from "../data/user";
 export const Stats = () => {
   const [helpText, setHelpText] = useState(0);
   return (
-    <div className="border-white border-2 w-[300px] h-[150px] px-2 relative">
+    <div className="border-white border-2 w-[300px] h-[170px] px-2 relative">
       <p className="text-white font-press-start text-center">{`${user.name}: ${user.character}`}</p>
       <div className="border-white border-2" />
       <div className="flex flex-col">
@@ -41,7 +41,14 @@ export const Stats = () => {
           onMouseEnter={() => setHelpText(5)}
           onMouseLeave={() => setHelpText(0)}
         >
-          {`Inventory: ${user.inventory.toString()}`}
+          {user.character === "elliott" &&
+            `Inventory: ${
+              user.inventory === "empty"
+                ? "lucky shoes"
+                : user.inventory.toString() + " + lucky shoes"
+            }`}
+          {user.character !== "elliott" &&
+            `Inventory: ${user.inventory.toString()}`}
         </p>
       </div>
       {helpText === 1 && (

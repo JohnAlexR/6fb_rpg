@@ -25,6 +25,7 @@ const CharacterSelection = () => {
     "cum",
     "fck",
     "sht",
+    "dik",
   ];
   const isNameBad = sillyNames.includes(user.name.toLowerCase()) ? true : false;
 
@@ -165,14 +166,14 @@ const CharacterSelection = () => {
             {!selectedCharacter && !characterDisplay && <Logo />}
             {selectedCharacter === "elliott" && <Elliott size={400} />}
           </div>
-          <div className="flex flex-col text-center">
+          <div className="flex flex-col text-center w-40 mr-4">
             <p className="text-white font-press-start text-center mb-3">
               Character Perk:
             </p>
             <div className="flex flex-col">
               {!selectedCharacter && characterDisplay === "zach" && (
                 <p className="text-white font-press-start">
-                  Spend 20% Less Money
+                  Spend 20% less Money
                 </p>
               )}
               {!selectedCharacter && characterDisplay === "john" && (
