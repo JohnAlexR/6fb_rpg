@@ -817,13 +817,13 @@ export const questions = [
       },
       {
         id: "18c",
-        text: "A new really really really cool guitar (-$500)",
+        text: "A new really really really cool guitar (-$450)",
         points: 50,
         fans: 0,
         vibes: 0,
         money: -450,
         isBranching: false,
-        result: "your tone shifts slightly",
+        result: "your tone changes a bit",
         inventory: "new guitar",
       },
       {
