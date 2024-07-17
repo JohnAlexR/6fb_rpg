@@ -4,7 +4,7 @@ import { fetchQuestion } from "../utils/fetchQuestion";
 import { questions } from "../data/questions";
 import { useScreen } from "../App";
 import { getRandomIntInclusive } from "../utils/fetchQuestion";
-import { updateQuestions } from "../data/user";
+import { answers, updateAnswer, updateQuestions } from "../data/user";
 import db from "../firebase";
 import { collection, addDoc } from "firebase/firestore/lite";
 import {
@@ -134,19 +134,28 @@ export const Question = () => {
       values.vibes *= 1.1;
       values.vibes = Math.round(values.vibes);
     }
-
-    updateUser({
-      points: values.points,
-      money: values.money,
-      fans: values.fans,
-      vibes: values.vibes,
-    });
+    if (typeof values.inventory === "string") {
+      updateUser({
+        points: values.points,
+        money: values.money,
+        fans: values.fans,
+        vibes: values.vibes,
+        inventory: values.inventory,
+      });
+    } else {
+      updateUser({
+        points: values.points,
+        money: values.money,
+        fans: values.fans,
+        vibes: values.vibes,
+      });
+    }
   };
 
   const startEndGame = async () => {
     var ref = collection(db, "scores");
 
-    const score = user.points + user.money + user.fans + user.vibes;
+    const score = user.points + user.fans + user.vibes;
 
     await addDoc(ref, { name: user.name, score: score })
       .then(() => {
@@ -167,6 +176,7 @@ export const Question = () => {
     const answer = question.answers.filter(
       (answer) => answer.id === selectedAnswer
     )[0];
+    updateAnswer(selectedAnswer);
     if (question.id === "13" && user.inventory === "dog treats") {
       const treatQuestion = questions.filter(
         (question) => question.id === "14"
@@ -291,6 +301,7 @@ export const Question = () => {
             calculateStats(statAnswer);
           }
         }}
+        disabled={!selectedAnswer}
       >
         <p className="text-white font-bold text-2xl font-press-start text-center">
           continue

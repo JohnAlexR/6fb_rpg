@@ -39,7 +39,7 @@ export const updateUser = ({
     const newVibes = user.vibes + vibes;
     user.vibes = newVibes;
   }
-  if (inventory) {
+  if (typeof inventory === "string") {
     user.inventory = inventory;
   }
   if (character) {
