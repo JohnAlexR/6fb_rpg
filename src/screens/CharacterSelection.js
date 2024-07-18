@@ -145,32 +145,32 @@ const CharacterSelection = () => {
         <div className="flex flex-row items-center">
           <div className="bounce">
             {!selectedCharacter && characterDisplay === "zach" && (
-              <Zach size={400} />
+              <Zach size={300} />
             )}
             {!selectedCharacter && characterDisplay === "john" && (
-              <JohnAlex size={400} />
+              <JohnAlex size={300} />
             )}
             {!selectedCharacter && characterDisplay === "elliott" && (
-              <Elliott size={400} />
+              <Elliott size={300} />
             )}
             {!selectedCharacter && characterDisplay === "dom" && (
-              <Dom size={400} />
+              <Dom size={300} />
             )}
             {!selectedCharacter && characterDisplay === "brian" && (
-              <Brian size={400} />
+              <Brian size={300} />
             )}
             {!selectedCharacter && characterDisplay === "julia" && (
-              <Julia size={400} />
+              <Julia size={300} />
             )}
-            {selectedCharacter === "julia" && <Julia size={400} />}
-            {selectedCharacter === "john" && <JohnAlex size={400} />}
-            {selectedCharacter === "brian" && <Brian size={400} />}
-            {selectedCharacter === "zach" && <Zach size={400} />}
-            {selectedCharacter === "dom" && <Dom size={400} />}
+            {selectedCharacter === "julia" && <Julia size={300} />}
+            {selectedCharacter === "john" && <JohnAlex size={300} />}
+            {selectedCharacter === "brian" && <Brian size={300} />}
+            {selectedCharacter === "zach" && <Zach size={300} />}
+            {selectedCharacter === "dom" && <Dom size={300} />}
             {!selectedCharacter && !characterDisplay && <Logo />}
-            {selectedCharacter === "elliott" && <Elliott size={400} />}
+            {selectedCharacter === "elliott" && <Elliott size={300} />}
           </div>
-          <div className="flex flex-col text-center w-40 mr-4">
+          <div className="flex flex-col text-center w-60 mr-4">
             <p className="text-white font-press-start text-center mb-3">
               Character Perk:
             </p>
@@ -218,6 +218,38 @@ const CharacterSelection = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="text-center absolute bottom-20 right-0 left-0">
+        {selectedCharacter === "zach" && (
+          <p className="text-white font-press-start text-[10px] ">
+            "Hey guys it's Zach from 6fb"
+          </p>
+        )}
+        {selectedCharacter === "john" && (
+          <p className="text-white font-press-start text-[10px]">
+            Thanks for playing
+          </p>
+        )}
+        {selectedCharacter === "brian" && (
+          <p className="text-white font-press-start text-[10px]">
+            "my passion is chilling"
+          </p>
+        )}
+        {selectedCharacter === "julia" && (
+          <p className="text-white font-press-start text-[10px]">
+            Not a landgirl
+          </p>
+        )}
+        {selectedCharacter === "elliott" && (
+          <p className="text-white font-press-start text-[10px]">
+            resident coffee addict
+          </p>
+        )}
+        {selectedCharacter === "dom" && (
+          <p className="text-white font-press-start text-[10px]">
+            the normal one
+          </p>
+        )}
       </div>
       <div className="text-center">
         {selectedCharacter && (
