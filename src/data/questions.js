@@ -151,7 +151,7 @@ export const questions = [
           {
             inventoryCondition: "dog treats",
             result:
-              "a mysterious wild animal approaches your merch box. Luckily, you still have your dog treats, you throw the dog treats to the animal. They happily eat the treats instead of your merch",
+              "a wild animal approaches your merch box. You throw your dog treats to the animal. They eat the treats and run away",
             points: 150,
             fans: 0,
             vibes: 0,
@@ -161,7 +161,7 @@ export const questions = [
           {
             inventoryCondition: "",
             result:
-              "a mysterious wild animal approaches your merch box. It tears a hole in your merch box and eats some.",
+              "a wild animal approaches your merch box. It tears a hole in your merch box and eats some.",
             points: 0,
             fans: 0,
             vibes: -20,
@@ -640,9 +640,9 @@ export const questions = [
       {
         id: "14a",
         text: "yes",
-        points: 100,
+        points: 300,
         fans: 2,
-        vibes: 30,
+        vibes: 50,
         money: 0,
         isBranching: false,
         result:
@@ -715,7 +715,7 @@ export const questions = [
   {
     id: "16",
     question:
-      "That bar food is not settling well. Walking up to stage, your tummy get's litle rumbly, time to improvise",
+      "That bar food is not settling well. Walking to stage, your tummy get's rumbly, time to improvise",
     isSecondary: true,
     answers: [
       {
@@ -991,6 +991,61 @@ export const questions = [
         money: 0,
         isBranching: false,
         result: "it won't ever be 'ready'",
+      },
+    ],
+  },
+  {
+    id: "22",
+    question: "you meet another band that loves your vibe",
+    isSecondary: true,
+    answers: [
+      {
+        id: "22a",
+        text: "play a show with them!",
+        points: 300,
+        fans: 200,
+        vibes: 50,
+        money: 0,
+        isBranching: false,
+        result: "your fans love the collab",
+      },
+      {
+        id: "22b",
+        text: "hit the town with them!",
+        points: 300,
+        fans: 50,
+        vibes: 200,
+        money: 0,
+        isBranching: false,
+        result: "you go out to an amazing restaurant and order nachos!",
+      },
+      {
+        id: "22c",
+        text: "Run",
+        points: 0,
+        fans: 0,
+        vibes: 0,
+        money: 0,
+        isBranching: true,
+        result: [
+          {
+            prob: 0.1,
+            result: "got away safely",
+            points: 100,
+            fans: 0,
+            vibes: 40,
+            money: -20,
+          },
+          {
+            prob: 0.9,
+            result: "can't escape",
+            points: -50,
+            fans: 0,
+            vibes: -100,
+            money: 0,
+            nextQuestion: "22",
+          },
+        ],
       },
     ],
   },

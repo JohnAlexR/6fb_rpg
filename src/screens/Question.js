@@ -137,7 +137,6 @@ export const Question = () => {
       coffeeQuestionsAsked === 1 &&
       coffeeAnswers === 0
     ) {
-      console.log("set3/4");
       setCoffeeStatus("3/4");
     }
     if (
@@ -166,9 +165,14 @@ export const Question = () => {
     let tireProbability = 0.01;
     let dogProbability = 0.05;
     let earplugProbability = 0.07;
-    let recordProbability = 0.15;
+    let recordProbability = 0;
+    let bandProbability = 0.25;
 
-    if (!answers.includes("5c") || questionsAsked.includes("21")) {
+    if (answers.includes("5c")) {
+      recordProbability = 0.15;
+    }
+
+    if (questionsAsked.includes("21")) {
       recordProbability = 0;
     }
 
@@ -180,6 +184,10 @@ export const Question = () => {
       dogProbability = 0;
     }
 
+    if (questionsAsked.includes("22") || user.vibes < 400) {
+      bandProbability = 0;
+    }
+
     if (
       questionsAsked.includes("19") ||
       questionsAsked.length > 5 ||
@@ -189,6 +197,7 @@ export const Question = () => {
     }
 
     const randomNumber = Math.random();
+
     if (randomNumber < tireProbability) {
       return "tire";
     } else if (randomNumber < dogProbability) {
@@ -197,6 +206,8 @@ export const Question = () => {
       return "earplug";
     } else if (randomNumber < recordProbability) {
       return "record";
+    } else if (randomNumber < bandProbability) {
+      return "band";
     } else {
       return null;
     }
@@ -266,7 +277,7 @@ export const Question = () => {
       values.fans *= 1.15;
       values.fans = Math.round(values.fans);
     } else if (user.character === "brian") {
-      values.vibes *= 1.15;
+      values.vibes *= 1.25;
       values.vibes = Math.round(values.vibes);
     }
 
@@ -309,9 +320,10 @@ export const Question = () => {
   };
 
   const submit = () => {
-    const answer = question.answers.filter(
+    const submitAnswer = question.answers.filter(
       (answer) => answer.id === selectedAnswer
     )[0];
+
     updateAnswer(selectedAnswer);
     if (user.character === "elliott") {
       checkCoffeeStatus();
@@ -322,11 +334,17 @@ export const Question = () => {
       )[0];
       updateQuestions("14");
       setQuestion(treatQuestion);
+    } else if (submitAnswer.nextQuestion) {
+      const nextQuestion = questions.filter(
+        (question) => question.id === submitAnswer.nextQuestion
+      )[0];
+      updateQuestions(submitAnswer.nextQuestion);
+      setQuestion(nextQuestion);
     } else if (answer.nextQuestion) {
+      //for random band encounter
       const nextQuestion = questions.filter(
         (question) => question.id === answer.nextQuestion
       )[0];
-      updateQuestions(answer.nextQuestion);
       setQuestion(nextQuestion);
     } else {
       const randomEncounter = determineRandomEncounter();
@@ -355,6 +373,12 @@ export const Question = () => {
           )[0];
           setQuestion(recordQuestion);
           updateQuestions("21");
+        } else if (randomEncounter === "band") {
+          const bandQuestion = questions.filter(
+            (question) => question.id === "22"
+          )[0];
+          setQuestion(bandQuestion);
+          updateQuestions("22");
         }
       } else {
         const newQuestion = fetchQuestion();
