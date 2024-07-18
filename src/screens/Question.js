@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Stats } from "../components/Stats";
 import { fetchQuestion } from "../utils/fetchQuestion";
 import { questions } from "../data/questions";
@@ -15,8 +15,34 @@ import {
   Elliott,
   Brian,
 } from "../assets/characters";
+import {
+  EmptyBattery,
+  HalfBattery,
+  Battery75,
+  BatteryFull,
+} from "../assets/batteries";
 
 import { updateUser, user, questionsAsked } from "../data/user";
+
+const CoffeeMeter = ({ coffeeStatus }) => {
+  return (
+    <div className="flex flex-row items-center justify-center absolute left-2 bottom-2">
+      <p
+        className={`text-white font-press-start text-xs ${
+          coffeeStatus === "empty" && "text-[#ff2c2c] text-xl"
+        } ${coffeeStatus === "half" && "text-[#ffA500] text-lg"} ${
+          coffeeStatus === "3/4" && "text-[#ffff00]"
+        }`}
+      >
+        Coffee Meter
+      </p>
+      {coffeeStatus === "empty" && <EmptyBattery />}
+      {coffeeStatus === "half" && <HalfBattery />}
+      {coffeeStatus === "3/4" && <Battery75 />}
+      {coffeeStatus === "full" && <BatteryFull />}
+    </div>
+  );
+};
 
 const DomLostModal = ({ onClose }) => {
   const lossCondition =
@@ -93,6 +119,48 @@ export const Question = () => {
   const [answer, setAnswer] = useState();
   const [domLostModalIsVibile, setDomLostModalIsVisible] = useState(false);
   const [hasDomLost, setHasDomLost] = useState(false);
+  const [coffeeStatus, setCoffeeStatus] = useState("full");
+
+  const checkCoffeeStatus = () => {
+    const coffeeQuestions = ["3", "4", "18"];
+    const coffeeAnswersList = ["3c", "4d", "18e"];
+
+    const coffeeQuestionsAsked = questionsAsked.filter((q) =>
+      coffeeQuestions.includes(q)
+    ).length;
+    const coffeeAnswers = answers.filter((a) =>
+      coffeeAnswersList.includes(a)
+    ).length;
+
+    if (
+      coffeeStatus === "full" &&
+      coffeeQuestionsAsked === 1 &&
+      coffeeAnswers === 0
+    ) {
+      console.log("set3/4");
+      setCoffeeStatus("3/4");
+    }
+    if (
+      coffeeStatus === "3/4" &&
+      coffeeQuestionsAsked === 2 &&
+      coffeeAnswers === 0
+    ) {
+      console.log("sethalf");
+      setCoffeeStatus("half");
+    }
+    if (
+      coffeeStatus === "half" &&
+      coffeeQuestionsAsked === 3 &&
+      coffeeAnswers === 0
+    ) {
+      console.log("setempty");
+      setCoffeeStatus("empty");
+    }
+
+    if (coffeeAnswers > 0) {
+      setCoffeeStatus("full");
+    }
+  };
 
   const determineRandomEncounter = () => {
     let tireProbability = 0.01;
@@ -112,7 +180,11 @@ export const Question = () => {
       dogProbability = 0;
     }
 
-    if (questionsAsked.includes("18") || questionsAsked.length > 5) {
+    if (
+      questionsAsked.includes("19") ||
+      questionsAsked.length > 5 ||
+      !questionsAsked.includes("18")
+    ) {
       earplugProbability = 0;
     }
 
@@ -185,16 +257,16 @@ export const Question = () => {
       values.fans += 20;
     }
     if (user.character === "john" && values.fans > 0) {
-      values.points *= 1.1;
+      values.points *= 1.15;
       values.points = Math.round(values.points);
     } else if (user.character === "zach") {
       values.money *= 0.8;
       values.money = Math.round(values.money);
     } else if (user.character === "julia" && values.fans > 0) {
-      values.fans *= 1.1;
+      values.fans *= 1.15;
       values.fans = Math.round(values.fans);
     } else if (user.character === "brian") {
-      values.vibes *= 1.1;
+      values.vibes *= 1.15;
       values.vibes = Math.round(values.vibes);
     }
 
@@ -241,15 +313,20 @@ export const Question = () => {
       (answer) => answer.id === selectedAnswer
     )[0];
     updateAnswer(selectedAnswer);
+    if (user.character === "elliott") {
+      checkCoffeeStatus();
+    }
     if (question.id === "13" && user.inventory === "dog treats") {
       const treatQuestion = questions.filter(
         (question) => question.id === "14"
       )[0];
+      updateQuestions("14");
       setQuestion(treatQuestion);
     } else if (answer.nextQuestion) {
       const nextQuestion = questions.filter(
         (question) => question.id === answer.nextQuestion
       )[0];
+      updateQuestions(answer.nextQuestion);
       setQuestion(nextQuestion);
     } else {
       const randomEncounter = determineRandomEncounter();
@@ -303,7 +380,13 @@ export const Question = () => {
   };
 
   return (
-    <div className="relative h-full">
+    <div
+      className={`relative h-full ${
+        coffeeStatus === "3/4" && "vibrate-subtle"
+      } ${coffeeStatus === "half" && "vibrate-moderate"} ${
+        coffeeStatus === "empty" && "vibrate-intense"
+      }`}
+    >
       <div className="flex flex-row relative">
         <div className="relative">
           <Stats />
@@ -402,6 +485,9 @@ export const Question = () => {
         <DomLostModal onClose={() => setDomLostModalIsVisible(false)} />
       )}
       <CharacterIcon />
+      {user.character === "elliott" && (
+        <CoffeeMeter coffeeStatus={coffeeStatus} />
+      )}
     </div>
   );
 };

@@ -26,6 +26,10 @@ const CharacterSelection = () => {
     "fck",
     "sht",
     "dik",
+    "cok",
+    "coc",
+    "fuc",
+    "fuq",
   ];
   const isNameBad = sillyNames.includes(user.name.toLowerCase()) ? true : false;
 
@@ -177,13 +181,13 @@ const CharacterSelection = () => {
                 </p>
               )}
               {!selectedCharacter && characterDisplay === "john" && (
-                <p className="text-white font-press-start">+10% Points</p>
+                <p className="text-white font-press-start">+15% Points</p>
               )}
               {!selectedCharacter && characterDisplay === "brian" && (
-                <p className="text-white font-press-start">+10% Vibes</p>
+                <p className="text-white font-press-start">+15% Vibes</p>
               )}
               {!selectedCharacter && characterDisplay === "julia" && (
-                <p className="text-white font-press-start">+10% Fans</p>
+                <p className="text-white font-press-start">+15% Fans</p>
               )}
               {!selectedCharacter && characterDisplay === "elliott" && (
                 <p className="text-white font-press-start">lucky shoes</p>
@@ -197,13 +201,13 @@ const CharacterSelection = () => {
                 </p>
               )}
               {selectedCharacter === "john" && (
-                <p className="text-white font-press-start">+10% Points</p>
+                <p className="text-white font-press-start">+15% Points</p>
               )}
               {selectedCharacter === "brian" && (
-                <p className="text-white font-press-start">+10% Vibes</p>
+                <p className="text-white font-press-start">+15% Vibes</p>
               )}
               {selectedCharacter === "julia" && (
-                <p className="text-white font-press-start">+10% Fans</p>
+                <p className="text-white font-press-start">+15% Fans</p>
               )}
               {selectedCharacter === "elliott" && (
                 <p className="text-white font-press-start">lucky shoes</p>
