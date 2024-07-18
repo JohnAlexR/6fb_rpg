@@ -61,18 +61,51 @@ export const questions = [
         vibes: 30,
         money: 0,
         isBranching: false,
-        result: "you feel rested",
+        result: [
+          {
+            characterCondition: ["zach"],
+            result: "you sit around and play blues licks on your guitar",
+            points: 50,
+            fans: 0,
+            vibes: 0,
+            money: 0,
+          },
+          {
+            characterCondition: ["elliott", "john", "julia", "dom", "brian"],
+            result: "you feel energized",
+            points: 20,
+            fans: 0,
+            vibes: 40,
+            money: 0,
+          },
+        ],
       },
       {
         id: "5b",
-        text: "go busking",
+        text: "go swimming!",
         points: 10,
         fans: 20,
         vibes: -20,
         money: 0,
-        isBranching: false,
-        result:
-          "you spend the day in the sun, you wear yourself out but make some new fans!",
+        isBranching: true,
+        result: [
+          {
+            characterCondition: ["julia"],
+            result: "you've never been a LAAAAAANDGIRL",
+            points: 300,
+            fans: 0,
+            vibes: 50,
+            money: 0,
+          },
+          {
+            characterCondition: ["elliott", "john", "zach", "dom", "brian"],
+            result: "you have a refreshing swim",
+            points: 20,
+            fans: 10,
+            vibes: 50,
+            money: 0,
+          },
+        ],
       },
       {
         id: "5c",
@@ -88,7 +121,7 @@ export const questions = [
         id: "5d",
         text: "put up flyers for next show (-$20)",
         points: 20,
-        fans: 50,
+        fans: 100,
         vibes: -30,
         money: -20,
         isBranching: false,
@@ -247,13 +280,13 @@ export const questions = [
       },
       {
         id: "4c",
-        text: "cool roadside attractions",
-        points: 40,
+        text: "stop at a diner (-$100)",
+        points: 200,
         fans: 0,
-        vibes: 20,
-        money: 0,
+        vibes: 50,
+        money: -100,
         isBranching: false,
-        result: "nice, they were cool",
+        result: "you see your friend (holding hands with your ex-man)",
       },
       {
         id: "4d",
@@ -261,15 +294,15 @@ export const questions = [
         isBranching: true,
         result: [
           {
-            characterCondition: ["brian"],
-            result: "you have a lil pastry",
-            points: 40,
+            characterCondition: ["elliott"],
+            result: "you realllly needed that",
+            points: 150,
             fans: 0,
             vibes: 40,
             money: -20,
           },
           {
-            characterCondition: ["elliott", "john", "julia", "dom", "brian"],
+            characterCondition: ["zach", "john", "julia", "dom", "brian"],
             result: "you feel energized",
             points: 40,
             fans: 0,
@@ -399,13 +432,13 @@ export const questions = [
       },
       {
         id: "7c",
-        text: "take a nap",
+        text: "go grab a drink",
         points: 10,
         fans: 0,
         vibes: 30,
         money: 0,
         isBranching: false,
-        result: "you dream of massive crowds cheering you on",
+        result: "red wine? or white wine?",
       },
       {
         id: "7d",
@@ -540,9 +573,9 @@ export const questions = [
             prob: 0.01,
             result:
               "the crowd erupts in hearty laughter, you go down in history as an absolute legend",
-            points: 550,
-            fans: 100,
-            vibes: 100,
+            points: 750,
+            fans: 200,
+            vibes: 200,
             money: 0,
           },
           {
@@ -890,7 +923,7 @@ export const questions = [
   },
   {
     id: "19",
-    question: "oh-no! Julia forgot her earplugs",
+    question: "oh-no! you forgot your earplugs",
     isSecondary: true,
     answers: [
       {
