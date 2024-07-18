@@ -23,6 +23,7 @@ import {
 } from "../assets/batteries";
 
 import { updateUser, user, questionsAsked } from "../data/user";
+import { Guitar } from "../assets/extras";
 
 const CoffeeMeter = ({ coffeeStatus }) => {
   return (
@@ -511,6 +512,11 @@ export const Question = () => {
       <CharacterIcon />
       {user.character === "elliott" && (
         <CoffeeMeter coffeeStatus={coffeeStatus} />
+      )}
+      {user.inventory === "new guitar" && (
+        <div className="absolute bottom-0 right-7">
+          <Guitar />
+        </div>
       )}
     </div>
   );
