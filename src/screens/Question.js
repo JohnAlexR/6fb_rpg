@@ -29,11 +29,11 @@ const CoffeeMeter = ({ coffeeStatus }) => {
   return (
     <div className="flex flex-row items-center justify-center absolute left-2 bottom-2">
       <p
-        className={`text-white font-press-start text-xs ${
-          coffeeStatus === "empty" && "text-[#ff2c2c] text-xl"
-        } ${coffeeStatus === "half" && "text-[#ffA500] text-lg"} ${
-          coffeeStatus === "3/4" && "text-[#ffff00]"
-        }`}
+        className={`font-press-start text-xs ${
+          coffeeStatus === "full" && "text-white"
+        } ${coffeeStatus === "3/4" && "text-yellow-300"} ${
+          coffeeStatus === "half" && "text-orange-300"
+        } ${coffeeStatus === "empty" && "text-red-500"}`}
       >
         Coffee Meter
       </p>
@@ -168,6 +168,7 @@ export const Question = () => {
     let earplugProbability = 0.07;
     let recordProbability = 0;
     let bandProbability = 0.25;
+    let sandwichProbability = 0.3;
 
     if (answers.includes("5c")) {
       recordProbability = 0.15;
@@ -187,6 +188,10 @@ export const Question = () => {
 
     if (questionsAsked.includes("22") || user.vibes < 400) {
       bandProbability = 0;
+    }
+
+    if (questionsAsked.includes("23")) {
+      sandwichProbability = 0;
     }
 
     if (
@@ -209,6 +214,8 @@ export const Question = () => {
       return "record";
     } else if (randomNumber < bandProbability) {
       return "band";
+    } else if (randomNumber < sandwichProbability) {
+      return "sandwich";
     } else {
       return null;
     }
@@ -380,6 +387,12 @@ export const Question = () => {
           )[0];
           setQuestion(bandQuestion);
           updateQuestions("22");
+        } else if (randomEncounter === "sandwich") {
+          const sandwichQuestion = questions.filter(
+            (question) => question.id === "23"
+          )[0];
+          setQuestion(sandwichQuestion);
+          updateQuestions("23");
         }
       } else {
         const newQuestion = fetchQuestion();
