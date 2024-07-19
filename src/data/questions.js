@@ -388,7 +388,7 @@ export const questions = [
             characterCondition: ["zach"],
             result:
               "you buy another pair of black shirt and jeans, it's gonna be a hell of a show",
-            points: 150,
+            points: 350,
             fans: 10,
             vibes: 20,
             money: -100,
@@ -411,7 +411,7 @@ export const questions = [
           {
             characterCondition: ["zach"],
             result: "you look absolutely legendary, everyone loves your outfit",
-            points: 150,
+            points: 200,
             fans: 50,
             vibes: 20,
             money: 0,
