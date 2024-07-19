@@ -1294,7 +1294,7 @@ export const questions = [
   {
     id: "27",
     question: "The band is HUNGRY. What's the plan?",
-    isSecondary: false,
+    isSecondary: true,
     answers: [
       {
         inventoryCondition: "snacks",
@@ -1345,7 +1345,7 @@ export const questions = [
   {
     id: "28",
     question: "The band is HUNGRY. What's the plan?",
-    isSecondary: false,
+    isSecondary: true,
     answers: [
       {
         inventoryCondition: "snacks",
@@ -1396,7 +1396,7 @@ export const questions = [
   {
     id: "29",
     question: "The band is HUNGRY. What's the plan?",
-    isSecondary: false,
+    isSecondary: true,
     answers: [
       {
         inventoryCondition: "snacks",
