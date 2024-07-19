@@ -29,13 +29,13 @@ const CoffeeMeter = ({ coffeeStatus }) => {
   return (
     <div className="flex flex-row items-center justify-center absolute left-2 bottom-2">
       <p
-        className={`font-press-start text-xs ${
+        className={`font-press-start text-[10px] ${
           coffeeStatus === "full" && "text-white"
         } ${coffeeStatus === "3/4" && "text-yellow-300"} ${
           coffeeStatus === "half" && "text-orange-300"
         } ${coffeeStatus === "empty" && "text-red-500"}`}
       >
-        Coffee Meter
+        {coffeeStatus === "empty" ? "COFFEE LEVEL CRITICAL" : `Coffee Meter`}
       </p>
       {coffeeStatus === "empty" && <EmptyBattery />}
       {coffeeStatus === "half" && <HalfBattery />}

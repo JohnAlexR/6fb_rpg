@@ -240,7 +240,14 @@ export const questions = [
             money: -30,
           },
           {
-            characterCondition: ["elliott", "john", "julia", "dom", "brian"],
+            characterCondition: [
+              "elliott",
+              "john",
+              "julia",
+              "dom",
+              "brian",
+              "zach",
+            ],
             result: "you feel energized",
             points: 20,
             fans: 10,
