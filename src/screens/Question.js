@@ -332,6 +332,15 @@ export const Question = () => {
       (answer) => answer.id === selectedAnswer
     )[0];
 
+    if (user.money <= 0 || user.fans <= 0 || user.vibes <= 0) {
+      if (user.character === "dom" && !hasDomLost) {
+        setDomLostModalIsVisible(true);
+        setHasDomLost(true);
+      } else {
+        triggerLoseCondition();
+      }
+    }
+
     updateAnswer(selectedAnswer);
     if (user.character === "elliott") {
       checkCoffeeStatus();
@@ -407,14 +416,6 @@ export const Question = () => {
     setIsResultVisible(false);
     setStatChanges(null);
     setSelectedAnswer("");
-    if (user.money <= 0 || user.fans <= 0 || user.vibes <= 0) {
-      if (user.character === "dom" && !hasDomLost) {
-        setDomLostModalIsVisible(true);
-        setHasDomLost(true);
-      } else {
-        triggerLoseCondition();
-      }
-    }
   };
 
   return (
