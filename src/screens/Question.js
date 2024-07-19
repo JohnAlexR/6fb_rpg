@@ -269,9 +269,9 @@ export const Question = () => {
     const values = answer;
 
     if (answers.includes("20a")) {
-      values.money += 50;
+      values.money += 25;
     } else if (answers.includes("20b")) {
-      values.money += 100;
+      values.money += 50;
     } else if (answers.includes("20d")) {
       values.fans += 20;
     }
