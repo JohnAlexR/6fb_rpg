@@ -285,7 +285,7 @@ export const Question = () => {
       values.fans *= 1.15;
       values.fans = Math.round(values.fans);
     } else if (user.character === "brian") {
-      values.vibes *= 1.25;
+      values.vibes *= 1.15;
       values.vibes = Math.round(values.vibes);
     }
 

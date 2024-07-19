@@ -184,7 +184,7 @@ const CharacterSelection = () => {
                 <p className="text-white font-press-start">+15% Points</p>
               )}
               {!selectedCharacter && characterDisplay === "brian" && (
-                <p className="text-white font-press-start">+25% Vibes</p>
+                <p className="text-white font-press-start">+15% Vibes</p>
               )}
               {!selectedCharacter && characterDisplay === "julia" && (
                 <p className="text-white font-press-start">+15% Fans</p>
@@ -204,7 +204,7 @@ const CharacterSelection = () => {
                 <p className="text-white font-press-start">+15% Points</p>
               )}
               {selectedCharacter === "brian" && (
-                <p className="text-white font-press-start">+25% Vibes</p>
+                <p className="text-white font-press-start">+15% Vibes</p>
               )}
               {selectedCharacter === "julia" && (
                 <p className="text-white font-press-start">+15% Fans</p>
