@@ -919,7 +919,7 @@ export const questions = [
           {
             characterCondition: ["elliott", "zach"],
             result: "your tone changes a little bit",
-            points: 250,
+            points: 450,
             fans: 0,
             vibes: 50,
             money: -450,
