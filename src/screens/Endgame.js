@@ -22,7 +22,7 @@ export const Endgame = () => {
         }));
         let sortedItems = itemsList;
         sortedItems.sort((a, b) => b.score - a.score);
-        const displayItems = sortedItems.slice(0, 10);
+        const displayItems = sortedItems.slice(0, 5);
         setItems(displayItems);
       } catch {
         console.log("no network");

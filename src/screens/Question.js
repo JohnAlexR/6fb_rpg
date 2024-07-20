@@ -312,7 +312,12 @@ export const Question = () => {
 
     const score = user.points + user.fans + user.vibes;
 
-    await addDoc(ref, { name: user.name, score: score })
+    await addDoc(ref, {
+      name: user.name,
+      score: score,
+      character: user.character,
+      creationTime: Date.now(),
+    })
       .then(() => {
         console.log("data added successfully");
       })
