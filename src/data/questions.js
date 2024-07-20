@@ -1,3 +1,5 @@
+import { Dog } from "../assets/extras";
+
 export const questions = [
   {
     id: "1",
@@ -163,6 +165,7 @@ export const questions = [
         fans: 0,
         vibes: -10,
         money: 0,
+        result: "anything to save a few bucks",
         nextQuestion: "3",
       },
     ],
@@ -519,6 +522,7 @@ export const questions = [
         fans: 0,
         vibes: 0,
         money: 0,
+        result: "...",
         nextQuestion: "9",
       },
     ],
@@ -535,6 +539,7 @@ export const questions = [
         fans: 0,
         vibes: 0,
         money: 0,
+        result: "... ",
         isBranching: false,
         nextQuestion: "10",
       },
@@ -564,6 +569,7 @@ export const questions = [
         vibes: 0,
         money: 0,
         isBranching: false,
+        result: "...",
         nextQuestion: "11",
       },
       {
@@ -600,7 +606,7 @@ export const questions = [
             points: 750,
             fans: 200,
             vibes: 200,
-            money: 0,
+            money: 500,
           },
           {
             prob: 0.99,
@@ -665,6 +671,7 @@ export const questions = [
   {
     id: "13",
     question: "you encounter a dog! Hecks ya. Pet the dog?",
+    icon: <Dog />,
     isSecondary: true,
     answers: [
       {
@@ -692,6 +699,7 @@ export const questions = [
   {
     id: "14",
     question: "give the dog a treat?",
+    icon: <Dog />,
     isSecondary: true,
     answers: [
       {
@@ -709,7 +717,7 @@ export const questions = [
       {
         id: "14b",
         text: "no",
-        points: 0,
+        points: -50,
         fans: 0,
         vibes: 0,
         money: 0,

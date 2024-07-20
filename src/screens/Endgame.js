@@ -13,16 +13,20 @@ export const Endgame = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const itemsCollection = collection(db, "scores");
-      const itemsSnapshot = await getDocs(itemsCollection);
-      const itemsList = itemsSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      let sortedItems = itemsList;
-      sortedItems.sort((a, b) => b.score - a.score);
-      const displayItems = sortedItems.slice(0, 10);
-      setItems(displayItems);
+      try {
+        const itemsCollection = collection(db, "scores");
+        const itemsSnapshot = await getDocs(itemsCollection);
+        const itemsList = itemsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        let sortedItems = itemsList;
+        sortedItems.sort((a, b) => b.score - a.score);
+        const displayItems = sortedItems.slice(0, 10);
+        setItems(displayItems);
+      } catch {
+        console.log("no network");
+      }
     };
 
     fetchItems();

@@ -165,7 +165,7 @@ export const Question = () => {
   const determineRandomEncounter = () => {
     let tireProbability = 0.01;
     let dogProbability = 0.05;
-    let earplugProbability = 0.07;
+    let earplugProbability = 0.08;
     let recordProbability = 0;
     let bandProbability = 0.25;
     let sandwichProbability = 0.3;
@@ -457,10 +457,13 @@ export const Question = () => {
           )}
         </div>
 
-        <div className="flex items-center text-center justify-center w-[500px] px-5">
-          <p className="font-press-start text-white text-center ">
-            {question.question}
-          </p>
+        <div className="flex flex-row items-center justify-center px-3">
+          <div>{question.icon && question.icon}</div>
+          <div className="flex items-center text-center justify-center w-[400px] px-5">
+            <p className="font-press-start text-white text-center ">
+              {question.question}
+            </p>
+          </div>
         </div>
       </div>
       {!isResultVisible && (
