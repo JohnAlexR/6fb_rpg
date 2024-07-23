@@ -1,4 +1,4 @@
-import { Car, Dog, Sandwich } from "../assets/extras";
+import { Car, Dog, Sandwich, Tire } from "../assets/extras";
 
 export const questions = [
   {
@@ -636,6 +636,7 @@ export const questions = [
     id: "12",
     question:
       "during your drive a tire falls from the sky (this actually happened)...",
+    icon: <Tire />,
     isSecondary: true,
     answers: [
       {
@@ -1455,19 +1456,19 @@ export const questions = [
         result: [
           {
             characterCondition: ["brian", "dom"],
-            result: "fine, you win. You don't eat...",
+            result: "fine, you win. You don't eat and somehow you're fine",
             points: 0,
             fans: 0,
-            vibes: -100,
+            vibes: -0,
             money: 0,
           },
           {
             characterCondition: ["zach", "john", "julia", "elliott"],
-            result: "you're really hungry'",
+            result: "I told you, you won't win this",
             points: -150,
             fans: 0,
             vibes: -50,
-            money: -20,
+            money: 0,
             nextQuestion: "29",
           },
         ],
