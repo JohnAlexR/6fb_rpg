@@ -1,10 +1,10 @@
-import { Car, Dog } from "../assets/extras";
+import { Car, Dog, Sandwich } from "../assets/extras";
 
 export const questions = [
   {
     id: "1",
     question: "Time to hit the road! Who should drive?",
-    icon: <Car/>,
+    icon: <Car />,
     isSecondary: false,
     answers: [
       {
@@ -1156,6 +1156,7 @@ export const questions = [
   {
     id: "23",
     question: "You find an awesome vegan sandwich shop",
+    icon: <Sandwich />,
     isSecondary: true,
     answers: [
       {
@@ -1184,6 +1185,7 @@ export const questions = [
   {
     id: "24",
     question: "That sandwich was so good...have another?",
+    icon: <Sandwich />,
     isSecondary: true,
     answers: [
       {
@@ -1212,6 +1214,7 @@ export const questions = [
   {
     id: "25",
     question: "Ok, maybe just one more????",
+    icon: <Sandwich />,
     isSecondary: true,
     answers: [
       {
