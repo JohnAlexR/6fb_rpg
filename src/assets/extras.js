@@ -31,6 +31,203 @@ export const Guitar = () => (
   </svg>
 );
 
+export const Sunglasses = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    data-name="Layer 1"
+    viewBox="0 0 48 60"
+    width="56px"
+    height="56px"
+  >
+    <polygon points="27.97 17.03 27.97 19.02 27.97 19.02 27.97 19.02 20.03 19.02 20.03 19.02 20.03 19.02 20.03 17.03 0 17.03 0 21.01 2.01 21.01 2.01 26.99 4 26.99 4 26.99 4.01 26.99 4.01 28.98 6 28.98 6 28.98 6.02 28.98 6.02 30.97 16.04 30.97 16.04 28.98 18.04 28.98 18.04 26.99 20.03 26.99 20.03 25 22.02 25 22.02 23 25.98 23 25.98 25 27.97 25 27.97 26.99 29.96 26.99 29.96 28.98 31.96 28.98 31.96 30.97 41.98 30.97 41.98 28.98 42 28.98 42 28.98 43.99 28.98 43.99 26.99 44 26.99 44 26.99 45.99 26.99 45.99 21.01 48 21.01 48 17.03 27.97 17.03" />
+  </svg>
+);
+
+export const Car = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="80px"
+    height="80px"
+    viewBox="0 0 32 32"
+    id="automobile_Light"
+    data-name="automobile/Light"
+  >
+    <path
+      id="Path"
+      d="M0,0H32V12H30V10H28V8H26V4H14V6H12V8H10v2H8v2H4v2H2v2H0Z"
+      fill="#000000"
+    />
+    <path
+      id="Path-2"
+      data-name="Path"
+      d="M14,0H26V4H24V2H22V8h6V6h2V8h2V20H30V16H28V14H24v2H22v4H14V16H12V14H8v2H6v4H2V18H0V12H2V10H4V8H8V6h2V8H20V2H14Z"
+      transform="translate(0 4)"
+      fill="#ffffff"
+    />
+    <path
+      id="Path-3"
+      data-name="Path"
+      d="M0,0H2V2H0Z"
+      transform="translate(12 6)"
+      fill="#ffffff"
+    />
+    <path
+      id="Path-4"
+      data-name="Path"
+      d="M4,0h6V6H0V4H2V2H4Z"
+      transform="translate(10 6)"
+      fill="#000000"
+    />
+    <path
+      id="Path-5"
+      data-name="Path"
+      d="M0,0H2V2H4V4H6V6H0Z"
+      transform="translate(22 6)"
+      fill="#000000"
+    />
+    <path
+      id="Path-6"
+      data-name="Path"
+      d="M0,0H2V2H0Z"
+      transform="translate(10 8)"
+      fill="#000000"
+    />
+    <path
+      id="Path-7"
+      data-name="Path"
+      d="M0,0H2V2H0Z"
+      transform="translate(26 8)"
+      fill="#ffffff"
+    />
+    <path
+      id="Path-8"
+      data-name="Path"
+      d="M0,0H2V2H0Z"
+      transform="translate(4 16)"
+      fill="#000000"
+    />
+    <path
+      id="Path-9"
+      data-name="Path"
+      d="M0,0H4V2H0Z"
+      transform="translate(8 18)"
+      fill="#000000"
+    />
+    <path
+      id="Path-10"
+      data-name="Path"
+      d="M0,0H4V2H0Z"
+      transform="translate(24 18)"
+      fill="#000000"
+    />
+    <path
+      id="Path-11"
+      data-name="Path"
+      d="M0,0H2V4H0Z"
+      transform="translate(6 20)"
+      fill="#000000"
+    />
+    <path
+      id="Path-12"
+      data-name="Path"
+      d="M0,0H4V4H0Z"
+      transform="translate(8 20)"
+      fill="#ffffff"
+    />
+    <path
+      id="Path-13"
+      data-name="Path"
+      d="M0,0H2V4H0Z"
+      transform="translate(12 20)"
+      fill="#000000"
+    />
+    <path
+      id="Path-14"
+      data-name="Path"
+      d="M0,0H2V4H0Z"
+      transform="translate(22 20)"
+      fill="#000000"
+    />
+    <path
+      id="Path-15"
+      data-name="Path"
+      d="M0,0H4V4H0Z"
+      transform="translate(24 20)"
+      fill="#ffffff"
+    />
+    <path
+      id="Path-16"
+      data-name="Path"
+      d="M0,0H2V4H0Z"
+      transform="translate(28 20)"
+      fill="#000000"
+    />
+    <path
+      id="Path-17"
+      data-name="Path"
+      d="M0,0H2V2H6V4H8V6h4V4h2V2h8V4h2V6h4V4h2V2h2v8H0Z"
+      transform="translate(0 22)"
+      fill="#000000"
+    />
+    <path
+      id="Path-18"
+      data-name="Path"
+      d="M0,0H2V2H0Z"
+      transform="translate(6 24)"
+      fill="#ffffff"
+    />
+    <path
+      id="Path-19"
+      data-name="Path"
+      d="M0,0H4V2H0Z"
+      transform="translate(8 24)"
+      fill="#000000"
+    />
+    <path
+      id="Path-20"
+      data-name="Path"
+      d="M0,0H2V2H0Z"
+      transform="translate(12 24)"
+      fill="#ffffff"
+    />
+    <path
+      id="Path-21"
+      data-name="Path"
+      d="M0,0H2V2H0Z"
+      transform="translate(22 24)"
+      fill="#ffffff"
+    />
+    <path
+      id="Path-22"
+      data-name="Path"
+      d="M0,0H4V2H0Z"
+      transform="translate(24 24)"
+      fill="#000000"
+    />
+    <path
+      id="Path-23"
+      data-name="Path"
+      d="M0,0H2V2H0Z"
+      transform="translate(28 24)"
+      fill="#ffffff"
+    />
+    <path
+      id="Path-24"
+      data-name="Path"
+      d="M0,0H4V2H0Z"
+      transform="translate(8 26)"
+      fill="#ffffff"
+    />
+    <path
+      id="Path-25"
+      data-name="Path"
+      d="M0,0H4V2H0Z"
+      transform="translate(24 26)"
+      fill="#ffffff"
+    />
+  </svg>
+);
+
 export const Dog = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

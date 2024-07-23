@@ -1,9 +1,10 @@
-import { Dog } from "../assets/extras";
+import { Car, Dog } from "../assets/extras";
 
 export const questions = [
   {
     id: "1",
     question: "Time to hit the road! Who should drive?",
+    icon: <Car/>,
     isSecondary: false,
     answers: [
       {
