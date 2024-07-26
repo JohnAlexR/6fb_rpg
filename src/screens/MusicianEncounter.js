@@ -15,12 +15,14 @@ import { data } from "../data/musicianEncounter";
 export const MusicianEncounter = ({ selectMinigameAnswer }) => {
   const [hoverState, setHoverState] = useState();
   const [tab, setTab] = useState();
+  console.log("tab", tab);
   const characterData = data.filter(
     (item) => item.character === user.character
   )[0];
   const [foeHealth, setFoeHealth] = useState(100);
   const [userHealth, setUserHealth] = useState(100);
   const [result, setResult] = useState();
+  const [escape, setEscape] = useState(false);
 
   const getResult = (option, index) => {
     const randomNumber = Math.random();
@@ -37,16 +39,6 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
     setTab(null);
   };
 
-  useEffect(() => {
-    if (foeHealth <= 0) {
-      //will need to update these
-      console.log("foeHealth = 0");
-      selectMinigameAnswer("win", "22b");
-    }
-    if (userHealth <= 0) {
-      selectMinigameAnswer("lose", "22a");
-    }
-  }, [foeHealth, userHealth]);
   return (
     <div className="">
       <div className="flex flex-row relative justify-end px-10 items-center ">
@@ -67,15 +59,15 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
             </div>
           </div>
         </div>
-        <div className="w-[250px] h-[250px] z-20">
+        <div className="w-[250px] h-[250px] z-20 slideleft">
           <img src={musicians} />
         </div>
-        <div className="absolute top-[100px] right-0">
+        <div className="absolute top-[100px] right-0 slideleft">
           <Grass />
         </div>
       </div>
       <div>
-        <div className="relative">
+        <div className="relative slideright">
           <div className="absolute top-[-100px] z-20 left-20">
             {user.character === "julia" && <Julia size={200} />}
             {user.character === "john" && <JohnAlex size={200} />}
@@ -123,7 +115,17 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
               </button>
               <button
                 className="text-xl font-press-start"
-                onClick={() => setTab("Run")}
+                onClick={() => {
+                  const randomNumber = Math.random();
+                  if (randomNumber < 0.4) {
+                    setEscape(true);
+                    setResult("got away safely");
+                  } else {
+                    setEscape(false);
+                    setResult("can't escape");
+                  }
+                  setTab("run");
+                }}
               >
                 Run
               </button>
@@ -131,9 +133,24 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
           </div>
         )}
         {tab === "run" && (
-          <div className=" w-full  z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1">
-            <p className="text-xl font-press-start">Got away safely</p>
-          </div>
+          <button
+            className=" w-full z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1"
+            onClick={() => {
+              if (escape) {
+                //will need to update these
+                selectMinigameAnswer("escape", "22c");
+              }
+              setResult(null);
+              setTab(null);
+            }}
+          >
+            <div className="border-4 bg-[#1d3e54] border-[#b4903f] flex items-center px-4 flex-grow h-full relative">
+              <p className="text-xl font-press-start text-white">{result}</p>
+              <p className="text-red-600 text-2xl absolute bottom-2 right-2">
+                v
+              </p>
+            </div>
+          </button>
         )}
         {tab === "talk" && (
           <div className="w-full  z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1 gap-x-3">
@@ -218,6 +235,13 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
             className=" w-full  z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1"
             onClick={() => {
               setResult(null);
+              if (foeHealth <= 0) {
+                //will need to update these
+                selectMinigameAnswer("win", "22a");
+              }
+              if (userHealth <= 0) {
+                selectMinigameAnswer("lose", "22b");
+              }
             }}
           >
             <div className="border-4 bg-[#1d3e54] border-[#b4903f] flex items-center px-4 flex-grow h-full relative">
