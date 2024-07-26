@@ -187,9 +187,9 @@ export const Question = () => {
       dogProbability = 0;
     }
 
-    if (questionsAsked.includes("22") || user.vibes < 100) {
-      bandProbability = 0;
-    }
+    // if (questionsAsked.includes("22")) {
+    //   bandProbability = 0;
+    // }
 
     if (questionsAsked.includes("23")) {
       sandwichProbability = 0;
@@ -205,16 +205,16 @@ export const Question = () => {
 
     const randomNumber = Math.random();
 
-    if (randomNumber < tireProbability) {
-      return "tire";
+    if (randomNumber < bandProbability) {
+      return "band";
     } else if (randomNumber < dogProbability) {
       return "dog";
     } else if (randomNumber < earplugProbability) {
       return "earplug";
     } else if (randomNumber < recordProbability) {
       return "record";
-    } else if (randomNumber < bandProbability) {
-      return "band";
+    } else if (randomNumber < tireProbability) {
+      return "tire";
     } else if (randomNumber < sandwichProbability) {
       return "sandwich";
     } else {
@@ -223,9 +223,14 @@ export const Question = () => {
   };
 
   const calculateAnswer = () => {
+    console.log("calc Answer");
+    console.log("question", question);
+    console.log("selectedAnswer", selectedAnswer);
     const answer = question.answers.filter(
       (answer) => answer.id === selectedAnswer
     )[0];
+
+    console.log("answer", answer);
 
     if (
       answer.isBranching &&
@@ -333,6 +338,13 @@ export const Question = () => {
     setScreenIndex(7);
   };
 
+  const selectAnswer = () => {
+    setIsResultVisible(true);
+    const statAnswer = calculateAnswer();
+    setAnswer(statAnswer);
+    calculateStats(statAnswer);
+  };
+
   const submit = () => {
     const submitAnswer = question.answers.filter(
       (answer) => answer.id === selectedAnswer
@@ -425,7 +437,7 @@ export const Question = () => {
   };
 
   if (question.id === "22") {
-    return <MusicianEncounter />;
+    return <MusicianEncounter selectAnswer={() => selectAnswer()} />;
   }
 
   return (
@@ -512,10 +524,7 @@ export const Question = () => {
           if (isResultVisible) {
             submit();
           } else {
-            setIsResultVisible(true);
-            const statAnswer = calculateAnswer();
-            setAnswer(statAnswer);
-            calculateStats(statAnswer);
+            selectAnswer();
           }
         }}
         disabled={!selectedAnswer}
