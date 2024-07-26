@@ -258,13 +258,19 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
             <div className="flex-grow border-[#2a62c5] bg-white border-4 flex-col flex justify-center gap-x-8 w-[40%] px-4">
               <div className="flex flex-row justify-between">
                 <p className="font-press-start">PP</p>
-                {hoverState && (
+                {hoverState > 0 && (
                   <p className="font-press-start text-xl">{`${characterData.options[hoverState].pp}/${characterData.options[hoverState].ppMax}`}</p>
+                )}
+                {hoverState === 0 && (
+                  <p className="font-press-start text-xl">{`${characterData.options[0].pp}/${characterData.options[0].ppMax}`}</p>
                 )}
               </div>
 
-              {hoverState && (
-                <p className="font-press-start">{`${characterData.options[hoverState].info}`}</p>
+              {hoverState > 0 && (
+                <p className="font-press-start text-sm">{`${characterData.options[hoverState].info}`}</p>
+              )}
+              {hoverState === 0 && (
+                <p className="font-press-start text-sm">{`${characterData.options[0].info}`}</p>
               )}
             </div>
           </div>

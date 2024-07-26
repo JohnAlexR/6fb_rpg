@@ -50,18 +50,18 @@ export const data = [
       {
         text: "zach uses talk",
         move: "talk",
-        info: "15/15",
+        info: "80%",
         success: "you exchange some words",
         fail: "they don't appreicate your volume",
         dmg: 25,
         prob: 0.8,
-        pp: 10,
-        ppMax: 10,
+        pp: 9,
+        ppMax: 9,
       },
       {
         text: "zach plays a blues lick",
         move: "blues lick",
-        info: "15/15",
+        info: "40% success",
         success: "they're impressed",
         fail: "it doesn't go over well...",
         dmg: 90,
@@ -72,7 +72,7 @@ export const data = [
       {
         text: "zach offers a handshake",
         move: "handshake",
-        info: "15/15",
+        info: "60% success",
         success: "you give a firm handshake",
         fail: "they don't see you",
         dmg: 40,
@@ -83,7 +83,7 @@ export const data = [
       {
         text: "zach tells a joke",
         move: "joke",
-        info: "15/15",
+        info: "80% success",
         success: "its hillarious",
         fail: "they don't get it...",
         dmg: 30,
@@ -99,7 +99,7 @@ export const data = [
       {
         text: "elliott uses talk",
         move: "talk",
-        info: "15/15",
+        info: "90% success",
         success: "nice conversation follows, you're good at this",
         fail: "you stumble on your words...",
         dmg: 25,
@@ -110,7 +110,7 @@ export const data = [
       {
         text: "elliott uses network",
         move: "network",
-        info: "15/15",
+        info: "70% success",
         success: "its business time",
         fail: "too much business",
         dmg: 60,
@@ -121,7 +121,7 @@ export const data = [
       {
         text: "elliott talks sports",
         move: "sports",
-        info: "15/15",
+        info: "80% success",
         success: "they like baseball, this is easy",
         fail: "they don't like sports...",
         dmg: 40,
@@ -132,7 +132,7 @@ export const data = [
       {
         text: "elliott makes eye contact",
         move: "eye contact",
-        info: "15/15",
+        info: "50% success",
         success: "they really appreicate your sincerity",
         fail: "it's too much",
         dmg: 90,
@@ -148,7 +148,7 @@ export const data = [
       {
         text: "john alex uses talk",
         move: "talk",
-        info: "15/15",
+        info: "90% success",
         success: "you find something in common",
         fail: "you forget how to speak...",
         dmg: 10,
@@ -159,7 +159,7 @@ export const data = [
       {
         text: "john alex uses nerd out",
         move: "nerd out",
-        info: "15/15",
+        info: "80% success",
         success: "they also love peppers and video games",
         fail: "they are wholly disinterested",
         dmg: 30,
@@ -170,7 +170,7 @@ export const data = [
       {
         text: "john alex says nothing",
         move: "say nothing",
-        info: "15/15",
+        info: "70% success",
         success: "your silence intrigues them",
         fail: "they grow bored",
         dmg: 40,
@@ -181,7 +181,7 @@ export const data = [
       {
         text: "john alex offers food",
         move: "offer food",
-        info: "15/15",
+        info: "60% success",
         success: "you offer some snacks",
         fail: "they're allergic...",
         dmg: 80,
@@ -196,8 +196,8 @@ export const data = [
     options: [
       {
         text: "julia uses talk",
-        move: "talk",
-        info: "Julia uses talk",
+        move: "use words",
+        info: "90% success",
         success: "you vibe well",
         fail: "you don't know what to say...",
         dmg: 25,
@@ -208,7 +208,7 @@ export const data = [
       {
         text: "julia uses compliment",
         move: "compliment",
-        info: "15/15",
+        info: "80% success",
         success: "they appreciate you!",
         fail: "they don't hear you...",
         dmg: 30,
@@ -219,7 +219,7 @@ export const data = [
       {
         text: "julia uses inspire",
         move: "inspire",
-        info: "15/15",
+        info: "70% success",
         success: "they feel full of inspiration",
         fail: "they don't hear you...",
         dmg: 50,
@@ -230,7 +230,7 @@ export const data = [
       {
         text: "julia starts to dance",
         move: "dance",
-        info: "15/15",
+        info: "60% success",
         success: "they join you for a twirl",
         fail: "they don't dance",
         dmg: 80,
@@ -246,7 +246,7 @@ export const data = [
       {
         text: "brian uses talk",
         move: "talk",
-        info: "15/15",
+        info: "90% success",
         success: "you have some nice chatter",
         fail: "you don't know what to say...",
         dmg: 25,
@@ -257,7 +257,7 @@ export const data = [
       {
         text: "brian uses rest",
         move: "rest",
-        info: "15/15",
+        info: "50% success",
         success: "you take a quick nap",
         fail: "you can't fall asleep!",
         dmg: 0,
@@ -269,7 +269,7 @@ export const data = [
       {
         text: "brian uses vibe",
         move: "vibe",
-        info: "15/15",
+        info: "70% success",
         success: "they enjoy your presence",
         fail: "they aren't your vibe",
         dmg: 40,
@@ -280,7 +280,7 @@ export const data = [
       {
         text: "brian shares music",
         move: "share music",
-        info: "15/15",
+        info: "80% success",
         success: "they love it",
         fail: "you can tell they don't like it",
         dmg: 30,
@@ -296,7 +296,7 @@ export const data = [
       {
         text: "dom uses talk",
         move: "talk",
-        info: "hi",
+        info: "90% success",
         success: "you have a nice chat",
         fail: "you don't know what to say",
         dmg: 25,
@@ -307,7 +307,7 @@ export const data = [
       {
         text: "dom uses compliment",
         move: "compliment",
-        info: "be nice",
+        info: "80% success",
         success: "they thank you",
         fail: "they don't hear you...",
         dmg: 40,
@@ -318,7 +318,7 @@ export const data = [
       {
         text: "dom uses show meme",
         move: "show meme",
-        info: "haha",
+        info: "50% success",
         success: "they love it",
         fail: "they've seen it",
         dmg: 90,
@@ -329,7 +329,7 @@ export const data = [
       {
         text: "dom makes a joke",
         move: "joke",
-        info: "haha",
+        info: "70% success",
         success: "they think it's funny",
         fail: "they don't laugh",
         dmg: 60,
