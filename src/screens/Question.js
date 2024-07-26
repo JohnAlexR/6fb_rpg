@@ -166,12 +166,12 @@ export const Question = () => {
   };
 
   const determineRandomEncounter = () => {
-    let tireProbability = 0.01;
-    let dogProbability = 0.05;
-    let earplugProbability = 0.08;
+    let tireProbability = 0.01; //1% per turn
+    let dogProbability = 0.05; //4% per turn
+    let earplugProbability = 0.08; //3% per turn
     let recordProbability = 0;
-    let bandProbability = 0.99;
-    let sandwichProbability = 0.3;
+    let bandProbability = 0.2; //12% per turn
+    let sandwichProbability = 0.3; //10% per turn
 
     if (answers.includes("5c")) {
       recordProbability = 0.15;
@@ -181,19 +181,19 @@ export const Question = () => {
       recordProbability = 0;
     }
 
-    if (questionsAsked.includes("12")) {
+    if (questionsAsked.includes("12") || questionsAsked.length < 3) {
       tireProbability = 0;
     }
 
-    if (questionsAsked.includes("13")) {
+    if (questionsAsked.includes("13") || questionsAsked.length < 3) {
       dogProbability = 0;
     }
 
-    if (questionsAsked.includes("22")) {
+    if (questionsAsked.includes("22") || questionsAsked.length < 5) {
       bandProbability = 0;
     }
 
-    if (questionsAsked.includes("23")) {
+    if (questionsAsked.includes("23") || questionsAsked.length < 5) {
       sandwichProbability = 0;
     }
 
@@ -207,16 +207,16 @@ export const Question = () => {
 
     const randomNumber = Math.random();
 
-    if (randomNumber < bandProbability) {
-      return "band";
+    if (randomNumber < tireProbability) {
+      return "tire";
     } else if (randomNumber < dogProbability) {
       return "dog";
     } else if (randomNumber < earplugProbability) {
       return "earplug";
     } else if (randomNumber < recordProbability) {
       return "record";
-    } else if (randomNumber < tireProbability) {
-      return "tire";
+    } else if (randomNumber < bandProbability) {
+      return "band";
     } else if (randomNumber < sandwichProbability) {
       return "sandwich";
     } else {

@@ -18,12 +18,12 @@ export const Exclamation = () => (
     />
 
     <g id="SVGRepo_iconCarrier">
-      <line class="cls-1" x1="12" y1="5.3" x2="12" y2="11.98" />
+      <line className="cls-1" x1="12" y1="5.3" x2="12" y2="11.98" />
       <path
-        class="cls-1"
+        className="cls-1"
         d="M18.68,1.48H5.32A3.82,3.82,0,0,0,1.5,5.3v9.54a3.82,3.82,0,0,0,3.82,3.82H9.14L12,21.52l2.86-2.86h3.82a3.82,3.82,0,0,0,3.82-3.82V5.3A3.82,3.82,0,0,0,18.68,1.48Z"
       />
-      <line class="cls-1" x1="11.05" y1="13.89" x2="12.95" y2="13.89" />
+      <line className="cls-1" x1="11.05" y1="13.89" x2="12.95" y2="13.89" />
       <rect x="11" y="4" width="2" height="8" fill="red" />
       <rect x="11" y="14" width="2" height="2" fill="red" />v
     </g>

@@ -25,6 +25,7 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
   const [userTurn, setUserTurn] = useState(true);
   const [foeResult, setFoeResult] = useState();
   const [moveText, setMoveText] = useState();
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const triggerFoeTurn = () => {
     const randomInt = Math.floor(Math.random() * 4);
@@ -45,6 +46,10 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
     if (randomNumber > option.prob) {
       setResult(option.success);
       setFoeHealth((prev) => prev - option.dmg);
+      if (option.move === "rest") {
+        setUserHealth(100);
+      }
+      setIsSuccess(true);
     } else {
       setResult(option.fail);
     }
@@ -277,9 +282,21 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
               }
               triggerFoeTurn();
               setResult(null);
+              setIsSuccess(false);
             }}
           >
             <div className="border-4 bg-[#1d3e54] border-[#b4903f] flex items-center px-4 flex-grow h-full relative">
+              <div className="absolute top-0 left-0 px-2 py-1">
+                {isSuccess ? (
+                  <p className="text-green-500 font-press-start text-sm">
+                    Success
+                  </p>
+                ) : (
+                  <p className="text-red-500 font-press-start text-sm">
+                    Failed
+                  </p>
+                )}
+              </div>
               <p className="text-xl font-press-start text-white">{result}</p>
               <p className="text-red-600 text-2xl absolute bottom-2 right-2">
                 v
