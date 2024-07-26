@@ -12,7 +12,7 @@ import {
 import { user } from "../data/user";
 import { data } from "../data/musicianEncounter";
 
-export const MusicianEncounter = ({ selectAnswer }) => {
+export const MusicianEncounter = ({ selectMinigameAnswer }) => {
   const [hoverState, setHoverState] = useState();
   const [tab, setTab] = useState();
   const characterData = data.filter(
@@ -41,10 +41,10 @@ export const MusicianEncounter = ({ selectAnswer }) => {
     if (foeHealth <= 0) {
       //will need to update these
       console.log("foeHealth = 0");
-      selectAnswer("result");
+      selectMinigameAnswer("win", "22b");
     }
     if (userHealth <= 0) {
-      selectAnswer();
+      selectMinigameAnswer("lose", "22a");
     }
   }, [foeHealth, userHealth]);
   return (

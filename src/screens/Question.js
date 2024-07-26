@@ -187,9 +187,9 @@ export const Question = () => {
       dogProbability = 0;
     }
 
-    // if (questionsAsked.includes("22")) {
-    //   bandProbability = 0;
-    // }
+    if (questionsAsked.includes("22")) {
+      bandProbability = 0;
+    }
 
     if (questionsAsked.includes("23")) {
       sandwichProbability = 0;
@@ -222,15 +222,10 @@ export const Question = () => {
     }
   };
 
-  const calculateAnswer = () => {
-    console.log("calc Answer");
-    console.log("question", question);
-    console.log("selectedAnswer", selectedAnswer);
+  const calculateAnswer = (minigameAnswer) => {
     const answer = question.answers.filter(
-      (answer) => answer.id === selectedAnswer
+      (answer) => answer.id === selectedAnswer || answer.id === minigameAnswer
     )[0];
-
-    console.log("answer", answer);
 
     if (
       answer.isBranching &&
@@ -345,6 +340,14 @@ export const Question = () => {
     calculateStats(statAnswer);
   };
 
+  const selectMinigameAnswer = (value, minigameAnswer) => {
+    setSelectedAnswer("22b");
+    setIsResultVisible(true);
+    const statAnswer = calculateAnswer(minigameAnswer);
+    setAnswer(statAnswer);
+    calculateStats(statAnswer);
+  };
+
   const submit = () => {
     const submitAnswer = question.answers.filter(
       (answer) => answer.id === selectedAnswer
@@ -436,8 +439,12 @@ export const Question = () => {
     setSelectedAnswer("");
   };
 
-  if (question.id === "22") {
-    return <MusicianEncounter selectAnswer={() => selectAnswer()} />;
+  if (question.id === "22" && !isResultVisible) {
+    return (
+      <MusicianEncounter
+        selectMinigameAnswer={(v, x) => selectMinigameAnswer(v, x)}
+      />
+    );
   }
 
   return (
