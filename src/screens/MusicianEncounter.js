@@ -197,7 +197,7 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
               <div className="flex flex-row justify-between flex-grow px-14">
                 {characterData.options.slice(0, 1).map((option) => (
                   <button
-                    className="text-xl font-press-start"
+                    className="text-xl font-press-start flex flex-row relative"
                     key={option.move}
                     onMouseEnter={() => setHoverState(0)}
                     onClick={() => {
@@ -206,12 +206,15 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
                     }}
                     disabled={option.pp === 0}
                   >
+                    {hoverState === 0 && (
+                      <p className="absolute left-[-20px]">{">"}</p>
+                    )}
                     {option.move}
                   </button>
                 ))}
                 {characterData.options.slice(1, 2).map((option) => (
                   <button
-                    className="text-xl font-press-start"
+                    className="text-xl font-press-start flex flex-row flex-0 relative"
                     key={option.move}
                     onMouseEnter={() => setHoverState(1)}
                     onClick={() => {
@@ -220,14 +223,17 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
                     }}
                     disabled={option.pp === 0}
                   >
+                    {hoverState === 1 && (
+                      <p className="absolute left-[-20px]">{">"}</p>
+                    )}
                     {option.move}
                   </button>
                 ))}
               </div>
-              <div className="flex flex-row justify-between flex-grow px-14">
+              <div className="flex flex-row justify-between flex-grow px-12">
                 {characterData.options.slice(2, 3).map((option) => (
                   <button
-                    className="text-xl font-press-start"
+                    className="text-xl font-press-start flex flex-row relative"
                     key={option.move}
                     onMouseEnter={() => setHoverState(2)}
                     onClick={() => {
@@ -236,12 +242,15 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
                     }}
                     disabled={option.pp === 0}
                   >
+                    {hoverState === 2 && (
+                      <p className="absolute left-[-20px]">{">"}</p>
+                    )}
                     {option.move}
                   </button>
                 ))}
                 {characterData.options.slice(3, 4).map((option) => (
                   <button
-                    className="text-xl font-press-start"
+                    className="text-xl font-press-start flex flex-row relative"
                     key={option.move}
                     onClick={() => {
                       const index = hoverState;
@@ -250,6 +259,10 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
                     onMouseEnter={() => setHoverState(3)}
                     disabled={option.pp === 0}
                   >
+                    {hoverState === 3 && (
+                      <p className="absolute left-[-20px]">{">"}</p>
+                    )}
+
                     {option.move}
                   </button>
                 ))}
