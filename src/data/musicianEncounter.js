@@ -1,11 +1,55 @@
 import React from "react";
 
+export const foeData = [
+  {
+    text: "Musicians use talk",
+    info: "Musicians use talk!",
+    success: "you like their vibe!",
+    fail: "but it fails",
+    dmg: 25,
+    prob: 0.8,
+    pp: 10,
+    ppMax: 10,
+  },
+  {
+    text: "Musicians use 'chat music'",
+    info: "15/15",
+    success: "you connect!",
+    fail: "but it fails",
+    dmg: 30,
+    prob: 0.8,
+    pp: 7,
+    ppMax: 7,
+  },
+  {
+    text: "Musicians use 'compliment'",
+    info: "be nice",
+    success: "how nice of them!",
+    fail: "but it fails",
+    dmg: 40,
+    prob: 0.8,
+    pp: 5,
+    ppMax: 5,
+  },
+  {
+    text: "Musicians use 'network",
+    info: "15/15",
+    success: "it's a win/win!",
+    fail: "but it fails",
+    dmg: 60,
+    prob: 0.5,
+    pp: 5,
+    ppMax: 5,
+  },
+];
+
 export const data = [
   {
     character: "zach",
     options: [
       {
-        text: "talk",
+        text: "zach uses talk",
+        move: "talk",
         info: "15/15",
         success: "you exchange some words",
         fail: "they don't appreicate your volume",
@@ -15,7 +59,8 @@ export const data = [
         ppMax: 10,
       },
       {
-        text: "Blues lick",
+        text: "zach plays a blues lick",
+        move: "blues lick",
         info: "15/15",
         success: "they're impressed",
         fail: "it doesn't go over well...",
@@ -25,7 +70,8 @@ export const data = [
         ppMax: 1,
       },
       {
-        text: "Handshake",
+        text: "zach offers a handshake",
+        move: "handshake",
         info: "15/15",
         success: "you give a firm handshake",
         fail: "they don't see you",
@@ -35,7 +81,8 @@ export const data = [
         ppMax: 5,
       },
       {
-        text: "Joke",
+        text: "zach tells a joke",
+        move: "joke",
         info: "15/15",
         success: "its hillarious",
         fail: "they don't get it...",
@@ -50,7 +97,8 @@ export const data = [
     character: "elliott",
     options: [
       {
-        text: "talk",
+        text: "elliott uses talk",
+        move: "talk",
         info: "15/15",
         success: "nice conversation follows, you're good at this",
         fail: "you stumble on your words...",
@@ -60,7 +108,8 @@ export const data = [
         ppMax: 10,
       },
       {
-        text: "network",
+        text: "elliott uses network",
+        move: "network",
         info: "15/15",
         success: "its business time",
         fail: "too much business",
@@ -70,7 +119,8 @@ export const data = [
         ppMax: 5,
       },
       {
-        text: "sports",
+        text: "elliott talks sports",
+        move: "sports",
         info: "15/15",
         success: "they like baseball, this is easy",
         fail: "they don't like sports...",
@@ -80,7 +130,8 @@ export const data = [
         ppMax: 2,
       },
       {
-        text: "eye contact",
+        text: "elliott makes eye contact",
+        move: "eye contact",
         info: "15/15",
         success: "they really appreicate your sincerity",
         fail: "it's too much",
@@ -95,7 +146,8 @@ export const data = [
     character: "john",
     options: [
       {
-        text: "talk",
+        text: "john alex uses talk",
+        move: "talk",
         info: "15/15",
         success: "you find something in common",
         fail: "you forget how to speak...",
@@ -105,7 +157,8 @@ export const data = [
         ppMax: 10,
       },
       {
-        text: "nerd out",
+        text: "john alex uses nerd out",
+        move: "nerd out",
         info: "15/15",
         success: "they also love peppers and video games",
         fail: "they are wholly disinterested",
@@ -115,7 +168,8 @@ export const data = [
         ppMax: 4,
       },
       {
-        text: "say nothing",
+        text: "john alex says nothing",
+        move: "say nothing",
         info: "15/15",
         success: "your silence intrigues them",
         fail: "they grow bored",
@@ -125,7 +179,8 @@ export const data = [
         ppMax: 5,
       },
       {
-        text: "offer food",
+        text: "john alex offers food",
+        move: "offer food",
         info: "15/15",
         success: "you offer some snacks",
         fail: "they're allergic...",
@@ -140,7 +195,8 @@ export const data = [
     character: "julia",
     options: [
       {
-        text: "talk",
+        text: "julia uses talk",
+        move: "talk",
         info: "Julia uses talk",
         success: "you vibe well",
         fail: "you don't know what to say...",
@@ -150,7 +206,8 @@ export const data = [
         ppMax: 10,
       },
       {
-        text: "compliment",
+        text: "julia uses compliment",
+        move: "compliment",
         info: "15/15",
         success: "they appreciate you!",
         fail: "they don't hear you...",
@@ -160,7 +217,8 @@ export const data = [
         ppMax: 5,
       },
       {
-        text: "inspire",
+        text: "julia uses inspire",
+        move: "inspire",
         info: "15/15",
         success: "they feel full of inspiration",
         fail: "they don't hear you...",
@@ -170,7 +228,8 @@ export const data = [
         ppMax: 3,
       },
       {
-        text: "dance",
+        text: "julia starts to dance",
+        move: "dance",
         info: "15/15",
         success: "they join you for a twirl",
         fail: "they don't dance",
@@ -185,7 +244,8 @@ export const data = [
     character: "brian",
     options: [
       {
-        text: "talk",
+        text: "brian uses talk",
+        move: "talk",
         info: "15/15",
         success: "you have some nice chatter",
         fail: "you don't know what to say...",
@@ -195,7 +255,8 @@ export const data = [
         ppMax: 10,
       },
       {
-        text: "rest",
+        text: "brian uses rest",
+        move: "rest",
         info: "15/15",
         success: "you take a quick nap",
         fail: "you can't fall asleep!",
@@ -206,7 +267,8 @@ export const data = [
         ppMax: 1,
       },
       {
-        text: "vibe",
+        text: "brian uses vibe",
+        move: "vibe",
         info: "15/15",
         success: "they enjoy your presence",
         fail: "they aren't your vibe",
@@ -216,7 +278,8 @@ export const data = [
         ppMax: 5,
       },
       {
-        text: "share music",
+        text: "brian shares music",
+        move: "share music",
         info: "15/15",
         success: "they love it",
         fail: "you can tell they don't like it",
@@ -231,7 +294,8 @@ export const data = [
     character: "dom",
     options: [
       {
-        text: "talk",
+        text: "dom uses talk",
+        move: "talk",
         info: "hi",
         success: "you have a nice chat",
         fail: "you don't know what to say",
@@ -241,7 +305,8 @@ export const data = [
         ppMax: 10,
       },
       {
-        text: "compliment",
+        text: "dom uses compliment",
+        move: "compliment",
         info: "be nice",
         success: "they thank you",
         fail: "they don't hear you...",
@@ -251,7 +316,8 @@ export const data = [
         ppMax: 5,
       },
       {
-        text: "show meme",
+        text: "dom uses show meme",
+        move: "show meme",
         info: "haha",
         success: "they love it",
         fail: "they've seen it",
@@ -261,7 +327,8 @@ export const data = [
         ppMax: 2,
       },
       {
-        text: "joke",
+        text: "dom makes a joke",
+        move: "joke",
         info: "haha",
         success: "they think it's funny",
         fail: "they don't laugh",

@@ -10,12 +10,11 @@ import {
   Dom,
 } from "../assets/characters";
 import { user } from "../data/user";
-import { data } from "../data/musicianEncounter";
+import { data, foeData } from "../data/musicianEncounter";
 
 export const MusicianEncounter = ({ selectMinigameAnswer }) => {
   const [hoverState, setHoverState] = useState();
   const [tab, setTab] = useState();
-  console.log("tab", tab);
   const characterData = data.filter(
     (item) => item.character === user.character
   )[0];
@@ -23,6 +22,23 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
   const [userHealth, setUserHealth] = useState(100);
   const [result, setResult] = useState();
   const [escape, setEscape] = useState(false);
+  const [userTurn, setUserTurn] = useState(true);
+  const [foeResult, setFoeResult] = useState();
+  const [moveText, setMoveText] = useState();
+
+  const triggerFoeTurn = () => {
+    const randomInt = Math.floor(Math.random() * 4);
+    const move = foeData[randomInt];
+    const randomNumber = Math.random();
+    if (randomNumber < move.prob) {
+      setUserHealth((prev) => prev - move.dmg);
+      setFoeResult(move.success);
+      setMoveText(move.text);
+    } else {
+      setFoeResult(move.fail);
+      setMoveText(move.text);
+    }
+  };
 
   const getResult = (option, index) => {
     const randomNumber = Math.random();
@@ -35,6 +51,8 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
     }
 
     characterData.options[index].pp += -1;
+    setMoveText(option.text);
+    setUserTurn(false);
 
     setTab(null);
   };
@@ -92,13 +110,13 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
             </div>
             <div className="flex-grow border-white border-[2px] rounded-xl flex ">
               <div
-                className="bg-[#64e6ae] flex-1 rounded-xl"
+                className="bg-[#64e6ae] rounded-xl"
                 style={{ width: `${userHealth}%` }}
               />
             </div>
           </div>
         </div>
-        {!tab && !result && (
+        {!tab && !result && userTurn && !moveText && (
           <div className=" w-full  z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1">
             <div className="border-4 bg-[#1d3e54] border-[#b4903f] flex items-center px-4 ">
               <p className="text-white font-press-start text-left text-lg">
@@ -132,13 +150,30 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
             </div>
           </div>
         )}
-        {tab === "run" && (
+        {moveText && (
+          <button
+            className=" w-full z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1"
+            onClick={() => {
+              setMoveText(null);
+            }}
+          >
+            <div className="border-4 bg-[#1d3e54] border-[#b4903f] flex items-center px-4 flex-grow h-full relative">
+              <p className="text-xl font-press-start text-white">{moveText}</p>
+              <p className="text-red-600 text-2xl absolute bottom-2 right-2">
+                v
+              </p>
+            </div>
+          </button>
+        )}
+        {tab === "run" && userTurn && !moveText && (
           <button
             className=" w-full z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1"
             onClick={() => {
               if (escape) {
                 //will need to update these
                 selectMinigameAnswer("escape", "22c");
+              } else {
+                triggerFoeTurn();
               }
               setResult(null);
               setTab(null);
@@ -152,14 +187,14 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
             </div>
           </button>
         )}
-        {tab === "talk" && (
+        {tab === "talk" && userTurn && !moveText && (
           <div className="w-full  z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1 gap-x-3">
             <div className="flex-grow border-[#2a62c5] bg-white border-4 flex-row flex items-center gap-x-8 flex-wrap ">
               <div className="flex flex-row justify-between flex-grow px-14">
                 {characterData.options.slice(0, 1).map((option) => (
                   <button
                     className="text-xl font-press-start"
-                    key={option.text}
+                    key={option.move}
                     onMouseEnter={() => setHoverState(0)}
                     onClick={() => {
                       const index = hoverState;
@@ -167,13 +202,13 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
                     }}
                     disabled={option.pp === 0}
                   >
-                    {option.text}
+                    {option.move}
                   </button>
                 ))}
                 {characterData.options.slice(1, 2).map((option) => (
                   <button
                     className="text-xl font-press-start"
-                    key={option.text}
+                    key={option.move}
                     onMouseEnter={() => setHoverState(1)}
                     onClick={() => {
                       const index = hoverState;
@@ -181,7 +216,7 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
                     }}
                     disabled={option.pp === 0}
                   >
-                    {option.text}
+                    {option.move}
                   </button>
                 ))}
               </div>
@@ -189,7 +224,7 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
                 {characterData.options.slice(2, 3).map((option) => (
                   <button
                     className="text-xl font-press-start"
-                    key={option.text}
+                    key={option.move}
                     onMouseEnter={() => setHoverState(2)}
                     onClick={() => {
                       const index = hoverState;
@@ -197,13 +232,13 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
                     }}
                     disabled={option.pp === 0}
                   >
-                    {option.text}
+                    {option.move}
                   </button>
                 ))}
                 {characterData.options.slice(3, 4).map((option) => (
                   <button
                     className="text-xl font-press-start"
-                    key={option.text}
+                    key={option.move}
                     onClick={() => {
                       const index = hoverState;
                       getResult(option, index);
@@ -211,7 +246,7 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
                     onMouseEnter={() => setHoverState(3)}
                     disabled={option.pp === 0}
                   >
-                    {option.text}
+                    {option.move}
                   </button>
                 ))}
               </div>
@@ -230,11 +265,10 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
             </div>
           </div>
         )}
-        {!tab && result && (
+        {!tab && result && !moveText && (
           <button
             className=" w-full  z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1"
             onClick={() => {
-              setResult(null);
               if (foeHealth <= 0) {
                 //will need to update these
                 selectMinigameAnswer("win", "22a");
@@ -242,10 +276,27 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
               if (userHealth <= 0) {
                 selectMinigameAnswer("lose", "22b");
               }
+              triggerFoeTurn();
+              setResult(null);
             }}
           >
             <div className="border-4 bg-[#1d3e54] border-[#b4903f] flex items-center px-4 flex-grow h-full relative">
               <p className="text-xl font-press-start text-white">{result}</p>
+              <p className="text-red-600 text-2xl absolute bottom-2 right-2">
+                v
+              </p>
+            </div>
+          </button>
+        )}
+        {!tab && !result && !moveText && !userTurn && (
+          <button
+            className=" w-full  z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1"
+            onClick={() => {
+              setUserTurn(true);
+            }}
+          >
+            <div className="border-4 bg-[#1d3e54] border-[#b4903f] flex items-center px-4 flex-grow h-full relative">
+              <p className="text-xl font-press-start text-white">{foeResult}</p>
               <p className="text-red-600 text-2xl absolute bottom-2 right-2">
                 v
               </p>
