@@ -3,6 +3,7 @@ import "./App.css";
 import GameBorder from "./components/GameBorder";
 import { screens } from "./data/screens";
 import { clearAnswers, clearQuestionsAsked, resetUser } from "./data/user";
+import { Sad } from "./assets/emotes";
 
 const ScreenContext = createContext();
 

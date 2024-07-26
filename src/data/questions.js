@@ -1,4 +1,14 @@
-import { Car, Dog, Sandwich, Tire } from "../assets/extras";
+import {
+  Bread,
+  Car,
+  Coffee,
+  Dog,
+  Police,
+  Sandwich,
+  Tire,
+  Wine,
+  Wolf,
+} from "../assets/extras";
 
 export const questions = [
   {
@@ -194,6 +204,7 @@ export const questions = [
             vibes: 0,
             money: 0,
             inventory: "empty",
+            icon: <Wolf />,
           },
           {
             inventoryCondition: "",
@@ -203,6 +214,7 @@ export const questions = [
             fans: 0,
             vibes: -20,
             money: -200,
+            icon: <Wolf />,
           },
         ],
       },
@@ -218,6 +230,7 @@ export const questions = [
             fans: 0,
             vibes: 0,
             money: -450,
+            icon: <Police />,
           },
           {
             prob: 0.2,
@@ -242,6 +255,7 @@ export const questions = [
             fans: 10,
             vibes: 10,
             money: -30,
+            icon: <Bread />,
           },
           {
             characterCondition: [
@@ -257,6 +271,7 @@ export const questions = [
             fans: 10,
             vibes: 10,
             money: -30,
+            icon: <Coffee />,
           },
         ],
       },
@@ -265,6 +280,7 @@ export const questions = [
   {
     id: "4",
     question: "Next stop is Wisconsin. Do you stop anywhere on the way?",
+    icon: <Car />,
     isSecondary: false,
     answers: [
       {
@@ -311,6 +327,7 @@ export const questions = [
             fans: 0,
             vibes: 40,
             money: -20,
+            icon: <Coffee />,
           },
           {
             characterCondition: ["zach", "john", "julia", "dom", "brian"],
@@ -319,6 +336,7 @@ export const questions = [
             fans: 0,
             vibes: 40,
             money: -20,
+            icon: <Coffee />,
           },
         ],
       },
@@ -467,6 +485,7 @@ export const questions = [
         money: 0,
         isBranching: false,
         result: "red wine? or white wine?",
+        icon: <Wine />,
       },
       {
         id: "7d",
@@ -1176,7 +1195,7 @@ export const questions = [
         text: "Don't buy one",
         points: 0,
         fans: 0,
-        vibes: 0,
+        vibes: -20,
         money: 0,
         isBranching: false,
         result: "you're a little hungry",
@@ -1455,15 +1474,15 @@ export const questions = [
         isBranching: true,
         result: [
           {
-            characterCondition: ["brian", "dom"],
-            result: "fine, you win. You don't eat and somehow you're fine",
-            points: 0,
+            characterCondition: ["dom"],
+            result: "fine, you win. You don't eat and somehow you're fine?",
+            points: 500,
             fans: 0,
-            vibes: -0,
+            vibes: -200,
             money: 0,
           },
           {
-            characterCondition: ["zach", "john", "julia", "elliott"],
+            characterCondition: ["zach", "john", "julia", "elliott", "brian"],
             result: "I told you, you won't win this",
             points: -150,
             fans: 0,

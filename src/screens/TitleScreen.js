@@ -1,7 +1,6 @@
 import React from "react";
 import { Logo } from "../assets/Logo";
 import { useScreen } from "../App";
-import { Dog } from "../assets/extras";
 
 const TitleScreen = () => {
   const { screenIndex, setScreenIndex } = useScreen();

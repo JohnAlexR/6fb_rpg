@@ -522,6 +522,7 @@ export const Question = () => {
       {isResultVisible && (
         <div className="flex justify-center items-center">
           <div className="w-[400px] h-[200px] mt-4 flex justify-center items-center">
+            {answer.icon && <div className="px-2">{answer.icon}</div>}
             <p className="text-white font-press-start text-center text-sm">
               {answer.result}
             </p>
