@@ -1131,7 +1131,8 @@ export const questions = [
         vibes: 250,
         money: 0,
         isBranching: false,
-        result: "the musicians become your life-long friends!",
+        result:
+          "the musicians become your life-long friends! You go get nachos together",
       },
       {
         id: "22b",

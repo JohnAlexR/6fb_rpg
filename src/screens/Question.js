@@ -22,6 +22,7 @@ import {
   BatteryFull,
 } from "../assets/batteries";
 import { MusicianEncounter } from "./MusicianEncounter";
+import { Exclamation } from "../assets/musicianEncounter";
 
 import { updateUser, user, questionsAsked } from "../data/user";
 import { Guitar, Sunglasses } from "../assets/extras";
@@ -122,6 +123,7 @@ export const Question = () => {
   const [domLostModalIsVibile, setDomLostModalIsVisible] = useState(false);
   const [hasDomLost, setHasDomLost] = useState(false);
   const [coffeeStatus, setCoffeeStatus] = useState("full");
+  const [isMiniGameSetupVisible, setIsMiniGameSetupVisible] = useState(false);
 
   const checkCoffeeStatus = () => {
     const coffeeQuestions = ["3", "4", "18"];
@@ -415,6 +417,7 @@ export const Question = () => {
           const bandQuestion = questions.filter(
             (question) => question.id === "22"
           )[0];
+          setIsMiniGameSetupVisible(true);
           setQuestion(bandQuestion);
           updateQuestions("22");
         } else if (randomEncounter === "sandwich") {
@@ -439,11 +442,38 @@ export const Question = () => {
     setSelectedAnswer("");
   };
 
-  if (question.id === "22" && !isResultVisible) {
+  if (question.id === "22" && !isResultVisible && !isMiniGameSetupVisible) {
     return (
       <MusicianEncounter
         selectMinigameAnswer={(v, x) => selectMinigameAnswer(v, x)}
       />
+    );
+  }
+
+  if (question.id === "22" && !isResultVisible && isMiniGameSetupVisible) {
+    return (
+      <div className="flex flex-col items-center justify-between border-2 h-full py-3">
+        <div className="items-center justify-center pt-40 text-center">
+          <p className="text-white font-press-start">
+            Time to meet the band you're playing with...
+          </p>
+          <p className="text-white font-press-start text-xl pt-10">
+            Can you make friends?
+          </p>
+        </div>
+        <div className="absolute right-12 bottom-[140px]">
+          <Exclamation />
+        </div>
+
+        <button
+          className="text-white font-press-start"
+          onClick={() => setIsMiniGameSetupVisible(false)}
+        >
+          start minigame
+        </button>
+
+        <CharacterIcon />
+      </div>
     );
   }
 

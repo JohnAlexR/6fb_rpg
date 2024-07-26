@@ -29,14 +29,13 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
   const triggerFoeTurn = () => {
     const randomInt = Math.floor(Math.random() * 4);
     const move = foeData[randomInt];
+    setMoveText(move.text);
     const randomNumber = Math.random();
     if (randomNumber < move.prob) {
       setUserHealth((prev) => prev - move.dmg);
       setFoeResult(move.success);
-      setMoveText(move.text);
     } else {
       setFoeResult(move.fail);
-      setMoveText(move.text);
     }
   };
 
@@ -288,11 +287,12 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
             </div>
           </button>
         )}
-        {!tab && !result && !moveText && !userTurn && (
+        {foeResult && !moveText && (
           <button
             className=" w-full  z-40 absolute h-[100px] bottom-0 bg-black flex flex-row p-1"
             onClick={() => {
               setUserTurn(true);
+              setFoeResult(null);
             }}
           >
             <div className="border-4 bg-[#1d3e54] border-[#b4903f] flex items-center px-4 flex-grow h-full relative">
