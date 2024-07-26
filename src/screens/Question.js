@@ -21,6 +21,7 @@ import {
   Battery75,
   BatteryFull,
 } from "../assets/batteries";
+import { MusicianEncounter } from "./MusicianEncounter";
 
 import { updateUser, user, questionsAsked } from "../data/user";
 import { Guitar, Sunglasses } from "../assets/extras";
@@ -76,7 +77,7 @@ const DomLostModal = ({ onClose }) => {
   );
 };
 
-const CharacterIcon = () => {
+export const CharacterIcon = () => {
   return (
     <div className="flex absolute justify-center items-center bottom-0 right-0">
       {user.character === "julia" && <Julia size={"150"} />}
@@ -167,7 +168,7 @@ export const Question = () => {
     let dogProbability = 0.05;
     let earplugProbability = 0.08;
     let recordProbability = 0;
-    let bandProbability = 0.25;
+    let bandProbability = 0.99;
     let sandwichProbability = 0.3;
 
     if (answers.includes("5c")) {
@@ -186,7 +187,7 @@ export const Question = () => {
       dogProbability = 0;
     }
 
-    if (questionsAsked.includes("22") || user.vibes < 400) {
+    if (questionsAsked.includes("22") || user.vibes < 100) {
       bandProbability = 0;
     }
 
@@ -422,6 +423,10 @@ export const Question = () => {
     setStatChanges(null);
     setSelectedAnswer("");
   };
+
+  if (question.id === "22") {
+    return <MusicianEncounter />;
+  }
 
   return (
     <div
