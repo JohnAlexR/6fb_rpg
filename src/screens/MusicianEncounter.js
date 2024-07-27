@@ -43,7 +43,7 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
   const getResult = (option, index) => {
     const randomNumber = Math.random();
 
-    if (randomNumber > option.prob) {
+    if (randomNumber < option.prob) {
       setResult(option.success);
       setFoeHealth((prev) => prev - option.dmg);
       if (option.move === "rest") {
