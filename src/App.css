@@ -126,3 +126,33 @@
 .vibrate-intense {
   animation: intense-vibration 0.1s infinite;
 }
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slideleft {
+  animation: slideIn 1s ease-out forwards;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slideright {
+  animation: slideInFromRight 1s ease-out forwards;
+}

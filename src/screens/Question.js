@@ -21,6 +21,8 @@ import {
   Battery75,
   BatteryFull,
 } from "../assets/batteries";
+import { MusicianEncounter } from "./MusicianEncounter";
+import { Exclamation } from "../assets/musicianEncounter";
 
 import { updateUser, user, questionsAsked } from "../data/user";
 import { Guitar, Sunglasses } from "../assets/extras";
@@ -76,7 +78,7 @@ const DomLostModal = ({ onClose }) => {
   );
 };
 
-const CharacterIcon = () => {
+export const CharacterIcon = () => {
   return (
     <div className="flex absolute justify-center items-center bottom-0 right-0">
       {user.character === "julia" && <Julia size={"150"} />}
@@ -121,6 +123,7 @@ export const Question = () => {
   const [domLostModalIsVibile, setDomLostModalIsVisible] = useState(false);
   const [hasDomLost, setHasDomLost] = useState(false);
   const [coffeeStatus, setCoffeeStatus] = useState("full");
+  const [isMiniGameSetupVisible, setIsMiniGameSetupVisible] = useState(false);
 
   const checkCoffeeStatus = () => {
     const coffeeQuestions = ["3", "4", "18"];
@@ -163,12 +166,12 @@ export const Question = () => {
   };
 
   const determineRandomEncounter = () => {
-    let tireProbability = 0.01;
-    let dogProbability = 0.05;
-    let earplugProbability = 0.08;
+    let tireProbability = 0.01; //1% per turn
+    let dogProbability = 0.05; //4% per turn
+    let earplugProbability = 0.08; //3% per turn
     let recordProbability = 0;
-    let bandProbability = 0.25;
-    let sandwichProbability = 0.3;
+    let bandProbability = 0.2; //12% per turn
+    let sandwichProbability = 0.3; //10% per turn
 
     if (answers.includes("5c")) {
       recordProbability = 0.15;
@@ -178,19 +181,19 @@ export const Question = () => {
       recordProbability = 0;
     }
 
-    if (questionsAsked.includes("12")) {
+    if (questionsAsked.includes("12") || questionsAsked.length < 3) {
       tireProbability = 0;
     }
 
-    if (questionsAsked.includes("13")) {
+    if (questionsAsked.includes("13") || questionsAsked.length < 3) {
       dogProbability = 0;
     }
 
-    if (questionsAsked.includes("22") || user.vibes < 400) {
+    if (questionsAsked.includes("22") || questionsAsked.length < 5) {
       bandProbability = 0;
     }
 
-    if (questionsAsked.includes("23")) {
+    if (questionsAsked.includes("23") || questionsAsked.length < 5) {
       sandwichProbability = 0;
     }
 
@@ -221,9 +224,9 @@ export const Question = () => {
     }
   };
 
-  const calculateAnswer = () => {
+  const calculateAnswer = (minigameAnswer) => {
     const answer = question.answers.filter(
-      (answer) => answer.id === selectedAnswer
+      (answer) => answer.id === selectedAnswer || answer.id === minigameAnswer
     )[0];
 
     if (
@@ -332,6 +335,21 @@ export const Question = () => {
     setScreenIndex(7);
   };
 
+  const selectAnswer = () => {
+    setIsResultVisible(true);
+    const statAnswer = calculateAnswer();
+    setAnswer(statAnswer);
+    calculateStats(statAnswer);
+  };
+
+  const selectMinigameAnswer = (value, minigameAnswer) => {
+    setSelectedAnswer("22b");
+    setIsResultVisible(true);
+    const statAnswer = calculateAnswer(minigameAnswer);
+    setAnswer(statAnswer);
+    calculateStats(statAnswer);
+  };
+
   const submit = () => {
     const submitAnswer = question.answers.filter(
       (answer) => answer.id === selectedAnswer
@@ -399,6 +417,7 @@ export const Question = () => {
           const bandQuestion = questions.filter(
             (question) => question.id === "22"
           )[0];
+          setIsMiniGameSetupVisible(true);
           setQuestion(bandQuestion);
           updateQuestions("22");
         } else if (randomEncounter === "sandwich") {
@@ -422,6 +441,41 @@ export const Question = () => {
     setStatChanges(null);
     setSelectedAnswer("");
   };
+
+  if (question.id === "22" && !isResultVisible && !isMiniGameSetupVisible) {
+    return (
+      <MusicianEncounter
+        selectMinigameAnswer={(v, x) => selectMinigameAnswer(v, x)}
+      />
+    );
+  }
+
+  if (question.id === "22" && !isResultVisible && isMiniGameSetupVisible) {
+    return (
+      <div className="flex flex-col items-center justify-between border-2 h-full py-3">
+        <div className="items-center justify-center pt-40 text-center">
+          <p className="text-white font-press-start">
+            Time to meet the band you're playing with...
+          </p>
+          <p className="text-white font-press-start text-xl pt-10">
+            Can you make friends?
+          </p>
+        </div>
+        <div className="absolute right-12 bottom-[140px]">
+          <Exclamation />
+        </div>
+
+        <button
+          className="text-white font-press-start"
+          onClick={() => setIsMiniGameSetupVisible(false)}
+        >
+          start minigame
+        </button>
+
+        <CharacterIcon />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -507,10 +561,7 @@ export const Question = () => {
           if (isResultVisible) {
             submit();
           } else {
-            setIsResultVisible(true);
-            const statAnswer = calculateAnswer();
-            setAnswer(statAnswer);
-            calculateStats(statAnswer);
+            selectAnswer();
           }
         }}
         disabled={!selectedAnswer}
