@@ -170,8 +170,8 @@ export const Question = () => {
     let dogProbability = 0.05; //4% per turn
     let earplugProbability = 0.08; //3% per turn
     let recordProbability = 0;
-    let bandProbability = 0.2; //12% per turn
-    let sandwichProbability = 0.3; //10% per turn
+    let bandProbability = 0.3; //22% per turn
+    let sandwichProbability = 0.4; //10% per turn
 
     if (answers.includes("5c")) {
       recordProbability = 0.15;
@@ -206,6 +206,9 @@ export const Question = () => {
     }
 
     const randomNumber = Math.random();
+
+    console.log(randomNumber, "random#");
+    console.log(bandProbability, "bandprob");
 
     if (randomNumber < tireProbability) {
       return "tire";
