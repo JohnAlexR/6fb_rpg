@@ -35,8 +35,14 @@ const ShowMinigame = () => {
         game.pos(175, 0),
         game.area(),
         game.body(),
+        "player",
       ]);
       setPlayer(bean);
+
+      game.onCollide("note", "player", () => {
+        console.log("NOTE");
+        game.shake();
+      });
 
       const borderBottom = game.add([
         game.rect(255, 5),
@@ -73,6 +79,27 @@ const ShowMinigame = () => {
         game.area(),
         game.body({ isStatic: true }),
       ]);
+    }
+  }, [game, player]);
+
+  useEffect(() => {
+    if (game && player) {
+      function spawnNote() {
+        game.add([
+          game.rect(24, 32),
+          game.area(),
+          game.outline(4),
+          game.pos(game.width(), game.rand(10, 200)),
+          game.anchor("botleft"),
+          game.color(255, 180, 255),
+          game.move(game.LEFT, 240),
+          "note",
+        ]);
+        game.wait(game.rand(0.5, 1), () => {
+          spawnNote();
+        });
+      }
+      spawnNote();
     }
   }, [game, player]);
 
