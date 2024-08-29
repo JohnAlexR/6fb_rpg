@@ -5,6 +5,7 @@ const ShowMinigame = () => {
   const gameContainerRef = useRef(null);
   const [game, setGame] = useState(null);
   const [player, setPlayer] = useState(null);
+  const [score, setScore] = useState(0);
   const keys = useRef({
     ArrowUp: false,
     ArrowDown: false,
@@ -40,8 +41,17 @@ const ShowMinigame = () => {
       setPlayer(bean);
 
       game.onCollide("note", "player", () => {
-        console.log("NOTE");
+        setScore((prev) => prev + 1);
+      });
+
+      game.onCollide("bullet", "player", () => {
         game.shake();
+        setScore((prev) => prev - 10);
+      });
+
+      game.onCollide("bullet", "note", (action) => {
+        console.log(action);
+        action.destroy();
       });
 
       const borderBottom = game.add([
@@ -86,16 +96,39 @@ const ShowMinigame = () => {
     if (game && player) {
       function spawnNote() {
         game.add([
+          game.rect(24, 24),
+          game.area(),
+          game.outline(4),
+          game.pos(game.width(), game.rand(10, 180)),
+          game.anchor("botleft"),
+          game.color(220, 20, 60),
+          game.move(game.LEFT, 120),
+          "bullet",
+        ]);
+        game.wait(game.rand(0.5, 6), () => {
+          spawnNote();
+        });
+      }
+      setTimeout(() => {
+        spawnNote();
+      }, 10000);
+    }
+  }, [game, player]);
+
+  useEffect(() => {
+    if (game && player) {
+      function spawnNote() {
+        game.add([
           game.rect(24, 32),
           game.area(),
           game.outline(4),
-          game.pos(game.width(), game.rand(10, 200)),
+          game.pos(game.width(), game.rand(10, 180)),
           game.anchor("botleft"),
-          game.color(255, 180, 255),
-          game.move(game.LEFT, 240),
+          game.color(0, 225, 0),
+          game.move(game.LEFT, 120),
           "note",
         ]);
-        game.wait(game.rand(0.5, 1), () => {
+        game.wait(game.rand(0.5, 2), () => {
           spawnNote();
         });
       }
@@ -129,7 +162,7 @@ const ShowMinigame = () => {
 
   useEffect(() => {
     if (game && player) {
-      const speed = 20000;
+      const speed = 10000;
       let lastTime = performance.now();
 
       const updatePlayerPosition = () => {
@@ -155,6 +188,7 @@ const ShowMinigame = () => {
 
   return (
     <div className="h-full w-full justify-center items-center flex flex-row">
+      <p className="font-press-start text-white pt-4">{`score: ${score}`}</p>
       <div id="canvas" ref={gameContainerRef}></div>
     </div>
   );
