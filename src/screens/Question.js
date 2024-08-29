@@ -26,6 +26,7 @@ import { Exclamation } from "../assets/musicianEncounter";
 
 import { updateUser, user, questionsAsked } from "../data/user";
 import { Guitar, Sunglasses } from "../assets/extras";
+import ShowMinigame from "./ShowMinigame";
 
 const CoffeeMeter = ({ coffeeStatus }) => {
   return (
@@ -444,6 +445,8 @@ export const Question = () => {
     setStatChanges(null);
     setSelectedAnswer("");
   };
+
+  return <ShowMinigame />;
 
   if (question.id === "22" && !isResultVisible && !isMiniGameSetupVisible) {
     return (
