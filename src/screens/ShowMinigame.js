@@ -46,13 +46,13 @@ const ShowMinigame = () => {
 
       game.onCollide("bullet", "player", () => {
         game.shake();
-        setScore((prev) => prev - 10);
+        setScore((prev) => prev - 5);
       });
 
-      game.onCollide("bullet", "note", (action) => {
-        console.log(action);
-        action.destroy();
-      });
+      //   game.onCollide("bullet", "note", (action) => {
+      //     console.log(action);
+      //     action.destroy();
+      //   });
 
       const borderBottom = game.add([
         game.rect(255, 5),
@@ -94,6 +94,8 @@ const ShowMinigame = () => {
 
   useEffect(() => {
     if (game && player) {
+      let speed = 80;
+      let frequency = 6;
       function spawnNote() {
         game.add([
           game.rect(24, 24),
@@ -102,16 +104,35 @@ const ShowMinigame = () => {
           game.pos(game.width(), game.rand(10, 180)),
           game.anchor("botleft"),
           game.color(220, 20, 60),
-          game.move(game.LEFT, 120),
+          game.move(game.LEFT, speed),
           "bullet",
         ]);
-        game.wait(game.rand(0.5, 6), () => {
+        game.wait(game.rand(0.5, frequency), () => {
           spawnNote();
         });
       }
-      setTimeout(() => {
+      const bulletDelay = setTimeout(() => {
         spawnNote();
       }, 10000);
+      const bulletSpeed = setTimeout(() => {
+        speed = 130;
+      }, 20000);
+      const bulletSpeed2 = setTimeout(() => {
+        speed = 180;
+      }, 30000);
+      const bulletFreq = setTimeout(() => {
+        frequency = 3;
+      }, 40000);
+      const bulletFreq2 = setTimeout(() => {
+        frequency = 1.5;
+      }, 45000);
+      return () => {
+        clearTimeout(bulletDelay);
+        clearTimeout(bulletSpeed);
+        clearTimeout(bulletSpeed2);
+        clearTimeout(bulletFreq);
+        clearTimeout(bulletFreq2);
+      };
     }
   }, [game, player]);
 
@@ -162,7 +183,7 @@ const ShowMinigame = () => {
 
   useEffect(() => {
     if (game && player) {
-      const speed = 10000;
+      const speed = 15000;
       let lastTime = performance.now();
 
       const updatePlayerPosition = () => {
