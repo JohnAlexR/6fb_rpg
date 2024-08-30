@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import kaplay from "kaplay";
 
-const ShowMinigame = () => {
+const ShowMinigame = ({ selectMinigameAnswer }) => {
   const gameContainerRef = useRef(null);
   const [game, setGame] = useState(null);
   const [player, setPlayer] = useState(null);
   const [score, setScore] = useState(0);
+  const [gameStatus, setGameStatus] = useState("start");
   const keys = useRef({
     ArrowUp: false,
     ArrowDown: false,
@@ -25,6 +26,11 @@ const ShowMinigame = () => {
         stretch: false,
       });
       setGame(gameInstance);
+      const stopGame = setTimeout(() => {
+        gameInstance.quit();
+        setGameStatus("end");
+      }, 60000);
+      return () => clearTimeout(stopGame);
     }
   }, []);
 
@@ -41,12 +47,16 @@ const ShowMinigame = () => {
       setPlayer(bean);
 
       game.onCollide("note", "player", () => {
-        setScore((prev) => prev + 1);
+        if (gameStatus === "start") {
+          setScore((prev) => prev + 10);
+        }
       });
 
       game.onCollide("bullet", "player", () => {
-        game.shake();
-        setScore((prev) => prev - 5);
+        if (gameStatus === "start") {
+          game.shake();
+          setScore((prev) => prev - 25);
+        }
       });
 
       //   game.onCollide("bullet", "note", (action) => {
@@ -108,7 +118,11 @@ const ShowMinigame = () => {
           "bullet",
         ]);
         game.wait(game.rand(0.5, frequency), () => {
-          spawnNote();
+          if (gameStatus === "start") {
+            spawnNote();
+          } else {
+            return;
+          }
         });
       }
       const bulletDelay = setTimeout(() => {
@@ -150,7 +164,11 @@ const ShowMinigame = () => {
           "note",
         ]);
         game.wait(game.rand(0.5, 2), () => {
-          spawnNote();
+          if (gameStatus === "start") {
+            spawnNote();
+          } else {
+            return;
+          }
         });
       }
       spawnNote();
@@ -209,8 +227,31 @@ const ShowMinigame = () => {
 
   return (
     <div className="h-full w-full justify-center items-center flex flex-row">
-      <p className="font-press-start text-white pt-4">{`score: ${score}`}</p>
-      <div id="canvas" ref={gameContainerRef}></div>
+      {gameStatus === "start" && (
+        <div className="flex-row flex items-center h-full">
+          <p className="font-press-start text-white pt-4">{`score: ${score}`}</p>
+          <div id="canvas" ref={gameContainerRef}></div>
+        </div>
+      )}
+      {gameStatus === "end" && (
+        <div>
+          <p className="text-white font-press-start">You scored:</p>
+          <p className="text-white font-press-start">{score}</p>
+          <div className="text-center mt-10">
+            <button
+              onClick={() => {
+                if (score > 0) {
+                  selectMinigameAnswer("goodShow", "30a", score);
+                } else {
+                  selectMinigameAnswer("badShow", "30b", score);
+                }
+              }}
+            >
+              <p className="text-white font-press-start">continue</p>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

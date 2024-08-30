@@ -173,6 +173,7 @@ export const Question = () => {
     let recordProbability = 0;
     let bandProbability = 0.3; //22% per turn
     let sandwichProbability = 0.4; //10% per turn
+    let showMinigameProbability = 0.9;
 
     if (answers.includes("5c")) {
       recordProbability = 0.15;
@@ -206,10 +207,11 @@ export const Question = () => {
       earplugProbability = 0;
     }
 
-    const randomNumber = Math.random();
+    if (questionsAsked.includes("30")) {
+      showMinigameProbability = 0;
+    }
 
-    console.log(randomNumber, "random#");
-    console.log(bandProbability, "bandprob");
+    const randomNumber = Math.random();
 
     if (randomNumber < tireProbability) {
       return "tire";
@@ -223,6 +225,8 @@ export const Question = () => {
       return "band";
     } else if (randomNumber < sandwichProbability) {
       return "sandwich";
+    } else if (randomNumber < showMinigameProbability) {
+      return "show";
     } else {
       return null;
     }
@@ -270,7 +274,7 @@ export const Question = () => {
     }
   };
 
-  const calculateStats = (answer) => {
+  const calculateStats = (answer, score) => {
     setStatChanges(answer);
 
     const values = answer;
@@ -294,6 +298,10 @@ export const Question = () => {
     } else if (user.character === "brian") {
       values.vibes *= 1.15;
       values.vibes = Math.round(values.vibes);
+    }
+
+    if (score) {
+      values.points += score;
     }
 
     if (typeof values.inventory === "string") {
@@ -346,12 +354,12 @@ export const Question = () => {
     calculateStats(statAnswer);
   };
 
-  const selectMinigameAnswer = (value, minigameAnswer) => {
-    setSelectedAnswer("22b");
+  const selectMinigameAnswer = (value, minigameAnswer, score) => {
+    setSelectedAnswer(minigameAnswer);
     setIsResultVisible(true);
     const statAnswer = calculateAnswer(minigameAnswer);
     setAnswer(statAnswer);
-    calculateStats(statAnswer);
+    calculateStats(statAnswer, score);
   };
 
   const submit = () => {
@@ -430,6 +438,13 @@ export const Question = () => {
           )[0];
           setQuestion(sandwichQuestion);
           updateQuestions("23");
+        } else if (randomEncounter === "show") {
+          const showhQuestion = questions.filter(
+            (question) => question.id === "30"
+          )[0];
+          setIsMiniGameSetupVisible(true);
+          setQuestion(showhQuestion);
+          updateQuestions("30");
         }
       } else {
         const newQuestion = fetchQuestion();
@@ -446,7 +461,13 @@ export const Question = () => {
     setSelectedAnswer("");
   };
 
-  return <ShowMinigame />;
+  if (question.id === "30" && !isResultVisible && !isMiniGameSetupVisible) {
+    return (
+      <ShowMinigame
+        selectMinigameAnswer={(v, x) => selectMinigameAnswer(v, x)}
+      />
+    );
+  }
 
   if (question.id === "22" && !isResultVisible && !isMiniGameSetupVisible) {
     return (
@@ -466,6 +487,29 @@ export const Question = () => {
           <p className="text-white font-press-start text-xl pt-10">
             Can you make friends?
           </p>
+        </div>
+        <div className="absolute right-12 bottom-[140px]">
+          <Exclamation />
+        </div>
+
+        <button
+          className="text-white font-press-start"
+          onClick={() => setIsMiniGameSetupVisible(false)}
+        >
+          start minigame
+        </button>
+
+        <CharacterIcon />
+      </div>
+    );
+  }
+
+  if (question.id === "30" && !isResultVisible && isMiniGameSetupVisible) {
+    return (
+      <div className="flex flex-col items-center justify-between border-2 h-full py-3">
+        <div className="items-center justify-center pt-40 text-center">
+          <p className="text-white font-press-start">Time to play a show!</p>
+          <p className="text-white font-press-start text-xl pt-10">Explainer</p>
         </div>
         <div className="absolute right-12 bottom-[140px]">
           <Exclamation />

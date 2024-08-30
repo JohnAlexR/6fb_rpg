@@ -1477,4 +1477,31 @@ export const questions = [
       },
     ],
   },
+  {
+    id: "30",
+    question: "show!",
+    isSecondary: true,
+    answers: [
+      {
+        id: "30a",
+        text: "",
+        points: 0,
+        fans: 100,
+        vibes: 0,
+        money: 0,
+        isBranching: false,
+        result: "that was a great show!",
+      },
+      {
+        id: "30b",
+        text: "",
+        points: 0,
+        fans: -100,
+        vibes: -100,
+        money: 0,
+        isBranching: false,
+        result: "oof, that wasn't your best...",
+      },
+    ],
+  },
 ];
