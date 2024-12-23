@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Stats } from "../components/Stats";
 import { fetchQuestion } from "../utils/fetchQuestion";
 import { questions } from "../data/questions";
@@ -27,6 +27,7 @@ import { Exclamation } from "../assets/musicianEncounter";
 import { updateUser, user, questionsAsked } from "../data/user";
 import { Guitar, Sunglasses } from "../assets/extras";
 import ShowMinigame from "./ShowMinigame";
+import { useAudio } from "../components/AudioPlayer";
 
 const CoffeeMeter = ({ coffeeStatus }) => {
   return (
@@ -126,6 +127,24 @@ export const Question = () => {
   const [coffeeStatus, setCoffeeStatus] = useState("full");
   const [isMiniGameSetupVisible, setIsMiniGameSetupVisible] = useState(false);
   const [isContinueHovered, setIsContinueHovered] = useState(false);
+  const { setCurrentTrack } = useAudio();
+
+  useEffect(() => {
+    if (question.id === "30") {
+      setCurrentTrack("/nora.m4a");
+    } else if (question.id === "22") {
+      setCurrentTrack("/landgirl.m4a");
+    } else if (
+      question.id === "9" ||
+      question.id === "10" ||
+      question.id === "11" ||
+      question.id === "12"
+    ) {
+      setCurrentTrack("/trekking.m4a");
+    } else {
+      setCurrentTrack("/refuge.m4a");
+    }
+  }, [question]);
 
   const checkCoffeeStatus = () => {
     const coffeeQuestions = ["3", "4", "18"];
@@ -370,9 +389,11 @@ export const Question = () => {
 
     if (user.money <= 0 || user.fans <= 0 || user.vibes <= 0) {
       if (user.character === "dom" && !hasDomLost) {
+        setCurrentTrack("/trekking.m4a");
         setDomLostModalIsVisible(true);
         setHasDomLost(true);
       } else {
+        setCurrentTrack("/youlose.m4a");
         triggerLoseCondition();
       }
     }
@@ -495,7 +516,7 @@ export const Question = () => {
 
         <button
           className={`font-press-start w-52 border-2 border-white ${
-            isContinueHovered ? "text-black bg-white" : "text-white"
+            isContinueHovered ? "text-black bg-white" : "text-white bg-black"
           }`}
           onClick={() => setIsMiniGameSetupVisible(false)}
           onMouseEnter={() => setIsContinueHovered(true)}
@@ -533,8 +554,8 @@ export const Question = () => {
         </div>
 
         <button
-          className={`text-white font-press-start w-52 border-2 border-white ${
-            isContinueHovered ? "text-black bg-white" : "text-white"
+          className={`font-press-start w-52 border-2 border-white ${
+            isContinueHovered ? "text-black bg-white" : "text-white bg-black"
           }`}
           onClick={() => setIsMiniGameSetupVisible(false)}
           onMouseEnter={() => setIsContinueHovered(true)}

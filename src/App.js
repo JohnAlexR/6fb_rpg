@@ -4,6 +4,7 @@ import GameBorder from "./components/GameBorder";
 import { screens } from "./data/screens";
 import { clearAnswers, clearQuestionsAsked, resetUser } from "./data/user";
 import { Sad } from "./assets/emotes";
+import { AudioProvider } from "./components/AudioPlayer";
 
 const ScreenContext = createContext();
 
@@ -24,9 +25,11 @@ export const useScreen = () => {
 
 function App() {
   return (
-    <ScreenProvider>
-      <MainApp />
-    </ScreenProvider>
+    <AudioProvider>
+      <ScreenProvider>
+        <MainApp />
+      </ScreenProvider>
+    </AudioProvider>
   );
 }
 

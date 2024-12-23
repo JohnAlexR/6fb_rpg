@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Stats } from "../components/Stats";
 import { useScreen } from "../App";
 import { user } from "../data/user";
+import { useAudio } from "../components/AudioPlayer";
 
 export const Congrats = () => {
   const { screenIndex, setScreenIndex } = useScreen();
+  const { setCurrentTrack } = useAudio();
+
+  useEffect(() => {
+    setCurrentTrack("/naptown.mp3");
+  }, []);
 
   return (
     <div className="h-full w-full flex flex-grow items-center justify-center flex-col">

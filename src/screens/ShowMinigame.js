@@ -249,7 +249,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
           <div className="text-center mt-10">
             <button
               onClick={() => {
-                if (isShowPerfect) {
+                if (isShowPerfect && score > 700) {
                   selectMinigameAnswer("perfectShow", "30c", score);
                 } else if (score > 0) {
                   selectMinigameAnswer("goodShow", "30a", score);
