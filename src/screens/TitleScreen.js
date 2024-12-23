@@ -34,7 +34,7 @@ const TitleScreen = () => {
         </p>
       </button>
       <p className="text-white bottom-0 right-[65px] absolute font-press-start text-sm">
-        sound recommended !
+        sound recommended!
       </p>
     </div>
   );
