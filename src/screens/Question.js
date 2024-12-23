@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Stats } from "../components/Stats";
 import { fetchQuestion } from "../utils/fetchQuestion";
 import { questions } from "../data/questions";
@@ -27,6 +27,7 @@ import { Exclamation } from "../assets/musicianEncounter";
 import { updateUser, user, questionsAsked } from "../data/user";
 import { Guitar, Sunglasses } from "../assets/extras";
 import ShowMinigame from "./ShowMinigame";
+import { useAudio } from "../components/AudioPlayer";
 
 const CoffeeMeter = ({ coffeeStatus }) => {
   return (
@@ -126,6 +127,12 @@ export const Question = () => {
   const [coffeeStatus, setCoffeeStatus] = useState("full");
   const [isMiniGameSetupVisible, setIsMiniGameSetupVisible] = useState(false);
   const [isContinueHovered, setIsContinueHovered] = useState(false);
+  const { setCurrentTrack } = useAudio();
+
+  useEffect(() => {
+    console.log("ran NORA");
+    setCurrentTrack("/nora.m4a");
+  }, []);
 
   const checkCoffeeStatus = () => {
     const coffeeQuestions = ["3", "4", "18"];
