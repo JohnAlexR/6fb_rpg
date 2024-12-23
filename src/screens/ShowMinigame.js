@@ -29,7 +29,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
       const stopGame = setTimeout(() => {
         gameInstance.quit();
         setGameStatus("end");
-      }, 60000);
+      }, 10000);
       return () => clearTimeout(stopGame);
     }
   }, []);
@@ -46,25 +46,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
       ]);
       setPlayer(bean);
 
-      game.onCollide("note", "player", () => {
-        if (gameStatus === "start") {
-          setScore((prev) => prev + 10);
-        }
-      });
-
-      game.onCollide("bullet", "player", () => {
-        if (gameStatus === "start") {
-          game.shake();
-          setScore((prev) => prev - 25);
-        }
-      });
-
-      //   game.onCollide("bullet", "note", (action) => {
-      //     console.log(action);
-      //     action.destroy();
-      //   });
-
-      const borderBottom = game.add([
+      game.add([
         game.rect(255, 5),
         game.outline(1),
         game.area(),
@@ -73,7 +55,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
         game.body({ isStatic: true }),
       ]);
 
-      const borderTop = game.add([
+      game.add([
         game.rect(250, 5),
         game.outline(1),
         game.area(),
@@ -82,7 +64,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
         game.body({ isStatic: true }),
       ]);
 
-      const borderLeft = game.add([
+      game.add([
         game.rect(5, 220),
         game.outline(1),
         game.area(),
@@ -91,7 +73,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
         game.body({ isStatic: true }),
       ]);
 
-      const borderRight = game.add([
+      game.add([
         game.rect(5, 220),
         game.outline(1),
         game.area(),
@@ -101,6 +83,30 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
       ]);
     }
   }, [game, player]);
+
+  useEffect(() => {
+    if (game && player) {
+      const handleNoteCollision = () => {
+        if (gameStatus === "start") {
+          setScore((prev) => prev + 10);
+        }
+      };
+      const handleBulletCollision = () => {
+        if (gameStatus === "start") {
+          game.shake();
+          setScore((prev) => prev - 25);
+        }
+      };
+
+      game.onCollide("note", "player", handleNoteCollision);
+      game.onCollide("bullet", "player", handleBulletCollision);
+
+      return () => {
+        game.destroyAll("note");
+        game.destroyAll("player");
+      };
+    }
+  }, [game, player, gameStatus]);
 
   useEffect(() => {
     if (game && player) {
@@ -227,13 +233,12 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
 
   return (
     <div className="h-full w-full justify-center items-center flex flex-row">
-      {gameStatus === "start" && (
+      {gameStatus === "start" ? (
         <div className="flex-row flex items-center h-full">
           <p className="font-press-start text-white pt-4">{`score: ${score}`}</p>
           <div id="canvas" ref={gameContainerRef}></div>
         </div>
-      )}
-      {gameStatus === "end" && (
+      ) : (
         <div>
           <p className="text-white font-press-start">You scored:</p>
           <p className="text-white font-press-start">{score}</p>
