@@ -130,8 +130,9 @@ export const Question = () => {
   const { setCurrentTrack } = useAudio();
 
   useEffect(() => {
-    console.log("ran NORA");
-    setCurrentTrack("/nora.m4a");
+    if (question.id === "30") {
+      setCurrentTrack("/nora.m4a");
+    }
   }, []);
 
   const checkCoffeeStatus = () => {

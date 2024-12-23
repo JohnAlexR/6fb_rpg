@@ -5,7 +5,6 @@ import { updateUser } from "../data/user";
 export const Name = () => {
   const { screenIndex, setScreenIndex } = useScreen();
   const [name, setName] = useState("");
-  console.log(name);
 
   return (
     <div className="flex justify-center items-center flex-col">

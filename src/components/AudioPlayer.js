@@ -42,6 +42,26 @@ const AudioPlayer = () => {
     }
   }, [currentTrack]);
 
+  useEffect(() => {
+    const handleEnded = () => {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      }
+    };
+
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      audioElement.addEventListener("ended", handleEnded);
+    }
+
+    return () => {
+      if (audioElement) {
+        audioElement.removeEventListener("ended", handleEnded);
+      }
+    };
+  }, []);
+
   return (
     <div className="absolute bottom-0 right-2">
       <audio ref={audioRef} />
