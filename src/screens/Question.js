@@ -26,6 +26,7 @@ import { Exclamation } from "../assets/musicianEncounter";
 
 import { updateUser, user, questionsAsked } from "../data/user";
 import { Guitar, Sunglasses } from "../assets/extras";
+import ShowMinigame from "./ShowMinigame";
 
 const CoffeeMeter = ({ coffeeStatus }) => {
   return (
@@ -124,6 +125,7 @@ export const Question = () => {
   const [hasDomLost, setHasDomLost] = useState(false);
   const [coffeeStatus, setCoffeeStatus] = useState("full");
   const [isMiniGameSetupVisible, setIsMiniGameSetupVisible] = useState(false);
+  const [isContinueHovered, setIsContinueHovered] = useState(false);
 
   const checkCoffeeStatus = () => {
     const coffeeQuestions = ["3", "4", "18"];
@@ -172,6 +174,7 @@ export const Question = () => {
     let recordProbability = 0;
     let bandProbability = 0.3; //22% per turn
     let sandwichProbability = 0.4; //10% per turn
+    let showMinigameProbability = 0.55; //15%
 
     if (answers.includes("5c")) {
       recordProbability = 0.15;
@@ -205,10 +208,11 @@ export const Question = () => {
       earplugProbability = 0;
     }
 
-    const randomNumber = Math.random();
+    if (questionsAsked.includes("30") || questionsAsked.length < 5) {
+      showMinigameProbability = 0;
+    }
 
-    console.log(randomNumber, "random#");
-    console.log(bandProbability, "bandprob");
+    const randomNumber = Math.random();
 
     if (randomNumber < tireProbability) {
       return "tire";
@@ -222,6 +226,8 @@ export const Question = () => {
       return "band";
     } else if (randomNumber < sandwichProbability) {
       return "sandwich";
+    } else if (randomNumber < showMinigameProbability) {
+      return "show";
     } else {
       return null;
     }
@@ -269,7 +275,7 @@ export const Question = () => {
     }
   };
 
-  const calculateStats = (answer) => {
+  const calculateStats = (answer, score) => {
     setStatChanges(answer);
 
     const values = answer;
@@ -293,6 +299,10 @@ export const Question = () => {
     } else if (user.character === "brian") {
       values.vibes *= 1.15;
       values.vibes = Math.round(values.vibes);
+    }
+
+    if (score) {
+      values.points += score;
     }
 
     if (typeof values.inventory === "string") {
@@ -345,12 +355,12 @@ export const Question = () => {
     calculateStats(statAnswer);
   };
 
-  const selectMinigameAnswer = (value, minigameAnswer) => {
-    setSelectedAnswer("22b");
+  const selectMinigameAnswer = (value, minigameAnswer, score) => {
+    setSelectedAnswer(minigameAnswer);
     setIsResultVisible(true);
     const statAnswer = calculateAnswer(minigameAnswer);
     setAnswer(statAnswer);
-    calculateStats(statAnswer);
+    calculateStats(statAnswer, score);
   };
 
   const submit = () => {
@@ -429,6 +439,13 @@ export const Question = () => {
           )[0];
           setQuestion(sandwichQuestion);
           updateQuestions("23");
+        } else if (randomEncounter === "show") {
+          const showhQuestion = questions.filter(
+            (question) => question.id === "30"
+          )[0];
+          setIsMiniGameSetupVisible(true);
+          setQuestion(showhQuestion);
+          updateQuestions("30");
         }
       } else {
         const newQuestion = fetchQuestion();
@@ -444,6 +461,14 @@ export const Question = () => {
     setStatChanges(null);
     setSelectedAnswer("");
   };
+
+  if (question.id === "30" && !isResultVisible && !isMiniGameSetupVisible) {
+    return (
+      <ShowMinigame
+        selectMinigameAnswer={(v, x) => selectMinigameAnswer(v, x)}
+      />
+    );
+  }
 
   if (question.id === "22" && !isResultVisible && !isMiniGameSetupVisible) {
     return (
@@ -469,8 +494,51 @@ export const Question = () => {
         </div>
 
         <button
-          className="text-white font-press-start"
+          className={`font-press-start w-52 border-2 border-white ${
+            isContinueHovered ? "text-black bg-white" : "text-white"
+          }`}
           onClick={() => setIsMiniGameSetupVisible(false)}
+          onMouseEnter={() => setIsContinueHovered(true)}
+          onMouseLeave={() => setIsContinueHovered(false)}
+        >
+          start minigame
+        </button>
+
+        <CharacterIcon />
+      </div>
+    );
+  }
+
+  if (question.id === "30" && !isResultVisible && isMiniGameSetupVisible) {
+    return (
+      <div className="flex flex-col items-center justify-between border-2 h-full py-3">
+        <div className="items-center justify-center pt-20 text-center">
+          <p className="text-white font-press-start text-xl">
+            Time to play a show!
+          </p>
+          <p className="text-white font-press-start text-sm pt-20">
+            Use the arrow keys to hit the notes
+          </p>
+          <div className="flex flex-row justify-center items-center pt-4">
+            <p className="font-press-start text-white w-52">Good note</p>
+            <div className="bg-green-500 w-4 h-4" />
+          </div>
+          <div className="flex flex-row justify-center items-center pt-4">
+            <p className="font-press-start text-white w-52">Bad note</p>
+            <div className="bg-red-500 w-4 h-4" />
+          </div>
+        </div>
+        <div className="absolute right-12 bottom-[140px]">
+          <Exclamation />
+        </div>
+
+        <button
+          className={`text-white font-press-start w-52 border-2 border-white ${
+            isContinueHovered ? "text-black bg-white" : "text-white"
+          }`}
+          onClick={() => setIsMiniGameSetupVisible(false)}
+          onMouseEnter={() => setIsContinueHovered(true)}
+          onMouseLeave={() => setIsContinueHovered(false)}
         >
           start minigame
         </button>
@@ -559,7 +627,7 @@ export const Question = () => {
         </div>
       )}
       <button
-        className="p-6 mb-7 absolute bottom-[-20px] right-0 left-0"
+        className="p-6 mb-7 absolute bottom-[-20px] right-0 left-0 flex justify-center"
         onClick={() => {
           if (isResultVisible) {
             submit();
@@ -568,8 +636,14 @@ export const Question = () => {
           }
         }}
         disabled={!selectedAnswer}
+        onMouseEnter={() => setIsContinueHovered(true)}
+        onMouseLeave={() => setIsContinueHovered(false)}
       >
-        <p className="text-white font-bold text-2xl font-press-start text-center">
+        <p
+          className={` border-slate-300 border-2 px-3 py-3 font-press-start w-52 ${
+            isContinueHovered === true ? "bg-white text-black" : "text-white"
+          }`}
+        >
           continue
         </p>
       </button>
