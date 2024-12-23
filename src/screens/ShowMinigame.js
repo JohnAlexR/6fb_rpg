@@ -7,6 +7,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
   const [player, setPlayer] = useState(null);
   const [score, setScore] = useState(0);
   const [gameStatus, setGameStatus] = useState("start");
+  const [isShowPerfect, setIsShowPerfect] = useState(true);
   const keys = useRef({
     ArrowUp: false,
     ArrowDown: false,
@@ -29,7 +30,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
       const stopGame = setTimeout(() => {
         gameInstance.quit();
         setGameStatus("end");
-      }, 10000);
+      }, 60000);
       return () => clearTimeout(stopGame);
     }
   }, []);
@@ -86,20 +87,23 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
 
   useEffect(() => {
     if (game && player) {
-      const handleNoteCollision = () => {
+      const handleNoteCollision = (item) => {
         if (gameStatus === "start") {
           setScore((prev) => prev + 10);
+          game.destroy(item);
         }
       };
-      const handleBulletCollision = () => {
+      const handleBulletCollision = (item) => {
         if (gameStatus === "start") {
           game.shake();
+          setIsShowPerfect(false);
           setScore((prev) => prev - 25);
+          game.destroy(item);
         }
       };
 
-      game.onCollide("note", "player", handleNoteCollision);
-      game.onCollide("bullet", "player", handleBulletCollision);
+      game.onCollide("note", "player", (item) => handleNoteCollision(item));
+      game.onCollide("bullet", "player", (item) => handleBulletCollision(item));
 
       return () => {
         game.destroyAll("note");
@@ -245,7 +249,9 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
           <div className="text-center mt-10">
             <button
               onClick={() => {
-                if (score > 0) {
+                if (isShowPerfect) {
+                  selectMinigameAnswer("perfectShow", "30c", score);
+                } else if (score > 0) {
                   selectMinigameAnswer("goodShow", "30a", score);
                 } else {
                   selectMinigameAnswer("badShow", "30b", score);

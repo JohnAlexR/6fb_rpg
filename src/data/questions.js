@@ -1479,14 +1479,14 @@ export const questions = [
   },
   {
     id: "30",
-    question: "show!",
+    question: "You made it through the show!",
     isSecondary: true,
     answers: [
       {
         id: "30a",
         text: "",
         points: 0,
-        fans: 100,
+        fans: 200,
         vibes: 0,
         money: 0,
         isBranching: false,
@@ -1501,6 +1501,16 @@ export const questions = [
         money: 0,
         isBranching: false,
         result: "oof, that wasn't your best...",
+      },
+      {
+        id: "30c",
+        text: "",
+        points: 0,
+        fans: 500,
+        vibes: 100,
+        money: 0,
+        isBranching: false,
+        result: "A PERFECT SHOW!!!!!",
       },
     ],
   },
