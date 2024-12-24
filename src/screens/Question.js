@@ -187,13 +187,14 @@ export const Question = () => {
   };
 
   const determineRandomEncounter = () => {
+    console.log(questionsAsked);
     let tireProbability = 0.01; //1% per turn
     let dogProbability = 0.05; //4% per turn
     let earplugProbability = 0.08; //3% per turn
     let recordProbability = 0;
     let bandProbability = 0.3; //22% per turn
     let sandwichProbability = 0.4; //10% per turn
-    let showMinigameProbability = 0.99; //15%
+    let showMinigameProbability = 0.55; //15%
 
     if (answers.includes("5c")) {
       recordProbability = 0.15;
@@ -210,8 +211,15 @@ export const Question = () => {
     if (questionsAsked.includes("13") || questionsAsked.length < 3) {
       dogProbability = 0;
     }
+    const length = questionsAsked.length;
 
-    if (questionsAsked.includes("22") || questionsAsked.length < 5) {
+    if (
+      questionsAsked.includes("22") ||
+      questionsAsked.length < 5 ||
+      questionsAsked[length] === "30" ||
+      questionsAsked[length - 1] === "30" ||
+      questionsAsked[length - 2] === "30"
+    ) {
       bandProbability = 0;
     }
 
@@ -227,7 +235,13 @@ export const Question = () => {
       earplugProbability = 0;
     }
 
-    if (questionsAsked.includes("30") || questionsAsked.length < 5) {
+    if (
+      questionsAsked.includes("30") ||
+      questionsAsked.length < 5 ||
+      questionsAsked[length] === "22" ||
+      questionsAsked[length - 1] === "22" ||
+      questionsAsked[length - 2] === "22"
+    ) {
       showMinigameProbability = 0;
     }
 
