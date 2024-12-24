@@ -38,7 +38,10 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
 
   useEffect(() => {
     if (game && !player) {
-      game.loadSprite("star", "/stariconsmall.png");
+      game.loadSprite(
+        "star",
+        "https://6fbrpg.s3.us-east-2.amazonaws.com/assets/stariconsmall.png"
+      );
       const bean = game.add([
         game.sprite("star"),
         game.pos(175, 0),
@@ -115,7 +118,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
 
   useEffect(() => {
     if (game && player) {
-      let speed = 80;
+      let speed = 120;
       let frequency = 6;
       function spawnNote() {
         game.add([
@@ -140,10 +143,10 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
         spawnNote();
       }, 10000);
       const bulletSpeed = setTimeout(() => {
-        speed = 130;
+        speed = 170;
       }, 20000);
       const bulletSpeed2 = setTimeout(() => {
-        speed = 180;
+        speed = 220;
       }, 30000);
       const bulletFreq = setTimeout(() => {
         frequency = 3;
@@ -171,7 +174,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
           game.pos(game.width(), game.rand(10, 180)),
           game.anchor("botleft"),
           game.color(0, 225, 0),
-          game.move(game.LEFT, 120),
+          game.move(game.LEFT, 185),
           "note",
         ]);
 
@@ -282,7 +285,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
           <div className="text-center mt-10">
             <button
               onClick={() => {
-                if (isShowPerfect && score > 700) {
+                if (isShowPerfect && score > 400) {
                   selectMinigameAnswer("perfectShow", "30c", score);
                 } else if (score > 0) {
                   selectMinigameAnswer("goodShow", "30a", score);
