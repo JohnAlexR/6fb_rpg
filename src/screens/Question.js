@@ -169,7 +169,6 @@ export const Question = () => {
       coffeeQuestionsAsked === 2 &&
       coffeeAnswers === 0
     ) {
-      console.log("sethalf");
       setCoffeeStatus("half");
     }
     if (
@@ -177,7 +176,6 @@ export const Question = () => {
       coffeeQuestionsAsked === 3 &&
       coffeeAnswers === 0
     ) {
-      console.log("setempty");
       setCoffeeStatus("empty");
     }
 
@@ -187,7 +185,6 @@ export const Question = () => {
   };
 
   const determineRandomEncounter = () => {
-    console.log(questionsAsked);
     let tireProbability = 0.01; //1% per turn
     let dogProbability = 0.05; //4% per turn
     let earplugProbability = 0.08; //3% per turn
