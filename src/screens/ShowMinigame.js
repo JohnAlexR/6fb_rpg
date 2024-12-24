@@ -8,6 +8,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
   const [score, setScore] = useState(0);
   const [gameStatus, setGameStatus] = useState("start");
   const [isShowPerfect, setIsShowPerfect] = useState(true);
+  const [countdown, setCountdown] = useState(3);
   const keys = useRef({
     ArrowUp: false,
     ArrowDown: false,
@@ -173,6 +174,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
           game.move(game.LEFT, 120),
           "note",
         ]);
+
         game.wait(game.rand(0.5, 2), () => {
           if (gameStatus === "start") {
             spawnNote();
@@ -181,7 +183,13 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
           }
         });
       }
-      spawnNote();
+      const startDelay = setTimeout(() => {
+        spawnNote();
+      }, 3000);
+
+      return () => {
+        clearTimeout(startDelay);
+      };
     }
   }, [game, player]);
 
@@ -235,12 +243,37 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
     }
   }, [game, player]);
 
+  useEffect(() => {
+    const countdown2 = setTimeout(() => {
+      setCountdown(2);
+    }, 1000);
+    const countdown1 = setTimeout(() => {
+      setCountdown(1);
+    }, 2000);
+
+    const countdown0 = setTimeout(() => {
+      setCountdown(null);
+    }, 3000);
+
+    return () => {
+      clearTimeout(countdown1);
+      clearTimeout(countdown2);
+      clearTimeout(countdown0);
+    };
+  }, []);
+
   return (
     <div className="h-full w-full justify-center items-center flex flex-row">
       {gameStatus === "start" ? (
         <div className="flex-row flex items-center h-full">
           <p className="font-press-start text-white pt-4">{`score: ${score}`}</p>
-          <div id="canvas" ref={gameContainerRef}></div>
+          <div id="canvas" ref={gameContainerRef}>
+            {countdown && (
+              <p className="text-green-500 font-press-start absolute bottom-20 right-20 text-3xl">
+                {countdown}
+              </p>
+            )}
+          </div>
         </div>
       ) : (
         <div>

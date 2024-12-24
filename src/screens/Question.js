@@ -193,7 +193,7 @@ export const Question = () => {
     let recordProbability = 0;
     let bandProbability = 0.3; //22% per turn
     let sandwichProbability = 0.4; //10% per turn
-    let showMinigameProbability = 0.55; //15%
+    let showMinigameProbability = 0.99; //15%
 
     if (answers.includes("5c")) {
       recordProbability = 0.15;
