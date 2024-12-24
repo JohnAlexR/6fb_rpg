@@ -37,7 +37,8 @@ const AudioPlayer = () => {
 
   useEffect(() => {
     if (audioRef?.current && currentTrack) {
-      audioRef.current.src = currentTrack;
+      const audioUrl = `https://6fbrpg.s3.us-east-2.amazonaws.com/assets/audio/${currentTrack}`;
+      audioRef.current.src = audioUrl;
       audioRef.current.play().catch(() => {});
     }
   }, [currentTrack]);
