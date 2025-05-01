@@ -9,7 +9,7 @@ export const Congrats = () => {
   const { setCurrentTrack } = useAudio();
 
   useEffect(() => {
-    setCurrentTrack("/naptown.mp3");
+    setCurrentTrack("naptown.mp3");
   }, []);
 
   return (

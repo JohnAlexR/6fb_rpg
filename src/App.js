@@ -38,16 +38,6 @@ function MainApp() {
   return (
     <div className="App">
       <GameBorder>{screens[screenIndex].component}</GameBorder>
-      <button
-        onClick={() => {
-          setScreenIndex(0);
-          clearAnswers();
-          clearQuestionsAsked();
-          resetUser();
-        }}
-      >
-        <p>reset</p>
-      </button>
     </div>
   );
 }

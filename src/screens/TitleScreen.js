@@ -19,7 +19,7 @@ const TitleScreen = () => {
       <button
         className="p-6 mb-10"
         onClick={() => {
-          setCurrentTrack("/crazyeyes.m4a");
+          setCurrentTrack("crazyeyes.m4a");
           setScreenIndex(1);
         }}
         onMouseEnter={() => setHover(true)}

@@ -8,6 +8,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
   const [score, setScore] = useState(0);
   const [gameStatus, setGameStatus] = useState("start");
   const [isShowPerfect, setIsShowPerfect] = useState(true);
+  const [countdown, setCountdown] = useState(3);
   const keys = useRef({
     ArrowUp: false,
     ArrowDown: false,
@@ -37,7 +38,10 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
 
   useEffect(() => {
     if (game && !player) {
-      game.loadSprite("star", "/stariconsmall.png");
+      game.loadSprite(
+        "star",
+        "https://6fbrpg.s3.us-east-2.amazonaws.com/assets/stariconsmall.png"
+      );
       const bean = game.add([
         game.sprite("star"),
         game.pos(175, 0),
@@ -114,7 +118,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
 
   useEffect(() => {
     if (game && player) {
-      let speed = 80;
+      let speed = 120;
       let frequency = 6;
       function spawnNote() {
         game.add([
@@ -139,10 +143,10 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
         spawnNote();
       }, 10000);
       const bulletSpeed = setTimeout(() => {
-        speed = 130;
+        speed = 170;
       }, 20000);
       const bulletSpeed2 = setTimeout(() => {
-        speed = 180;
+        speed = 220;
       }, 30000);
       const bulletFreq = setTimeout(() => {
         frequency = 3;
@@ -170,9 +174,10 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
           game.pos(game.width(), game.rand(10, 180)),
           game.anchor("botleft"),
           game.color(0, 225, 0),
-          game.move(game.LEFT, 120),
+          game.move(game.LEFT, 185),
           "note",
         ]);
+
         game.wait(game.rand(0.5, 2), () => {
           if (gameStatus === "start") {
             spawnNote();
@@ -181,7 +186,13 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
           }
         });
       }
-      spawnNote();
+      const startDelay = setTimeout(() => {
+        spawnNote();
+      }, 3000);
+
+      return () => {
+        clearTimeout(startDelay);
+      };
     }
   }, [game, player]);
 
@@ -235,12 +246,37 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
     }
   }, [game, player]);
 
+  useEffect(() => {
+    const countdown2 = setTimeout(() => {
+      setCountdown(2);
+    }, 1000);
+    const countdown1 = setTimeout(() => {
+      setCountdown(1);
+    }, 2000);
+
+    const countdown0 = setTimeout(() => {
+      setCountdown(null);
+    }, 3000);
+
+    return () => {
+      clearTimeout(countdown1);
+      clearTimeout(countdown2);
+      clearTimeout(countdown0);
+    };
+  }, []);
+
   return (
     <div className="h-full w-full justify-center items-center flex flex-row">
       {gameStatus === "start" ? (
         <div className="flex-row flex items-center h-full">
           <p className="font-press-start text-white pt-4">{`score: ${score}`}</p>
-          <div id="canvas" ref={gameContainerRef}></div>
+          <div id="canvas" ref={gameContainerRef}>
+            {countdown && (
+              <p className="text-green-500 font-press-start absolute bottom-20 right-20 text-3xl">
+                {countdown}
+              </p>
+            )}
+          </div>
         </div>
       ) : (
         <div>
@@ -249,7 +285,7 @@ const ShowMinigame = ({ selectMinigameAnswer }) => {
           <div className="text-center mt-10">
             <button
               onClick={() => {
-                if (isShowPerfect && score > 700) {
+                if (isShowPerfect && score > 400) {
                   selectMinigameAnswer("perfectShow", "30c", score);
                 } else if (score > 0) {
                   selectMinigameAnswer("goodShow", "30a", score);

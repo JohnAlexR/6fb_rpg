@@ -131,18 +131,18 @@ export const Question = () => {
 
   useEffect(() => {
     if (question.id === "30") {
-      setCurrentTrack("/nora.m4a");
+      setCurrentTrack("nora.m4a");
     } else if (question.id === "22") {
-      setCurrentTrack("/landgirl.m4a");
+      setCurrentTrack("landgirl.m4a");
     } else if (
       question.id === "9" ||
       question.id === "10" ||
       question.id === "11" ||
       question.id === "12"
     ) {
-      setCurrentTrack("/trekking.m4a");
+      setCurrentTrack("trekking.m4a");
     } else {
-      setCurrentTrack("/refuge.m4a");
+      setCurrentTrack("refuge.m4a");
     }
   }, [question]);
 
@@ -169,7 +169,6 @@ export const Question = () => {
       coffeeQuestionsAsked === 2 &&
       coffeeAnswers === 0
     ) {
-      console.log("sethalf");
       setCoffeeStatus("half");
     }
     if (
@@ -177,7 +176,6 @@ export const Question = () => {
       coffeeQuestionsAsked === 3 &&
       coffeeAnswers === 0
     ) {
-      console.log("setempty");
       setCoffeeStatus("empty");
     }
 
@@ -210,8 +208,15 @@ export const Question = () => {
     if (questionsAsked.includes("13") || questionsAsked.length < 3) {
       dogProbability = 0;
     }
+    const length = questionsAsked.length;
 
-    if (questionsAsked.includes("22") || questionsAsked.length < 5) {
+    if (
+      questionsAsked.includes("22") ||
+      questionsAsked.length < 5 ||
+      questionsAsked[length] === "30" ||
+      questionsAsked[length - 1] === "30" ||
+      questionsAsked[length - 2] === "30"
+    ) {
       bandProbability = 0;
     }
 
@@ -227,7 +232,13 @@ export const Question = () => {
       earplugProbability = 0;
     }
 
-    if (questionsAsked.includes("30") || questionsAsked.length < 5) {
+    if (
+      questionsAsked.includes("30") ||
+      questionsAsked.length < 5 ||
+      questionsAsked[length] === "22" ||
+      questionsAsked[length - 1] === "22" ||
+      questionsAsked[length - 2] === "22"
+    ) {
       showMinigameProbability = 0;
     }
 
@@ -389,11 +400,11 @@ export const Question = () => {
 
     if (user.money <= 0 || user.fans <= 0 || user.vibes <= 0) {
       if (user.character === "dom" && !hasDomLost) {
-        setCurrentTrack("/trekking.m4a");
+        setCurrentTrack("trekking.m4a");
         setDomLostModalIsVisible(true);
         setHasDomLost(true);
       } else {
-        setCurrentTrack("/youlose.m4a");
+        setCurrentTrack("youlose.m4a");
         triggerLoseCondition();
       }
     }

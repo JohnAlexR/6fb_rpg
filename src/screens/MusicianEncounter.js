@@ -11,6 +11,7 @@ import {
 } from "../assets/characters";
 import { user } from "../data/user";
 import { data, foeData } from "../data/musicianEncounter";
+import { useSpring, animated } from "@react-spring/web";
 
 export const MusicianEncounter = ({ selectMinigameAnswer }) => {
   const [hoverState, setHoverState] = useState();
@@ -26,6 +27,16 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
   const [foeResult, setFoeResult] = useState();
   const [moveText, setMoveText] = useState();
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const foeHealthSpring = useSpring({
+    width: `${foeHealth}%`,
+    config: { tension: 170, friction: 26 },
+  });
+
+  const userHealthSpring = useSpring({
+    width: `${userHealth}%`,
+    config: { tension: 170, friction: 26 },
+  });
 
   const triggerFoeTurn = () => {
     const randomInt = Math.floor(Math.random() * 4);
@@ -74,9 +85,9 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
               <p className="font-press-start text-[#edce56]">HP</p>
             </div>
             <div className="flex-grow border-white border-[2px] rounded-xl flex justify-end">
-              <div
+              <animated.div
                 className="bg-[#64e6ae] rounded-xl"
-                style={{ width: `${foeHealth}%` }}
+                style={foeHealthSpring}
               />
             </div>
           </div>
@@ -113,9 +124,9 @@ export const MusicianEncounter = ({ selectMinigameAnswer }) => {
               <p className="font-press-start text-[#edce56]">HP</p>
             </div>
             <div className="flex-grow border-white border-[2px] rounded-xl flex ">
-              <div
+              <animated.div
                 className="bg-[#64e6ae] rounded-xl"
-                style={{ width: `${userHealth}%` }}
+                style={userHealthSpring}
               />
             </div>
           </div>
